@@ -1,0 +1,25 @@
+{
+  "name": "proyecto-alejandria-libros",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon -e js app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enzdor/proyecto-alejandria-libros.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enzdor/proyecto-alejandria-libros/issues"
+  },
+  "homepage": "https://github.com/enzdor/proyecto-alejandria-libros#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15",
+    "normalize.css": "^8.0.1"
+  }
+}
