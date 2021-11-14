@@ -1,4 +1,4 @@
-#container-index-info{
+#container-info{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -7,13 +7,13 @@
     border-radius: 20px;
 }
 
-#container-index-info h2{
+#container-info h2{
     align-self: center;
     margin: 10px;
     font-size: 32px;
 }
 
-#container-search-index-info {
+#container-search-info {
     margin: 10px 10px 20px 10px;
     align-self: center;
     display: flex;
@@ -21,38 +21,95 @@
     flex-wrap: wrap;
 }
 
-#container-search-index-info input{
+#container-search-info input{
     border: none;
     border-radius: 50px 0 0 50px;
     height: 30px;
     padding-left: 10px;
 }
 
-#container-search-index-info button{
+#container-search-info button{
     border: none;
     border-radius: 0 50px 50px 0;
     height: 30px;
     background-color: white;
 }
 
-#container-search-index-info button i{
+#container-search-info button i{
     margin-right: 10px;
 }
 
-#container-index-carousel{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+
+/*
+
+CAROUSEL FROM HERE ON DOWN
+
+*/
+
+
+#container-carousel{
+    position: relative;
     background-color: greenyellow;
     margin-top: 10px;
     border-radius: 20px;
+    height: 468px;
 }
 
-.carousel-index-item-info{
+#carousel-slide-container{
+    background-color: red;
+    height: 100%;
+    position: relative;
+}
+
+.carousel-item{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+#carousel-next, #carousel-prev{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+#carousel-next{
+    right: 0px;
+}
+
+#carousel-next i, #carousel-prev i{
+    width: 20px;
+    color: blue;
+}
+
+#carousel-nav{
+    display: flex;
+    justify-content: center;
+}
+
+.carousel-indicator{
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin: 3px 10px;
+    align-self: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.carousel-current-indicator{
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.carousel-item-info{
     background-color: white;
 }
 
-.carousel-index-item-info h3{
+.carousel-item-info h3{
     margin: 10px;
 }
 

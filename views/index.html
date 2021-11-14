@@ -31,34 +31,33 @@
         </section>
     </header>
     <main>
-        <div id="container-index-info">
+        <div id="container-info">
             <h2>Conectando librerias de barrio con lectores apasionados</h2>
-            <div id="container-search-index-info">
+            <div id="container-search-info">
                 <input type="text" name="" id="" placeholder="Encontra tu libro...">
                 <button><i class="fas fa-search"></i></button>
             </div>
         </div>
-        <div id="container-index-carousel">
-            <h2>Libros populares</h2>
-            <div id="carousel-index-slide-container">
-                <div class="carousel-index-item carousel-index-item_visible">
-                    <div class="carousel-index-item-info">
+        <div id="container-carousel">
+            <div id="carousel-slide-container">
+                <div class="carousel-item carousel-item-visible">
+                    <div class="carousel-item-info">
                         <h3>
                             Libro 1
                         </h3>
                         <div class="carousel-item-image-container"><img src="/images/libro1.jpeg" alt=""></div>
                     </div>
                 </div>
-                <div class="carousel-index-item">
-                    <div class="carousel-index-item-info">
+                <div class="carousel-item">
+                    <div class="carousel-item-info">
                         <h3>
                             Libro 2
                         </h3>
                         <div class="carousel-item-image-container"><img src="/images/libro2.jpeg" alt=""></div>
                     </div>
                 </div>
-                <div class="carousel-index-item">
-                    <div class="carousel-index-item-info">
+                <div class="carousel-item">
+                    <div class="carousel-item-info">
                         <h3>
                             Libro 3
                         </h3>
@@ -66,11 +65,15 @@
                     </div>
                 </div>
             </div>
-            <div id="carousel-index-actions"></div>
-            <button id="carousel-index-prev" aria-label="previous-slide"><</button>
-            <button id="carousel-index-next" aria-label="next-slide">></button>
+            <button id="carousel-prev"><i class="fas fa-less-than"></i></button>
+            <button id="carousel-next"><i class="fas fa-greater-than"></i></button>
+            <div id="carousel-nav">
+                <button class="carousel-indicator carousel-current-indicator"></button>
+                <button class="carousel-indicator"></button>
+                <button class="carousel-indicator"></button>
+            </div>
         </div>
-        <div id="container-index-register">
+        <div id="container-register">
             <h2>Registrate</h2>
             <button>Lector</button>
             <button>Vendedor</button>
