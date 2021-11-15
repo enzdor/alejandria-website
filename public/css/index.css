@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    background-color: greenyellow;
+    background-color: white;
     margin-top: 10px;
     border-radius: 20px;
 }
@@ -47,18 +47,34 @@ CAROUSEL FROM HERE ON DOWN
 */
 
 
+#index-carousel{
+    background-color: white;
+    border-radius: 20px;
+    margin: 20px 0;
+    padding-bottom: 10px;
+}
+
+#index-carousel h2{
+    padding-top: 10px;
+    text-align: center;
+}
+
 #container-carousel{
     position: relative;
-    background-color: greenyellow;
-    margin-top: 10px;
+    background-color: white;
+    margin: 10px 5% 0 5%;
+    height: 422px;
+    overflow: hidden;
+    width: 90%;
+    max-width: 305px;
+    align-self: center;
     border-radius: 20px;
-    height: 468px;
 }
 
 #carousel-slide-container{
-    background-color: red;
-    height: 100%;
+    height: 402px;
     position: relative;
+    transition: transform 250ms ease-in;
 }
 
 .carousel-item{
@@ -83,34 +99,37 @@ CAROUSEL FROM HERE ON DOWN
 
 #carousel-next i, #carousel-prev i{
     width: 20px;
-    color: blue;
+    color: black;
 }
 
 #carousel-nav{
     display: flex;
     justify-content: center;
+    height: 20px;
 }
 
 .carousel-indicator{
     border: none;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
     margin: 3px 10px;
     align-self: center;
     background-color: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
 }
 
 .carousel-current-indicator{
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .carousel-item-info{
     background-color: white;
+    max-width: 305px;
 }
 
 .carousel-item-info h3{
-    margin: 10px;
+    margin: 5px 10px 5px 30px;
 }
 
 .carousel-item-image-container{
