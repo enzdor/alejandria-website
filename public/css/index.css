@@ -3,8 +3,10 @@
     flex-direction: column;
     flex-wrap: wrap;
     background-color: white;
-    margin-top: 10px;
+    margin-top: 20px;
     border-radius: 20px;
+    height: 250px;
+    justify-content: space-between;
 }
 
 #container-info h2{
@@ -14,7 +16,7 @@
 }
 
 #container-search-info {
-    margin: 10px 10px 20px 10px;
+    margin: 10px 10px 50px 10px;
     align-self: center;
     display: flex;
     flex-direction: row;
@@ -24,14 +26,19 @@
 #container-search-info input{
     border: none;
     border-radius: 50px 0 0 50px;
-    height: 30px;
+    height: 40px;
     padding-left: 10px;
+    border: green solid 2px;
+    border-right: none;
+    background-color: white;
 }
 
 #container-search-info button{
     border: none;
     border-radius: 0 50px 50px 0;
-    height: 30px;
+    height: 40px;
+    border: green solid 2px;
+    border-left: none;
     background-color: white;
 }
 
@@ -140,4 +147,43 @@ CAROUSEL FROM HERE ON DOWN
 
 .carousel-item-image-container img{
     width: 100%;
+}
+
+
+
+/*
+
+CAROUSEL END
+
+*/
+
+
+#container-register{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: white;
+    margin: 10px 0 20px 0;
+    border-radius: 20px;
+}
+
+#container-register h2{
+    text-align: center;
+    margin: 10px 0;
+}
+
+#container-register-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+#container-register-button button{
+    width: 90px;
+    height: 25px;
+    border: none;
+    background-color: green;
+    color: white;
+    border-radius: 5px;
 }
