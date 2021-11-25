@@ -3,6 +3,7 @@ const path = require('path')
 const app = express()
 const methodOverride =  require('method-override');
 const mainRouter = require('./src/routes/mainRouter');
+const productsRouter = require('./src/routes/productsRouter');
 
 
 app.use(express.static(path.join(__dirname, "./public")));
@@ -20,3 +21,4 @@ app.listen(3000, () => {
 
 
 app.use('/' , mainRouter)
+app.use('/products' , productsRouter)

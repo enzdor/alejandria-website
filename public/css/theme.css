@@ -13,6 +13,7 @@ main{
 body{
     background-color: white;
     font-family: 'Open sans' , sans-serif;
+    overflow-x: hidden;
 }
 
 
@@ -21,6 +22,7 @@ body{
 HEADER STYLES!!!
 
 */
+
 
 
 .header_container-top {
@@ -41,11 +43,13 @@ HEADER STYLES!!!
     align-items: center;
 }
 
-.header-top_container-icon a{
+.header-top_container-icon button{
     text-decoration: none;
+    background-color: transparent;
+    border: none;
 }
 
-.header-top_container-icon a i{
+.header-top_container-icon button i{
     font-size: 1.5rem;
 }
 
@@ -57,6 +61,10 @@ BURGUER NAV
 
 */
 
+
+.header-top_burguer {
+    z-index: 1000;
+}
 
 
 .header_container-burguer{
@@ -74,9 +82,15 @@ BURGUER NAV
     margin: 20px 0;
 }
 
+.header_visible {
+    transform: translateX(0%);
+    transition: transform 250ms ease-out;
+}
 
-
-
+.header_not-visible {
+    transform: translateX(-100%);
+    transition: transform 250ms ease-in;
+}
 
 
 
