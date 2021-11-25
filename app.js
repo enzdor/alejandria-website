@@ -1,14 +1,22 @@
 const express = require('express')
 const path = require('path')
 const app = express()
+const methodOverride =  require('method-override');
+const mainRouter = require('./src/routes/mainRouter');
 
-const publicPath = path.join(__dirname, "./public");
-app.use(express.static(publicPath));
+
+app.use(express.static(path.join(__dirname, "./public")));
+app.use(methodOverride('_method'));
+
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '/src/views'));
+
+
 
 app.listen(3000, () => {
     console.log("Server is working!");
 });
 
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "views/index.html"));
-  });
+
+app.use('/' , mainRouter)

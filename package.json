@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/enzdor/proyecto-alejandria-libros#readme",
   "dependencies": {
+    "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "method-override": "^3.0.0",
     "nodemon": "^2.0.15",
     "normalize.css": "^8.0.1"
   }
