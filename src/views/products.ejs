@@ -2,15 +2,28 @@
 <html lang="en">
 <head>
     <%- include('partials/head', {title: 'Home'}) %>
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/products.css">
 </head>
 <body>
     <header>
         <%- include('partials/header') %> 
     </header>
     <main>
-        <h1>Hello there...  </h1>
-        <h2>General Kenobi!</h2>
+        <div class="products_container">
+            <h2>Libros</h2>
+            <div class="products_outer-edge-product">
+                <div class="products_container-product container">
+                    <div class="products-product_container-image">
+                        <img src="/images/libro1.jpeg" alt="" width="100%">
+                    </div>
+                    <div class="products-product_container-description">
+                        <h3>The Complete Mapp</h3>
+                        <p>$200</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
     </main>
     <footer>
         <%- include('partials/footer') %> 
