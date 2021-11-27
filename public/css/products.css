@@ -53,6 +53,26 @@ CONTAINER OF INDIVIDUAL PRODUCT
     font-weight: 500;
 }
 
+/*
+
+
+PRODUCTS BUTTONS
+
+
+*/
+
+
+.product_container-button{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: center;
+    margin: 10px;
+    width: 100%;
+}
+
+
 /* 
 
 

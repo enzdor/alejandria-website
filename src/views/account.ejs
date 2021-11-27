@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head', {title: 'Mi Cuenta'}) %>
+    <link rel="stylesheet" href="/css/account.css">
+    <link rel="stylesheet" href="/css/products.css">
+</head>
+<body>
+    <header>
+        <%- include('partials/header') %> 
+    </header>
+    <main>
+        <div class="account_outer-edge">
+            <div class="account_container container">
+                <h2 class="account_title">Informacion de tu cuenta</h2>
+                <div class="account_container-information">
+                    <p class="account_information-type">Nombre: </p>
+                    <p>Enzo</p>
+                </div>
+                <div class="account_container-information">
+                    <p class="account_information-type">Apellido: </p>
+                    <p>Lopes</p>
+                </div>
+                <div class="account_container-information">
+                    <p class="account_information-type">Email: </p>
+                    <p>enzo@gmail.com</p>
+                </div>
+                <div class="account_container-information">
+                    <p class="account_information-type">Contrasena: </p>
+                    <p>Cabildo1810</p>
+                </div>
+                <div class="account_container-information">
+                    <p class="account_information-type">Tipo de cuenta: </p>
+                    <p>Lector</p>
+                </div>
+                <div class="account_container-information account_container-button">
+                    <form action="">
+                        <button class="button-regular account_button-edit">
+                            Editar
+                        </button>
+                    </form>
+                </div>
+           </div>
+        </div>
+        <div class="products_container">
+            <div class="title_outer-edge">
+                <div class="title_container container">
+                    <h2>Tus libros a la venta</h2>
+                </div>
+            </div>
+            <div class="products_outer-edge-product">
+                <div class="products_container-product container">
+                    <div class="products-product_container-image">
+                        <img src="/images/libro1.jpeg" alt="" width="100%">
+                    </div>
+                    <div class="products-product_container-description">
+                        <h3>The Complete Mapp</h3>
+                        <p>$200</p>
+                    </div>
+                    <div class="product_container-button">
+                        <div>
+                            <form action="">
+                                <div>
+                                    <button class="button-regular">Borrar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div>
+                            <form action="">
+                                <div>
+                                    <button class="button-regular">Editar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <%- include('partials/footer') %> 
+    </footer>
+</body>
+</html>

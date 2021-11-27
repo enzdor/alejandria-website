@@ -11,7 +11,7 @@ CONTAINER SEARCH
 .index_container-search {
     margin-top: 10px;
     margin-bottom: 20px;
-    height: 250px;
+    min-height: 250px;
 }
 
 .index_container-search h2{
@@ -103,6 +103,10 @@ CONTAINER FORM
     width: 100%;
 }
 
+.index-info_icon{
+    color: #216e2f;
+}
+
 .index-info_info i{
     font-size: 1.5rem;
     margin-bottom: 10px;
@@ -111,7 +115,6 @@ CONTAINER FORM
 .index-info_info p {
     text-align: center;
 }
-
 
 
 /*
