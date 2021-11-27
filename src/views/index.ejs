@@ -3,44 +3,69 @@
 <head>
     <%- include('partials/head', {title: 'Home'}) %>
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/products.css">
 </head>
 <body>
     <header>
         <%- include('partials/header') %> 
     </header>
     <main>
-        <div class="container index_container-search">
-            <h2>Conectando librerias de barrio con lectores apasionados</h2>
-            <form action="">
-                <div class="index-search_container-form">
-                    <input type="text" name="" id="" placeholder="Encontra tu libro...">
-                    <button class="button-regular"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
+        <div class="index_outer-edge">
+            <div class="container index_container-search">
+                <h2>Conectando librerias de barrio con lectores apasionados</h2>
+                <form action="">
+                    <div class="index-search_container-form">
+                        <input type="text" name="" id="" placeholder="Encontra tu libro...">
+                        <button class="button-regular"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="container index_container-register">
-            <h2>Registrate</h2>
-            <form action="">
-                <div class="index-register_container-form">
-                    <button class="button-regular">Lector</button>
-                    <button class="button-regular">Vendedor</button>
-                </div>
-            </form>
+        <div class="index_outer-edge">
+            <div class="container index_container-register">
+                <h2>Registrate</h2>
+                <form action="">
+                    <div class="index-register_container-form">
+                        <button class="button-regular">Lector</button>
+                        <button class="button-regular">Vendedor</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="container index_container-info">
-            <h2>Porque elegirnos a nosotros?</h2>
-            <section class="index-info_info">
-                <i class="fas fa-book index-info_icon"></i>
-                <p>Tenemos mas opciones</p>
-            </section>
-            <section class="index-info_info">
-                <i class="fas fa-fist-raised index-info_icon"></i>
-                <p>Vas a estar apoyando librerias independientes</p>
-            </section>
-            <section class="index-info_info">
-                <i class="fas fa-money-bill-wave index-info_icon"></i>
-                <p>Nuestras opciones son mas baratas</p>
-            </section>
+        <div class="products_container">
+            <div class="title_outer-edge">
+                <div class="title_container container">
+                    <h2>Libros populares</h2>
+                </div>
+            </div>
+            <div class="products_outer-edge-product">
+                <div class="products_container-product container">
+                    <div class="products-product_container-image">
+                        <img src="/images/libro1.jpeg" alt="" width="100%">
+                    </div>
+                    <div class="products-product_container-description">
+                        <h3>The Complete Mapp</h3>
+                        <p>$200</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="index_outer-edge">
+            <div class="container index_container-info">
+                <h2>Porque elegirnos a nosotros?</h2>
+                <section class="index-info_info">
+                    <i class="fas fa-book index-info_icon"></i>
+                    <p>Tenemos mas opciones</p>
+                </section>
+                <section class="index-info_info">
+                    <i class="fas fa-fist-raised index-info_icon"></i>
+                    <p>Vas a estar apoyando librerias independientes</p>
+                </section>
+                <section class="index-info_info">
+                    <i class="fas fa-money-bill-wave index-info_icon"></i>
+                    <p>Nuestras opciones son mas baratas</p>
+                </section>
+            </div>
         </div>
     </main>
     <footer>
