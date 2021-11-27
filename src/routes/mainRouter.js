@@ -6,6 +6,7 @@ router.get('/' , mainController.index)
 router.get('/account' , mainController.account)
 router.get('/basket' , mainController.basket)
 router.get('/about' , mainController.about)
+router.get('/register' , mainController.register)
 
 
 module.exports = router;

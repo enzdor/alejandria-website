@@ -1,0 +1,16 @@
+.register_outer-edge{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.register_container{
+    width: 100%;
+    max-width: 400px;
+    justify-self: center;
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+}
+

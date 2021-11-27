@@ -10,6 +10,9 @@ const mainController = {
     },
     about: (req, res) =>{
         res.render('about')
+    },
+    register: (req, res) =>{
+        res.render('register')
     }
 };
 
