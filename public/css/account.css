@@ -70,14 +70,19 @@ EDIT ACCOUNT INFORMATION BUTTON SYTLES
 /*
 
 
-PRODUCT EDIT DELETE STYLES
+ADD PRODUCT BUTTON STYLES
 
 
 */
 
 
+.account_container-title{
+    justify-content: space-between;
+}
 
-
+.account_container-button-add {
+    margin: 10px;
+}
 
 
 
