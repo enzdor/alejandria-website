@@ -4,6 +4,7 @@ const app = express()
 const methodOverride =  require('method-override');
 const mainRouter = require('./src/routes/mainRouter');
 const productsRouter = require('./src/routes/productsRouter');
+const accountRouter = require('./src/routes/accountRouter');
 
 
 app.use(express.static(path.join(__dirname, "./public")));
@@ -22,3 +23,4 @@ app.listen(3000, () => {
 
 app.use('/' , mainRouter)
 app.use('/products' , productsRouter)
+app.use('/account' , accountRouter)

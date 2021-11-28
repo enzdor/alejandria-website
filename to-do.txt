@@ -1,0 +1,7 @@
+all post put routes for forms
+
+
+give names to inputs and labels
+
+
+fix "agregar" button in account
