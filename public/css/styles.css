@@ -109,3 +109,8 @@ FORM STYLES
 .form_container-button{
     margin: 10px 20px;
 }
+
+textarea{
+    max-width: 358px;
+    max-height: 400px;
+}
