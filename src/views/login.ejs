@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head', {title: 'Home'}) %>
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+    <header>
+        <%- include('partials/header') %> 
+    </header>
+    <main>
+        <div class="register_outer-edge">
+            <div class="register_container container">
+                <h2>Ingresar</h2>
+                <div class="form_container">
+                    <form action="">
+                        <div class="form_outer-edge-input">
+                            <div class="form_container-input">
+                                <label for="">Email:</label>
+                                <input type="email" name="" id="">
+                            </div>
+                        </div>
+                        <div class="form_outer-edge-input">
+                            <div class="form_container-input">
+                                <label for="">Contrasena:</label>
+                                <input type="password" name="" id="">
+                            </div>
+                        </div>
+                        <div class="form_container-button">
+                            <button class="button-regular">Ingresar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <%- include('partials/footer') %> 
+    </footer>
+</body>
+</html>

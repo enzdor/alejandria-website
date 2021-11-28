@@ -7,6 +7,8 @@ router.get('/account' , mainController.account)
 router.get('/basket' , mainController.basket)
 router.get('/about' , mainController.about)
 router.get('/register' , mainController.register)
+router.get('/login' , mainController.login)
+router.get('/account/edit' , mainController.accountEdit)
 
 
 module.exports = router;

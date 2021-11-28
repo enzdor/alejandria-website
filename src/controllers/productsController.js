@@ -10,6 +10,9 @@ const productsController = {
     },
     productEdit: (req, res) => {
         res.render('productEdit')
+    },
+    productAdd: (req, res) => {
+        res.render('productAdd')
     }
 };
 
