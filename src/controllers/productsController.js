@@ -4,6 +4,9 @@ const productsController = {
     },
     categories: (req, res) => {
         res.render('categories')
+    },
+    productDetail: (req, res) => {
+        res.render('productDetail')
     }
 };
 
