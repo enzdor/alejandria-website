@@ -38,19 +38,21 @@
                     <h2>Libros populares</h2>
                 </div>
             </div>
-            <div class="products_outer-edge-product">
-                <div class="products_container-product container">
-                    <div class="products-product_container-image">
-                        <a href="/products/detail">
-                            <img src="/images/libro1.jpeg" alt="" width="100%">
-                        </a>
-                    </div>
-                    <div class="products-product_container-description">
-                        <h3>The Complete Mapp</h3>
-                        <p>$200</p>
+            <% for (let product of productsPopular) { %> 
+                <div class="products_outer-edge-product">
+                    <div class="products_container-product container">
+                        <div class="products-product_container-image">
+                            <a href="/products/<%= product.id %> ">
+                                <img src="/images/<%= product.image %>" alt="" width="100%">
+                            </a>
+                        </div>
+                        <div class="products-product_container-description">
+                            <h3><%= product.name %></h3>
+                            <p><%= product.price %></p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <% } %> 
         </div>
         <div class="index_outer-edge">
             <div class="container index_container-info">

@@ -14,22 +14,22 @@
             <div class="detail_container container">
                 <div class="detail_outer-edge-image">
                     <div class="detail_container-image">
-                        <img src="/images/libro1.jpeg" alt="" width="100%">
+                        <img src="/images/<%= product.image %>" alt="" width="100%">
                     </div>
                 </div>
                 <div class="detail_outer-edge-information">
                     <div class="detail_container-information">
                         <div class="detail-information_container">
-                            <h2>Name of the book</h2>
+                            <h2><%= product.name %></h2>
                         </div>
                         <div class="detail-information_container">
-                            <p>Autor: Juan Carlos Pepe</p>
+                            <p>Autor: <%= product.author %></p>
                         </div>
                         <div class="detail-information_container">
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque, sequi aliquam fugit quo alias doloribus maxime? Amet, dolorum. Possimus expedita, error accusantium quasi eligendi ducimus. Tempora molestias corporis magnam reiciendis.</p>
+                            <p><%= product.description %></p>
                         </div>
                         <div class="detail-information_container">
-                            <p class="detail-information_price">$200</p>
+                            <p class="detail-information_price"><%= product.price %></p>
                         </div>
                         <div class="detail-information_container">
                             <div class="product_container-button">
