@@ -50,29 +50,31 @@
                     
                 </div>
             </div>
-            <div class="products_outer-edge-product">
-                <div class="products_container-product container">
-                    <div class="products-product_container-image">
-                        <a href="/products/detail">
-                            <img src="/images/libro1.jpeg" alt="" width="100%">
-                        </a>
-                    </div>
-                    <div class="products-product_container-description">
-                        <h3>The Complete Mapp</h3>
-                        <p>$200</p>
-                    </div>
-                    <div class="product_container-button">
-                        <div>
-                            <form action="">
-                                <div>
-                                    <button class="button-regular">Borrar</button>
-                                </div>
-                            </form>
+            <% for (let product of productsPopular){ %> 
+                <div class="products_outer-edge-product">
+                    <div class="products_container-product container">
+                        <div class="products-product_container-image">
+                            <a href="/products/<%= product.id %>/detail ">
+                                <img src="/images/<%= product.image %> " alt="" width="100%">
+                            </a>
                         </div>
-                        <a class="button-regular" href="/products/edit">Editar</a>
+                        <div class="products-product_container-description">
+                            <h3><%= product.name %></h3>
+                            <p><%= product.price %></p>
+                        </div>
+                        <div class="product_container-button">
+                            <div>
+                                <form action="">
+                                    <div>
+                                        <button class="button-regular">Borrar</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <a class="button-regular" href="/products/edit">Editar</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <% } %> 
         </div>
     </main>
     <footer>

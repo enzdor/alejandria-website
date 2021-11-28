@@ -1,20 +1,6 @@
-const fs = require('fs');
-const path = require('path');
+productsService = require('../services/productsServices.js')
 
-const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
-const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
-
-function saveProducts(){
-	const texto = JSON.stringify(products, null, 4);
-	fs.writeFileSync(productsFilePath, texto, "utf-8")
-}
-
-function findOne(id){
-    const product = products.find((prod) => {
-        return prod.id == id;
-    })
-    return product
-}
+const products = productsService.getAll();
 
 
 const productsController = {
@@ -27,17 +13,29 @@ const productsController = {
     },
     productDetail: (req, res) => {
         const id = req.params.id
-        const product = findOne(id);
+        const product = productsService.findOne(id);
         res.render('productDetail',
         {product})
     },
     productEdit: (req, res) => {
-        const product = findOne(id);
+        const id = req.params.id
+        const product = productsService.findOne(id);
         res.render('productEdit',
         {product})
     },
     productAdd: (req, res) => {
         res.render('productAdd')
+    },
+    productStore: (req ,res) => {
+        let product = {
+			id: Date.now(),
+			...req.body
+		};
+
+        products.push(product);
+		productsService.saveProducts();
+
+		res.redirect('/products')
     }
 };
 

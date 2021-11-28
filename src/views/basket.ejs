@@ -16,50 +16,46 @@
                     <h2>Libros en tu cesto</h2>
                 </div>
             </div>
-            <div class="products_outer-edge-product">
-                <div class="products_container-product container">
-                    <div class="products-product_container-image">
-                        <a href="/products/detail">
-                            <img src="/images/libro1.jpeg" alt="" width="100%">
-                        </a>
-                    </div>
-                    <div class="products-product_container-description">
-                        <h3>The Complete Mapp</h3>
-                        <p>$200</p>
-                    </div>
-                    <div class="product_container-button">
-                        <div>
-                            <form action="">
-                                <div>
-                                    <button class="button-regular">Borrar</button>
-                                </div>
-                            </form>
+            <% for (let product of productsPopular) {%> 
+                <div class="products_outer-edge-product">
+                    <div class="products_container-product container">
+                        <div class="products-product_container-image">
+                            <a href="/products/<%= product.id %>/detail ">
+                                <img src="/images/<%= product.image %> " alt="" width="100%">
+                            </a>
                         </div>
-                        <div>
-                            <form action="">
-                                <div>
-                                    <button class="button-regular">Favorito</button>
-                                </div>
-                            </form>
+                        <div class="products-product_container-description">
+                            <h3><%= product.name %></h3>
+                            <p><%= product.price %></p>
+                        </div>
+                        <div class="product_container-button">
+                            <div>
+                                <form action="">
+                                    <div>
+                                        <button class="button-regular">Borrar</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div>
+                                <form action="">
+                                    <div>
+                                        <button class="button-regular">Favorito</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            <% } %> 
             <div class="basket_outer-edge-price">
                 <div class="basket_container-price container">
                     <h3>Total a pagar: 2000$</h3>
+                    <% for (let product of productsPopular) {%> 
                     <div class="basket-price_container-product">
-                        <p class="basket-price_product-name">The Complete Mapp</p>
-                        <p class="basket-price_product-price">$200</p>
+                        <p class="basket-price_product-name"><%= product.name %> </p>
+                        <p class="basket-price_product-price"><%= product.price %> </p>
                     </div>
-                    <div class="basket-price_container-product">
-                        <p class="basket-price_product-name">The Complete Mapp</p>
-                        <p class="basket-price_product-price">$200</p>
-                    </div>
-                    <div class="basket-price_container-product">
-                        <p class="basket-price_product-name">The Complete Mapp</p>
-                        <p class="basket-price_product-price">$200</p>
-                    </div>
+                    <% } %> 
                     <div class="basket-price_container-form">
                         <form action="">
                             <div>

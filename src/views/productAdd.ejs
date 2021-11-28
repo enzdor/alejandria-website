@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%- include('partials/head', {title: 'Home'}) %>
+    <%- include('partials/head', {title: 'Add product'}) %>
     <link rel="stylesheet" href="/css/register.css">
 </head>
 <body>
@@ -13,7 +13,7 @@
             <div class="register_container container">
                 <h2>Crear libro</h2>
                 <div class="form_container">
-                    <form action="">
+                    <form action="/products" method="post">
                         <div class="form_outer-edge-input">
                             <div class="form_container-input">
                                 <label for="">Nombre:</label>
@@ -52,9 +52,8 @@
                                 </select>
                             </div>
                         </div>
-
                         <div class="form_container-button">
-                            <button class="button-regular">Finalizar</button>
+                            <button type="submit" class="button-regular">Finalizar</button>
                         </div>
                     </form>
                 </div>
