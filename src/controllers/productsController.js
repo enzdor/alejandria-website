@@ -27,15 +27,7 @@ const productsController = {
         res.render('productAdd')
     },
     productStore: (req ,res) => {
-        let product = {
-			id: Date.now(),
-			...req.body
-		};
-
-        products.push(product);
-		productsService.saveProducts();
-
-		res.redirect('/products')
+        res.send(req.body + 'Hola')
     }
 };
 

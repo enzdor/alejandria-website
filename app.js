@@ -9,6 +9,7 @@ const accountRouter = require('./src/routes/accountRouter');
 
 app.use(express.static(path.join(__dirname, "./public")));
 app.use(methodOverride('_method'));
+app.use(express.json())
 
 
 app.set('view engine', 'ejs');
