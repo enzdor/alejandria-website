@@ -36,7 +36,6 @@ const productsController = {
 		};
 
         products[index] = updatedProduct;
-        console.log(index)
         productsService.saveProducts();
 
         res.redirect('/products')
@@ -55,6 +54,17 @@ const productsController = {
 
 		res.redirect('/account')
 	},
+    productDestroy: (req, res) => {
+        const id = req.params.id;
+
+        const index = products.findIndex((prod)=>{
+			return prod.id == id;
+		})
+
+        products.splice(index, 1);
+
+        productsService.saveProducts()
+    }
 };
 
 module.exports = productsController;
