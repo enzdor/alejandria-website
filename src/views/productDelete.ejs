@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head', {title: 'Home'}) %>
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+    <header>
+        <%- include('partials/header') %> 
+    </header>
+    <main>
+        <div class="register_outer-edge">
+            <div class="register_container container">
+                <h2>Estas seguro que queres borrar:</h2>
+                <h2><%= product.name %> </h2>
+                <div class="form_container">
+                    <div>
+                        <form action="/products/<% product.id %>/delete?_method=DELETE" method="post">
+                            <div>
+                                <button type="submit" class="button-regular">Borrar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <a href="/account" class="button-regular">No</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <%- include('partials/footer') %> 
+    </footer>
+</body>
+</html>

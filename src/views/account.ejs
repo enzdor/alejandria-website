@@ -62,13 +62,7 @@
                             <p><%= product.price %></p>
                         </div>
                         <div class="product_container-button">
-                            <div>
-                                <form action="/products/<% product.id %>?_method=DELETE">
-                                    <div>
-                                        <button type="submit" class="button-regular">Borrar</button>
-                                    </div>
-                                </form>
-                            </div>
+                            <a href="/products/<%= product.id %>/delete">Borrar</a>
                             <a class="button-regular" href="/products/<%= product.id %>/edit">Editar</a>
                         </div>
                     </div>

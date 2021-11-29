@@ -64,6 +64,14 @@ const productsController = {
         products.splice(index, 1);
 
         productsService.saveProducts()
+
+        res.redirect('/products')
+    },
+    productDelete: (req, res) => {
+        const id = req.params.id
+        const product = productsService.findOne(id);
+        res.render('productDelete',
+        {product})
     }
 };
 

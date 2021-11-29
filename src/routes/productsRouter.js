@@ -34,4 +34,10 @@ router.get('/add' , productsController.productAdd)
 router.post('/', productsController.productStore)
 
 
+// DELETE ONE PRODUCT
+
+router.get('/:id/delete' ,productsController.productDelete)
+router.delete('/:id' , productsController.productDestroy)
+
+
 module.exports = router;
