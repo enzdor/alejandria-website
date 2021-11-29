@@ -7,7 +7,7 @@ const productsPopular = productsService.getPopular();
 const mainController = {
     index: (req, res) => {
         res.render('index',
-        {productsPopular})
+        {productsPopular, products})
     },
     basket: (req, res) =>{
         res.render('basket',

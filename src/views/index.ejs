@@ -38,16 +38,16 @@
                     <h2>Libros populares</h2>
                 </div>
             </div>
-            <% for (let product of productsPopular) { %> 
+            <% for (let i = 0; i < 4; i++) { %> 
                 <div class="products_outer-edge-product">
                     <div class="products_container-product container">
                         <div class="products-product_container-image">
-                            <a href="/products/<%= product.id %>">
-                                <img src="/images/<%= product.image %>" alt="" width="100%">
+                            <a href="/products/<%= products[i].id %>">
+                                <img src="/images/<%= products[i].image %>" alt="" width="100%">
                             </a>
                         </div>
                         <div class="products-product_container-description">
-                            <p><%= product.price %></p>
+                            <p><%= products[i].price %></p>
                         </div>
                     </div>
                 </div>
