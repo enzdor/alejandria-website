@@ -4,8 +4,6 @@ const path = require('path');
 const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
 const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
-const productsPopular = products.slice(products.length -4, products.length);
-
 function saveProducts(){
 	const texto = JSON.stringify(products, null, 4);
 	fs.writeFileSync(productsFilePath, texto, "utf-8")
@@ -23,7 +21,7 @@ function getAll(){
 }
 
 function getPopular(){
-    return productsPopular;
+    return products.slice(products.length -4, products.length);;
 }
 
 module.exports = {

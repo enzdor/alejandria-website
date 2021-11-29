@@ -1,12 +1,13 @@
 productsService = require('../services/productsServices.js');
 
+const products = productsService.getAll();
 productsPopular = productsService.getPopular();
 
 
 const accountController = {
     account: (req ,res) =>{
         res.render('account',
-        {productsPopular})
+        {products, productsPopular})
     },
     register: (req, res) =>{
         res.render('register')
