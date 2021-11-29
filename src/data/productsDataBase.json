@@ -433,12 +433,12 @@
     },
     {
         "id": 49,
-        "name": "Williamson, McDermott and Purdy",
-        "author": "Carlen Delve",
-        "description": "Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
-        "price": "$307.77",
-        "image": "libro5.jpeg",
-        "category": "Aventura"
+        "name": "Irs crazy",
+        "author": "Wnzo Lopes",
+        "description": "Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. ",
+        "price": "$69",
+        "image": "libro10.jpeg",
+        "genre": "Aventura"
     },
     {
         "id": 50,

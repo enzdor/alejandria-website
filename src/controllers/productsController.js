@@ -23,6 +23,24 @@ const productsController = {
         res.render('productEdit',
         {product})
     },
+    productUpdate: (req, res) => {
+        const id = req.params.id
+		
+		const index = products.findIndex((prod)=>{
+			return prod.id == id;
+		})
+
+		const updatedProduct = {
+			id: products[index].id,
+			...req.body
+		};
+
+        products[index] = updatedProduct;
+        console.log(index)
+        productsService.saveProducts();
+
+        res.redirect('/products')
+    },
     productAdd: (req, res) => {
         res.render('productAdd')
     },

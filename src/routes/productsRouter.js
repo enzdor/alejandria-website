@@ -17,13 +17,14 @@ router.get('/categories' , productsController.categories)
 
 /* SHOW PRODUCT DETAIL */
 
-router.get('/:id/detail' , productsController.productDetail)
+router.get('/:id' , productsController.productDetail)
 
 
 
 /* EDIT ONE PRODUCT */
 
 router.get('/:id/edit' , productsController.productEdit)
+router.put('/:id' , productsController.productUpdate)
 
 
 
