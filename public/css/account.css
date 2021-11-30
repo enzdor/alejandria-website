@@ -80,13 +80,8 @@ ADD PRODUCT BUTTON STYLES
     justify-content: space-between;
 }
 
-.account_container-button-add {
+.account_button-add {
     margin: 10px;
-}
-
-.account_container-add {
-    width: 100px;
-    height: 40px;
 }
 
 

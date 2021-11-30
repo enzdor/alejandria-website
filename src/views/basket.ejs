@@ -49,10 +49,10 @@
             <div class="basket_outer-edge-price">
                 <div class="basket_container-price container">
                     <h3>Total a pagar: 2000$</h3>
-                    <% for (let product of productsPopular) {%> 
+                    <% for (let i = 0; i < 4; i++) {%> 
                     <div class="basket-price_container-product">
-                        <p class="basket-price_product-name"><%= product.name %> </p>
-                        <p class="basket-price_product-price"><%= product.price %> </p>
+                        <p class="basket-price_product-name"><%= products[i].name %> </p>
+                        <p class="basket-price_product-price"><%= products[i].price %> </p>
                     </div>
                     <% } %> 
                     <div class="basket-price_container-form">

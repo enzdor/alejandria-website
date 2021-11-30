@@ -10,12 +10,12 @@
     },
     {
         "id": 2,
-        "name": "Bednar-Bogan",
-        "author": "Virginia Wyson",
-        "description": "Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.",
-        "price": "$347.41",
-        "image": "libro8.jpeg",
-        "category": "Horror"
+        "name": "Hard Times",
+        "author": "Virginia Williams",
+        "description": "Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi. I do not understand this text",
+        "price": "$300",
+        "image": "libro7.jpeg",
+        "genre": "Aventura"
     },
     {
         "id": 3,
