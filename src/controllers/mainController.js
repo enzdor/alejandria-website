@@ -11,7 +11,7 @@ const mainController = {
     },
     basket: (req, res) =>{
         res.render('basket',
-        {productsPopular})
+        {productsPopular, products})
     },
     about: (req, res) =>{
         res.render('about')

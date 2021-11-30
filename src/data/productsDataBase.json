@@ -322,50 +322,5 @@
         "price": "$485.10",
         "image": "libro6.jpeg",
         "category": "Romance"
-    },
-    {
-        "id": 37,
-        "name": "Howell, Nolan and Greenholt",
-        "author": "Tymon Maber",
-        "description": "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.",
-        "price": "$289.37",
-        "image": "libro4.jpeg",
-        "category": "Romance"
-    },
-    {
-        "id": 38,
-        "name": "Kshlerin Group",
-        "author": "Lorain Dudgeon",
-        "description": "Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.",
-        "price": "$846.37",
-        "image": "libro1.jpeg",
-        "category": "Romance"
-    },
-    {
-        "id": 39,
-        "name": "Keeling-Kassulke",
-        "author": "Ben Walding",
-        "description": "Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.",
-        "price": "$473.84",
-        "image": "libro8.jpeg",
-        "category": "Fantasia"
-    },
-    {
-        "id": 40,
-        "name": "Adams-Hermann",
-        "author": "Brandice Caig",
-        "description": "Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.",
-        "price": "$548.41",
-        "image": "libro2.jpeg",
-        "category": "Comedia"
-    },
-    {
-        "id": 41,
-        "name": "Hayes, Casper and Hamill",
-        "author": "Nesta Winsiowiecki",
-        "description": "Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.",
-        "price": "$750.47",
-        "image": "libro8.jpeg",
-        "category": "Ciencia ficcion"
     }
 ]

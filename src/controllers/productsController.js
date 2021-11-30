@@ -54,12 +54,21 @@ const productsController = {
 
 		res.redirect('/account')
 	},
+    productDelete: (req, res) => {
+        const id = req.params.id
+        const product = productsService.findOne(id);
+        res.render('productDelete',
+        {product})
+    },
     productDestroy: (req, res) => {
         const id = req.params.id;
 
         const index = products.findIndex((prod)=>{
 			return prod.id == id;
 		})
+        console.log(req.params);
+        console.log(index);
+        console.log(id);
 
         products.splice(index, 1);
 
@@ -67,12 +76,7 @@ const productsController = {
 
         res.redirect('/products')
     },
-    productDelete: (req, res) => {
-        const id = req.params.id
-        const product = productsService.findOne(id);
-        res.render('productDelete',
-        {product})
-    }
+    
 };
 
 module.exports = productsController;
