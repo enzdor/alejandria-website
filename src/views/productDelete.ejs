@@ -16,7 +16,7 @@
                 <h2><%= product.name %> </h2>
                 <div class="form_container">
                     <div>
-                        <form action="/products/<% product.id %>/delete?_method=DELETE" method="post">
+                        <form action="/products/<%= product.id %>?_method=DELETE" method="post">
                             <div>
                                 <button type="submit" class="button-regular">Borrar</button>
                             </div>

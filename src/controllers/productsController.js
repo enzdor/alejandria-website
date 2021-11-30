@@ -12,6 +12,7 @@ const productsController = {
         res.render('categories')
     },
     productDetail: (req, res) => {
+        console.log('Not here bitch');
         const id = req.params.id
         const product = productsService.findOne(id);
         res.render('productDetail',
@@ -41,6 +42,7 @@ const productsController = {
         res.redirect('/products')
     },
     productAdd: (req, res) => {
+        console.log('Hello there');
         res.render('productAdd')
     },
     productStore: (req, res) => {
@@ -66,10 +68,7 @@ const productsController = {
         const index = products.findIndex((prod)=>{
 			return prod.id == id;
 		})
-        console.log(req.params);
-        console.log(index);
-        console.log(id);
-
+        
         products.splice(index, 1);
 
         productsService.saveProducts()
