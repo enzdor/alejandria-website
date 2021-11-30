@@ -12,7 +12,6 @@ const productsController = {
         res.render('categories')
     },
     productDetail: (req, res) => {
-        console.log('Not here bitch');
         const id = req.params.id
         const product = productsService.findOne(id);
         res.render('productDetail',
@@ -42,7 +41,6 @@ const productsController = {
         res.redirect('/products')
     },
     productAdd: (req, res) => {
-        console.log('Hello there');
         res.render('productAdd')
     },
     productStore: (req, res) => {

@@ -17,7 +17,7 @@ router.get('/categories' , productsController.categories)
 
 /* SHOW PRODUCT DETAIL */
 
-router.get('/:id' , productsController.productDetail)
+router.get('/:id/' , productsController.productDetail)
 
 
 
@@ -30,7 +30,7 @@ router.put('/:id' , productsController.productUpdate)
 
 /* CREATE ONE PRODUCT */
 
-router.get('/add' , productsController.productAdd)
+router.get('/add/product' , productsController.productAdd)
 router.post('/', productsController.productStore)
 
 
