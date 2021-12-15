@@ -1,6 +1,7 @@
-productsService = require('../services/productsServices.js')
-
+const productsService = require('../services/productsServices.js');
 const products = productsService.getAll();
+
+const {validationResult} = require('express-validator');
 
 
 const productsController = {
@@ -24,35 +25,52 @@ const productsController = {
         {product})
     },
     productUpdate: (req, res) => {
-        const id = req.params.id
-		
-		const index = products.findIndex((prod)=>{
-			return prod.id == id;
-		})
+        let errors = validationResult(req);
 
-		const updatedProduct = {
-			id: products[index].id,
-			...req.body
-		};
+        if (errors.isEmpty()){
+            const id = req.params.id
+            
+            const index = products.findIndex((prod)=>{
+                return prod.id == id;
+            })
 
-        products[index] = updatedProduct;
-        productsService.saveProducts();
+            const updatedProduct = {
+                id: products[index].id,
+                ...req.body
+            };
 
-        res.redirect('/products')
+            products[index] = updatedProduct;
+            productsService.saveProducts();
+
+            res.redirect('/products')
+        } else {
+            const id = req.params.id
+            const product = productsService.findOne(id);
+            res.render('productEdit',
+            {product, errors: errors.errors, old: req.body})
+        }
+        
     },
     productAdd: (req, res) => {
         res.render('productAdd')
     },
     productStore: (req, res) => {
-		let product = {
-			id: Date.now(),
-			...req.body
-		};
+		let errors = validationResult(req);
 
-		products.push(product);
-		productsService.saveProducts();
-
-		res.redirect('/account')
+        if (errors.isEmpty()) {
+            let product = {
+                id: Date.now(),
+                ...req.body
+            };
+    
+            products.push(product);
+            productsService.saveProducts();
+    
+            res.redirect('/account')
+        } else {
+            res.render('productAdd',
+            {errors: errors.errors, old: req.body})
+        }
 	},
     productDelete: (req, res) => {
         const id = req.params.id

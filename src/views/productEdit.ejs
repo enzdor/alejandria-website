@@ -12,6 +12,14 @@
         <div class="register_outer-edge">
             <div class="register_container container">
                 <h2>Editar libro</h2>
+                <div>
+                    <% if (locals.errors) { %>
+                        <p>Errors</p>
+                        <% for (let error of errors) { %>
+                            <p><%= error.msg %></p>
+                        <% } %>
+                    <% } %>
+                </div>
                 <div class="form_container">
                     <form action="/products/<%= product.id %>?_method=PUT" method="post">
                         <div class="form_outer-edge-input">
@@ -52,7 +60,6 @@
                                 </select>
                             </div>
                         </div>
-
                         <div class="form_container-button">
                             <button class="button-regular" type="submit">Finalizar</button>
                         </div>

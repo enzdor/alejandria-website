@@ -12,6 +12,14 @@
         <div class="register_outer-edge">
             <div class="register_container container">
                 <h2>Crear libro</h2>
+                <div>
+                    <% if (locals.errors) { %>
+                        <p>Errors</p>
+                        <% for (let error of errors) { %>
+                            <p><%= error.msg %></p>
+                        <% } %>
+                    <% } %>
+                </div>
                 <div class="form_container">
                     <form action="/products" method="post">
                         <div class="form_outer-edge-input">

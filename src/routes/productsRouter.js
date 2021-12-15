@@ -3,6 +3,18 @@ const router = express.Router();
 const productsController = require('../controllers/productsController');
 
 
+/* EXPRESS VALIDATOR*/
+
+const {check} = require('express-validator')
+let validateProduct = [
+    check('name').notEmpty().withMessage('Debes completar el nombre'),
+    check('author').notEmpty().withMessage('Debes completar el nombre del autor'),
+    check('description').notEmpty().withMessage('Debes completar la descripcion'),
+    check('price').notEmpty().withMessage('Debes completar el precio'),
+    check('image').notEmpty().withMessage('Debes completar la imagen'),
+    check('genre').notEmpty().withMessage('Debes elegir un genero'),
+]
+
 /* SHOW ALL PRODUCTS */
 
 router.get('/' , productsController.products)
@@ -24,14 +36,14 @@ router.get('/:id/' , productsController.productDetail)
 /* EDIT ONE PRODUCT */
 
 router.get('/:id/edit' , productsController.productEdit)
-router.put('/:id' , productsController.productUpdate)
+router.put('/:id' , validateProduct ,productsController.productUpdate)
 
 
 
 /* CREATE ONE PRODUCT */
 
 router.get('/add/product' , productsController.productAdd)
-router.post('/', productsController.productStore)
+router.post('/', validateProduct ,productsController.productStore)
 
 
 // DELETE ONE PRODUCT
