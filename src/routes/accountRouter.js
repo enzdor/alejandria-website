@@ -2,10 +2,39 @@ const express = require('express');
 const router = express.Router();
 const accountController = require('../controllers/accountController');
 
+
+
+/* EXPRESS VALIDATOR*/
+
+const {check} = require('express-validator')
+let validateAccountCreate = [
+    check('first-name').notEmpty().withMessage('Debes completar el nombre'),
+    check('last-name').notEmpty().withMessage('Debes completar el nombre'),
+    check('email').notEmpty().withMessage('Debes completar el email').isEmail().withMessage('Tiene que ser un mail valido'),
+    check('password').notEmpty().withMessage('Debes completar la contrasena'),
+    check('type').notEmpty().withMessage('Debes seleccionar el tipo de cuenta'),
+]
+let validateAccountLogin = [
+    check('email').notEmpty().withMessage('Debes completar el mail'),
+    check('password').notEmpty().withMessage('Debes completar la contrasena')
+]
+
+/* ACCOUNT INFO*/
 router.get('/' , accountController.account)
+
+
+/*ACCOUNT REGISTER*/
 router.get('/register' , accountController.register)
+router.post('/register' , validateAccountCreate , accountController.accountStore)
+
+
+/*ACCOUNT LOGIN*/
 router.get('/login' , accountController.login)
-router.get('/edit' , accountController.accountEdit)
+router.post('/login', validateAccountLogin ,accountController.loginProcess)
+
+
+/*EDIT ACCOUNT*/
+router.get('/edit' , accountController.edit)
 
 
 module.exports = router;

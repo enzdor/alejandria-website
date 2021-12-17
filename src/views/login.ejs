@@ -12,8 +12,14 @@
         <div class="register_outer-edge">
             <div class="register_container container">
                 <h2>Ingresar</h2>
+                <% if (locals.errors) { %>
+                    <p>Errors</p>
+                    <% for (let error of errors) { %>
+                        <p><%= error.msg %></p>
+                    <% } %>
+                <% } %>
                 <div class="form_container">
-                    <form action="">
+                    <form action="/account/login" method="post">
                         <div class="form_outer-edge-input">
                             <div class="form_container-input">
                                 <label for="email">Email:</label>
