@@ -14,7 +14,10 @@ app.set('views', path.join(__dirname, '/src/views'));
 app.use(express.static(path.join(__dirname, "./public")));
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended : false}));
-app.use(session({secret: "Very safe message you do not need to worry"}))
+app.use(session(
+    {secret: "Very safe message you do not need to worry",
+    resave: false,
+    saveUninitialized: false}))
 app.use(express.json());
 
 

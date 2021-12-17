@@ -493,5 +493,24 @@
         "price": "666",
         "image": "libro7.jpeg",
         "genre": "Aventura"
+    },
+    {
+        "id": 1639771357152,
+        "name": "Muy buen libro",
+        "author": "El mejor enzo",
+        "description": "aoreibarghpaoibae",
+        "price": "$6666",
+        "image": "libro10.jpeg",
+        "genre": "Aventura"
+    },
+    {
+        "id": 1639771520211,
+        "name": "Very good book",
+        "author": "you will know it when it happens",
+        "description": "bharpebpa;ehrigheapir",
+        "price": "$3",
+        "image": "libro1.jpeg",
+        "genre": "Aventura",
+        "user": "carlos@carlos.com"
     }
 ]

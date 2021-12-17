@@ -10,28 +10,25 @@
         <%- include('partials/header') %> 
     </header>
     <main>
+        <h1><%= user.email %> </h1>
         <div class="account_outer-edge">
             <div class="account_container container">
                 <h2 class="account_title">Informacion de tu cuenta</h2>
                 <div class="account_container-information">
                     <p class="account_information-type">Nombre: </p>
-                    <p>Enzo</p>
+                    <p><%= user.firstName %> </p>
                 </div>
                 <div class="account_container-information">
                     <p class="account_information-type">Apellido: </p>
-                    <p>Lopes</p>
+                    <p><%= user.lastName %></p>
                 </div>
                 <div class="account_container-information">
                     <p class="account_information-type">Email: </p>
-                    <p>enzo@gmail.com</p>
-                </div>
-                <div class="account_container-information">
-                    <p class="account_information-type">Contrasena: </p>
-                    <p>Cabildo1810</p>
+                    <p><%= user.email %></p>
                 </div>
                 <div class="account_container-information">
                     <p class="account_information-type">Tipo de cuenta: </p>
-                    <p>Lector</p>
+                    <p><%= user.type %> </p>
                 </div>
                 <div class="account_container-information account_container-button">
                     <a class="button-regular account_button-edit" href="/account/edit">Editar</a>

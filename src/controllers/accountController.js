@@ -11,13 +11,17 @@ const {validationResult} = require('express-validator');
 const accountController = {
     account: (req ,res) =>{
         res.render('account',
-        {products, productsPopular})
+        {products,
+        productsPopular,
+        user: req.session.userLogged,
+        })
     },
     register: (req, res) =>{
         res.render('register')
     },
     accountStore: (req, res) =>{
         let errors = validationResult(req);
+        console.log(errors);
 
         if (errors.isEmpty()) {
             let accountDb = accountsService.findByField('email', req.body.email)
@@ -40,8 +44,15 @@ const accountController = {
     
             accounts.push(account);
             accountsService.saveAccounts();
-    
-            res.redirect('/account')
+            
+            let userLogin = accountsService.findByField('email', req.body.email);
+            delete userLogin.password;
+            req.session.userLogged = userLogin;
+            res.render('account', {
+                user: req.session.userLogged,
+                products});
+
+
         } else {
             res.render('register',
             {errors: errors.errors, old: req.body})
@@ -58,7 +69,12 @@ const accountController = {
         if (userLogin) {
             let passwordOk = bcryptjs.compareSync(req.body.password, userLogin.password);
             if (passwordOk){
-                res.redirect('/account/');
+                delete userLogin.password;
+                req.session.userLogged = userLogin;
+                res.render('account', {
+                    user: req.session.userLogged,
+                    products
+                });
                 return
             } else {
                 errors.errors.push({
@@ -87,7 +103,8 @@ const accountController = {
 
     },
     edit: (req, res) => {
-        res.render('accountEdit')
+        res.render('accountEdit', 
+        {user: req.session.userLogged})
     }
 };
 

@@ -60,7 +60,8 @@ const productsController = {
         if (errors.isEmpty()) {
             let product = {
                 id: Date.now(),
-                ...req.body
+                ...req.body,
+                user: req.session.userLogged.email
             };
     
             products.push(product);

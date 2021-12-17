@@ -16,32 +16,26 @@
                     <form action="">
                         <div class="form_outer-edge-input">
                             <div class="form_container-input">
-                                <label for="first-name">Nombre:</label>
-                                <input type="text" name="first-name" id="first-name">
+                                <label for="firstName">Nombre:</label>
+                                <input type="text" name="firstName" id="firstName" value="<%= user.firstName %>">
                             </div>
                         </div>
                         <div class="form_outer-edge-input">
                             <div class="form_container-input">
-                                <label for="last-name">Apellido:</label>
-                                <input type="text" name="last-name" id="last-name">
+                                <label for="lastName">Apellido:</label>
+                                <input type="text" name="lastName" id="lastName" value="<%= user.lastName %>">
                             </div>
                         </div>
                         <div class="form_outer-edge-input">
                             <div class="form_container-input">
                                 <label for="email">Email:</label>
-                                <input type="email" name="email" id="email">
+                                <input type="email" name="email" id="email" value="<%= user.email %>">
                             </div>
                         </div>
                         <div class="form_outer-edge-input">
                             <div class="form_container-input">
                                 <label for="password">Contrasena:</label>
-                                <input type="password" name="password" id="password">
-                            </div>
-                        </div>
-                        <div class="form_outer-edge-input">
-                            <div class="form_container-input">
-                                <label for="password-confirm">Confirmar contrasena:</label>
-                                <input type="password" name="password-confirm" id="password-confirm">
+                                <input type="password" name="password" id="password" value="<%= user.password %>">
                             </div>
                         </div>
                         <div class="form_container-button">

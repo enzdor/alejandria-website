@@ -14,7 +14,8 @@ const mainController = {
         {productsPopular, products})
     },
     about: (req, res) =>{
-        res.render('about')
+        res.render('about',
+        {user: req.session.userLogged,})
     },
 };
 
