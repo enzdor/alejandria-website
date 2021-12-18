@@ -65,9 +65,11 @@ const accountController = {
         let errors = validationResult(req);
 
         let userLogin = accountsService.findByField('email', req.body.email);
-
+        
         if (userLogin) {
-            let passwordOk = bcryptjs.compareSync(req.body.password, userLogin.password);
+            console.log(userLogin);
+            console.log(userLogin.password + req.body.password);
+            let passwordOk = bcryptjs.compareSync(userLogin.password, req.body.password);
             if (passwordOk){
                 delete userLogin.password;
                 req.session.userLogged = userLogin;
@@ -103,8 +105,51 @@ const accountController = {
 
     },
     edit: (req, res) => {
+        let errors = validationResult(req);
+
         res.render('accountEdit', 
-        {user: req.session.userLogged})
+        {user: req.session.userLogged,
+        errors: errors.errors})
+    },
+    accountUpdate: (req, res) => {
+        let errors = validationResult(req);
+
+        if (errors.isEmpty()){
+            const index = accounts.findIndex((acc)=>{
+                return req.session.id == acc.id;
+            })
+
+            console.log(req.body);
+            console.log(req.session);
+            const updatedAccount = {
+                id: req.session.id,
+                ...req.body,
+                email: req.session.email,
+                type: req.session.type,
+            }
+
+            
+            accounts[index] = updatedAccount;
+            accountsService.saveAccounts()
+
+
+            req.session.userLogged = updatedAccount;
+            res.render('account',{products,
+                productsPopular,
+                user: req.session.userLogged,
+                })
+            return
+
+        } else {
+            let errors = validationResult(req);
+            req.session.userLogged = updatedAccount;
+
+            res.render('accountEdit', 
+            {user: req.session.userLogged,
+            errors: errors.errors})
+            return
+        }
+        
     }
 };
 

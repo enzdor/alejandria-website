@@ -13,7 +13,7 @@
             <div class="register_container container">
                 <h2>Editar tu cuenta</h2>
                 <div class="form_container">
-                    <form action="">
+                    <form action="/account/edit?_method=PUT" method="post">
                         <div class="form_outer-edge-input">
                             <div class="form_container-input">
                                 <label for="firstName">Nombre:</label>
@@ -24,12 +24,6 @@
                             <div class="form_container-input">
                                 <label for="lastName">Apellido:</label>
                                 <input type="text" name="lastName" id="lastName" value="<%= user.lastName %>">
-                            </div>
-                        </div>
-                        <div class="form_outer-edge-input">
-                            <div class="form_container-input">
-                                <label for="email">Email:</label>
-                                <input type="email" name="email" id="email" value="<%= user.email %>">
                             </div>
                         </div>
                         <div class="form_outer-edge-input">

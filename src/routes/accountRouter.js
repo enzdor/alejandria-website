@@ -16,6 +16,11 @@ let validateAccountCreate = [
     check('password').notEmpty().withMessage('Debes completar la contrasena'),
     check('type').notEmpty().withMessage('Debes seleccionar el tipo de cuenta'),
 ]
+let validateAccountUpdate = [
+    check('firstName').notEmpty().withMessage('Debes completar el nombre'),
+    check('lastName').notEmpty().withMessage('Debes completar el nombre'),
+    check('password').notEmpty().withMessage('Debes completar la contrasena')
+]
 let validateAccountLogin = [
     check('email').notEmpty().withMessage('Debes completar el mail'),
     check('password').notEmpty().withMessage('Debes completar la contrasena')
@@ -37,6 +42,7 @@ router.post('/login', validateAccountLogin ,accountController.loginProcess)
 
 /*EDIT ACCOUNT*/
 router.get('/edit' , authMiddleware ,accountController.edit)
+router.put('/edit' , validateAccountUpdate ,accountController.accountUpdate)
 
 
 module.exports = router;

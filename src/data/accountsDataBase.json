@@ -22,13 +22,5 @@
         "email": "rob@smith.com",
         "password": "$2a$10$fq6Wj/XqYIg.xik0lwmysev5Fq5DgPxxpRrQMiKNbsxxNDwy5te/e",
         "type": "Lector"
-    },
-    {
-        "id": 1639783053245,
-        "firstName": "bob",
-        "lastName": "bob",
-        "email": "bob@bob.com",
-        "password": "$2a$10$EmfUi7ArpwB0Wp/5KFkouesaJtrVDOeA1m//LbgClnAofVzjaKCs2",
-        "type": "Lector"
     }
 ]
