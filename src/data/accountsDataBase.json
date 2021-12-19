@@ -1,26 +1,34 @@
 [
     {
-        "id": 1639769693321,
-        "firstName": "Carlos",
-        "lastName": "Carlos",
-        "email": "carlos@carlos.com",
-        "password": "$2a$10$mDMCiOwj5uAraNOnv83U..cPAZJ9D8wskoAWDyz0tUqe90bU1V2Y2",
+        "id": 1639891570460,
+        "firstName": "enzo",
+        "lastName": "lopes",
+        "password": "$2a$10$eSOlQDXen.EBcMxIdVGIiu/ccwtmX/.8jVrYyU2oPd7os8GrKDR9K",
+        "email": "enzo@l.com",
         "type": "Lector"
     },
     {
-        "id": 1639769752582,
-        "firstName": "Fe",
-        "lastName": "Fe",
-        "email": "fe@fe.com",
-        "password": "$2a$10$qhkOkOuLf1eiSwALV7Zc7uK0zCP/ev47q1UVcOT/p8RrmA1Km8FLe",
+        "id": 1639891740299,
+        "firstName": "carlos",
+        "lastName": "carlos",
+        "password": "$2a$10$WOD2vVGdweMEy5xEvizjSunJFtLfNJIEF42w./y/0l54Y0.UUI8ia",
+        "email": "carlos@c.com",
         "type": "Lector"
     },
     {
-        "id": 1639782875932,
-        "firstName": "Rob",
-        "lastName": "Smith",
-        "email": "rob@smith.com",
-        "password": "$2a$10$fq6Wj/XqYIg.xik0lwmysev5Fq5DgPxxpRrQMiKNbsxxNDwy5te/e",
+        "id": 1639891913194,
+        "firstName": "james",
+        "lastName": "smith",
+        "password": "$2a$10$G53vfjhJZFUErpAFg/X0fOFT/4MPcuEoIgzBEO3d8w81oqD7aMwH6",
+        "email": "james@s.com",
+        "type": "Lector"
+    },
+    {
+        "id": 1639892080681,
+        "firstName": "jane",
+        "lastName": "doe",
+        "password": "$2a$10$DRoKTk8l58lePOvBOoyce.2DoTtv0gvPWh/2Hjh9grRWAUgdAPzcu",
+        "email": "jane@doe.com",
         "type": "Lector"
     }
 ]

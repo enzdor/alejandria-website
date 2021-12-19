@@ -21,7 +21,6 @@ const accountController = {
     },
     accountStore: (req, res) =>{
         let errors = validationResult(req);
-        console.log(errors);
 
         if (errors.isEmpty()) {
             let accountDb = accountsService.findByField('email', req.body.email)
@@ -46,11 +45,8 @@ const accountController = {
             accountsService.saveAccounts();
             
             let userLogin = accountsService.findByField('email', req.body.email);
-            delete userLogin.password;
             req.session.userLogged = userLogin;
-            res.render('account', {
-                user: req.session.userLogged,
-                products});
+            res.redirect('/account');
 
 
         } else {
@@ -67,16 +63,12 @@ const accountController = {
         let userLogin = accountsService.findByField('email', req.body.email);
         
         if (userLogin) {
-            console.log(userLogin);
-            console.log(userLogin.password + req.body.password);
-            let passwordOk = bcryptjs.compareSync(userLogin.password, req.body.password);
+            let passwordOk = bcryptjs.compareSync(req.body.password, userLogin.password);
+
+
             if (passwordOk){
-                delete userLogin.password;
                 req.session.userLogged = userLogin;
-                res.render('account', {
-                    user: req.session.userLogged,
-                    products
-                });
+                res.redirect('/account');
                 return
             } else {
                 errors.errors.push({
@@ -116,28 +108,22 @@ const accountController = {
 
         if (errors.isEmpty()){
             const index = accounts.findIndex((acc)=>{
-                return req.session.id == acc.id;
+                return req.session.userLogged.id == acc.id;
             })
 
-            console.log(req.body);
-            console.log(req.session);
             const updatedAccount = {
-                id: req.session.id,
+                id: req.session.userLogged.id,
                 ...req.body,
-                email: req.session.email,
-                type: req.session.type,
+                email: req.session.userLogged.email,
+                type: req.session.userLogged.type,
+                password: bcryptjs.hashSync(req.body.password, 10)
             }
-
             
             accounts[index] = updatedAccount;
-            accountsService.saveAccounts()
-
-
+            accountsService.saveAccounts();
             req.session.userLogged = updatedAccount;
-            res.render('account',{products,
-                productsPopular,
-                user: req.session.userLogged,
-                })
+
+            res.redirect('/account')
             return
 
         } else {
