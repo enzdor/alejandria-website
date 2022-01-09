@@ -1,6 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const productsController = require('../controllers/productsController');
+const multer = require("multer");
+const path = require('path');
+
+/* MULTER */
+
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../../public/images/img-products"));
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '_img_' + path.extname(file.originalname));
+  },
+});
+
+const uploadFile = multer({ storage });
 
 
 /* EXPRESS VALIDATOR*/
@@ -11,14 +27,12 @@ let validateProduct = [
     check('author').notEmpty().withMessage('Debes completar el nombre del autor'),
     check('description').notEmpty().withMessage('Debes completar la descripcion'),
     check('price').notEmpty().withMessage('Debes completar el precio'),
-    check('image').notEmpty().withMessage('Debes completar la imagen'),
     check('genre').notEmpty().withMessage('Debes elegir un genero'),
 ]
 
 /* SHOW ALL PRODUCTS */
 
 router.get('/' , productsController.products)
-
 
 
 /* SHOW ALL CATEGORIES */
@@ -43,7 +57,7 @@ router.put('/:id' , validateProduct ,productsController.productUpdate)
 /* CREATE ONE PRODUCT */
 
 router.get('/add/product' , productsController.productAdd)
-router.post('/', validateProduct ,productsController.productStore)
+router.post('/', uploadFile.single('image'), validateProduct ,productsController.productStore)
 
 
 // DELETE ONE PRODUCT

@@ -30,5 +30,21 @@
         "password": "$2a$10$DRoKTk8l58lePOvBOoyce.2DoTtv0gvPWh/2Hjh9grRWAUgdAPzcu",
         "email": "jane@doe.com",
         "type": "Lector"
+    },
+    {
+        "id": 1641706111654,
+        "firstName": "John",
+        "lastName": "Smith",
+        "email": "john@smith.com",
+        "password": "$2a$10$CN2rbHldMEMEYcF3e25OJOghIKu5HmxuPaAQBwjFzK/945WBgYv4C",
+        "type": "Lector"
+    },
+    {
+        "id": 1641765879107,
+        "firstName": "Admin",
+        "lastName": "Admin",
+        "email": "admin@admin.com",
+        "password": "$2a$10$6Ec1RtYYB49Nvtn0yudDU.f7yi2t3LEtm1qamBPaVRO71yyMX4U3y",
+        "type": "Lector"
     }
 ]

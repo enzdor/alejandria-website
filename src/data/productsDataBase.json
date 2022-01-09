@@ -512,5 +512,33 @@
         "image": "libro1.jpeg",
         "genre": "Aventura",
         "user": "carlos@carlos.com"
+    },
+    {
+        "id": 1641706336917,
+        "name": "A very good book",
+        "author": "Enz Lopes",
+        "description": "I reely like this book and this is not weird at all.",
+        "price": "$400",
+        "image": "libro2.jpeg",
+        "genre": "Aventura",
+        "user": "john@smith.com"
+    },
+    {
+        "id": 1641766102843,
+        "name": "Banana",
+        "author": "James Bond",
+        "description": ".",
+        "price": "1000",
+        "genre": "Aventura",
+        "image": "/img-products/1641766102805_img_.jpeg"
+    },
+    {
+        "id": 1641766358408,
+        "name": "John",
+        "author": "Lemon",
+        "description": ".",
+        "price": "1000",
+        "genre": "Aventura",
+        "image": "/img-products/1641766358398_img_.jpeg"
     }
 ]

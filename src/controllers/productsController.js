@@ -61,7 +61,7 @@ const productsController = {
             let product = {
                 id: Date.now(),
                 ...req.body,
-                user: req.session.userLogged.email
+                image: (req.file.path).split('images').pop(),
             };
     
             products.push(product);

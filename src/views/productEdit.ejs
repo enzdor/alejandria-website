@@ -21,7 +21,7 @@
                     <% } %>
                 </div>
                 <div class="form_container">
-                    <form action="/products/<%= product.id %>?_method=PUT" method="post">
+                    <form action="/products/<%= product.id %>?_method=PUT" method="post" enctype="multipart/form-data">
                         <div class="form_outer-edge-input">
                             <div class="form_container-input">
                                 <label for="name">Nombre:</label>
