@@ -1,4 +1,14 @@
-all post put routes for forms
 
 
-fix "agregar" button in account
+new idea for the website
+
+market place to buy and sell books
+what will need to change:
+
+home 
+there will be two types of account: user, admin
+about us can die
+add to header: search and user
+
+
+most importantly, implement sequelize
