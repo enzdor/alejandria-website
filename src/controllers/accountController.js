@@ -1,4 +1,5 @@
-const bcryptjs = require('bcryptjs')
+const bcryptjs = require('bcryptjs');
+const db = require('../database/models')
 const productsService = require('../services/productsServices.js');
 const products = productsService.getAll();
 const productsPopular = productsService.getPopular();
@@ -20,6 +21,7 @@ const accountController = {
         res.render('register')
     },
     accountStore: (req, res) =>{
+        /*
         let errors = validationResult(req);
 
         if (errors.isEmpty()) {
@@ -52,7 +54,22 @@ const accountController = {
         } else {
             res.render('register',
             {errors: errors.errors, old: req.body})
-        }
+        }*/
+
+        console.log(req.body.userName);
+
+        db.User.create({
+            userName: 'James',
+            email: 'j@j.com',
+            password: 12345,
+            categoryId: 1
+        }).then(()=>{
+            res.redirect('/')
+        })
+        
+        
+        console.log('Hello there');
+        return
     },
     login: (req, res) => {
         res.render('login')
