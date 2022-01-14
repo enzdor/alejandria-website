@@ -56,12 +56,12 @@ const accountController = {
             {errors: errors.errors, old: req.body})
         }*/
 
-        console.log(req.body.userName);
+        console.log(req.body);
 
         db.User.create({
-            userName: 'James',
-            email: 'j@j.com',
-            password: 12345,
+            userName: req.body.userName,
+            email: req.body.email,
+            password: bcryptjs.hashSync(req.body.password, 10),
             categoryId: 1
         }).then(()=>{
             res.redirect('/')

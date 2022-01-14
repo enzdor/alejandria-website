@@ -28,11 +28,7 @@
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.15",
     "normalize.css": "^8.0.1",
-<<<<<<< HEAD
     "sequelize": "^6.13.0",
     "sequelize-cli": "^6.3.0"
-=======
-    "sequelize": "^6.13.0"
->>>>>>> fa6b34d3d7cad749f8a61a0abdf54dcd24479841
   }
 }
