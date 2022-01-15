@@ -15,12 +15,8 @@
             <div class="account_container container">
                 <h2 class="account_title">Informacion de tu cuenta</h2>
                 <div class="account_container-information">
-                    <p class="account_information-type">Nombre: </p>
-                    <p><%= user.firstName %> </p>
-                </div>
-                <div class="account_container-information">
-                    <p class="account_information-type">Apellido: </p>
-                    <p><%= user.lastName %></p>
+                    <p class="account_information-type">Nombre de cuenta: </p>
+                    <p><%= user.user_name %> </p>
                 </div>
                 <div class="account_container-information">
                     <p class="account_information-type">Email: </p>
@@ -28,7 +24,11 @@
                 </div>
                 <div class="account_container-information">
                     <p class="account_information-type">Tipo de cuenta: </p>
-                    <p><%= user.type %> </p>
+                    <% if (user.category_id == 1) { %>
+                        <p>User</p>
+                    <% } else { %>
+                        <p>Admin</p>
+                    <% } %>
                 </div>
                 <div class="account_container-information account_container-button">
                     <a class="button-regular account_button-edit" href="/account/edit">Editar</a>

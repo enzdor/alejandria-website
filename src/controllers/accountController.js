@@ -110,6 +110,56 @@ const accountController = {
     loginProcess: (req, res) => {
         let errors = validationResult(req);
 
+        if (errors.isEmpty()){
+            db.User.findOne({
+                where: {
+                    email: req.body.email
+                }
+            }).then((user) => {
+                let userLogin = user;
+
+                if (userLogin) {
+
+                    let passwordOk = bcryptjs.compareSync(req.body.password, userLogin.password);
+
+                    if (passwordOk){
+
+                        req.session.userLogged = userLogin;
+                        res.redirect('/account');
+                        return
+
+                    } else {
+                        errors.errors.push({
+                            value: req.body.email,
+                            msg: 'La contraseña es incorrecta',
+                            param: 'password',
+                            location: 'body'
+                        })
+                        res.render('login',{errors: errors.errors})
+                        return
+                    }
+
+                } else {
+                    errors.errors.push({
+                        value: req.body.email,
+                        msg: 'No hay cuenta que use este mail',
+                        param: 'email',
+                        location: 'body'
+                    })
+                    res.render('register',{errors: errors.errors})
+                    return
+                }
+            })
+        } else {
+            res.render('login',
+            {errors: errors.errors, old: req.body})
+        }
+
+
+
+        /*
+
+
         let userLogin = accountsService.findByField('email', req.body.email);
         
         if (userLogin) {
@@ -144,6 +194,21 @@ const accountController = {
             errors: errors.errors
         })
         return
+
+        to do
+
+        - check if there are errors
+            - if there are, render errors
+
+        - check if an account exists with the email in body
+            - if there isnt one, create and render error
+
+        - check if password is ok
+            - if password is not ok render error
+
+        - login
+
+        */
 
     },
     edit: (req, res) => {

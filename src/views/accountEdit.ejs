@@ -16,14 +16,13 @@
                     <form action="/account/edit?_method=PUT" method="post">
                         <div class="form_outer-edge-input">
                             <div class="form_container-input">
-                                <label for="firstName">Nombre:</label>
-                                <input type="text" name="firstName" id="firstName" value="<%= user.firstName %>">
+                                <label for="first-name">Nombre de Usuario:</label>
+                                <input type="text" name="userName" id="userName" value="<%= user.user_name %>">
                             </div>
-                        </div>
                         <div class="form_outer-edge-input">
                             <div class="form_container-input">
-                                <label for="lastName">Apellido:</label>
-                                <input type="text" name="lastName" id="lastName" value="<%= user.lastName %>">
+                                <label for="email">Email:</label>
+                                <input type="email" name="email" id="email" value="<%= user.email %>">
                             </div>
                         </div>
                         <div class="form_outer-edge-input">
@@ -33,7 +32,7 @@
                             </div>
                         </div>
                         <div class="form_container-button">
-                            <button class="button-regular">Registrar</button>
+                            <button class="button-regular">Editar</button>
                         </div>
                     </form>
                 </div>
