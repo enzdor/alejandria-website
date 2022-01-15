@@ -1,11 +1,8 @@
 const bcryptjs = require('bcryptjs');
-const db = require('../database/models')
+const db = require('../database/models');
 const productsService = require('../services/productsServices.js');
 const products = productsService.getAll();
 const productsPopular = productsService.getPopular();
-
-const accountsService = require('../services/accountsServices.js');
-const accounts = accountsService.getAll();
 
 const {validationResult} = require('express-validator');
 
@@ -201,37 +198,6 @@ const accountController = {
         }
 
         /*
-
-
-        if (errors.isEmpty()){
-            const index = accounts.findIndex((acc)=>{
-                return req.session.userLogged.id == acc.id;
-            })
-
-            const updatedAccount = {
-                id: req.session.userLogged.id,
-                ...req.body,
-                email: req.session.userLogged.email,
-                type: req.session.userLogged.type,
-                password: bcryptjs.hashSync(req.body.password, 10)
-            }
-            
-            accounts[index] = updatedAccount;
-            accountsService.saveAccounts();
-            req.session.userLogged = updatedAccount;
-
-            res.redirect('/account')
-            return
-
-        } else {
-            let errors = validationResult(req);
-            req.session.userLogged = updatedAccount;
-
-            res.render('accountEdit', 
-            {user: req.session.userLogged,
-            errors: errors.errors})
-            return
-        }
 
 
         to do

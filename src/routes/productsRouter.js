@@ -27,6 +27,7 @@ let validateProduct = [
     check('author').notEmpty().withMessage('Debes completar el nombre del autor'),
     check('description').notEmpty().withMessage('Debes completar la descripcion'),
     check('price').notEmpty().withMessage('Debes completar el precio'),
+    check('image').notEmpty().withMessage('Tienes que seleccionar una imagen'),
     check('genre').notEmpty().withMessage('Debes elegir un genero'),
 ]
 
