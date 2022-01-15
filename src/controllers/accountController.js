@@ -75,22 +75,6 @@ const accountController = {
 
         /*
 
-        console.log(req.body);
-
-        db.User.create({
-            user_name: req.body.user_name,
-            email: req.body.email,
-            password: bcryptjs.hashSync(req.body.password, 10),
-            categoryId: 1
-        }).then(()=>{
-            res.redirect('/')
-        })
-        
-        
-        console.log('Hello there');
-        return
-
-
         to do
 
         - check if there are any errors
@@ -159,42 +143,6 @@ const accountController = {
 
         /*
 
-
-        let userLogin = accountsService.findByField('email', req.body.email);
-        
-        if (userLogin) {
-            let passwordOk = bcryptjs.compareSync(req.body.password, userLogin.password);
-
-
-            if (passwordOk){
-                req.session.userLogged = userLogin;
-                res.redirect('/account');
-                return
-            } else {
-                errors.errors.push({
-                    value: req.body.email,
-                    msg: 'La contraseña es incorrecta',
-                    param: 'password',
-                    location: 'body'
-                })
-                res.render('login', {
-                    errors: errors.errors
-                })
-                return
-            }
-        }
-
-        errors.errors.push({
-            value: req.body.email,
-            msg: 'No hay una cuenta que use este mail',
-            param: 'email',
-            location: 'body'
-        })
-        res.render('login', {
-            errors: errors.errors
-        })
-        return
-
         to do
 
         - check if there are errors
@@ -220,6 +168,40 @@ const accountController = {
     },
     accountUpdate: (req, res) => {
         let errors = validationResult(req);
+
+        if (errors.isEmpty()) {
+            db.User.update(
+                {
+                    user_name: req.body.userName,
+                    email: req.body.email,
+                    password: bcryptjs.hashSync(req.body.password, 10),
+                    category_id: 1
+                },
+                {
+                    where: {
+                        id: req.session.userLogged.id
+                    }
+                }
+            ).then(()=> {
+                db.User.findByPk(req.session.userLogged.id)
+                .then((user)=>{
+                    req.session.userLogged = user;
+                    res.redirect('/account')
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }).catch((err) => {
+                console.log(err);
+            });
+
+        } else {
+            res.render('accountEdit', 
+            {user: req.session.userLogged,
+            errors: errors.errors, old: req.body})
+        }
+
+        /*
+
 
         if (errors.isEmpty()){
             const index = accounts.findIndex((acc)=>{
@@ -250,7 +232,19 @@ const accountController = {
             errors: errors.errors})
             return
         }
-        
+
+
+        to do
+
+        - check if there are errors
+            - if there are errors, render errors
+
+        - update account
+
+        - render account view
+
+
+        */
     }
 };
 

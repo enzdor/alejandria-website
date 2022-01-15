@@ -12,16 +12,16 @@ const {check} = require('express-validator')
 let validateAccountCreate = [
     check('userName').notEmpty().withMessage('Debes completar el nombre'),
     check('email').notEmpty().withMessage('Debes completar el email').isEmail().withMessage('Tiene que ser un mail valido'),
-    check('password').notEmpty().withMessage('Debes completar la contrasena'),
+    check('password').notEmpty().withMessage('Debes completar la contraseña'),
 ]
 let validateAccountUpdate = [
-    check('firstName').notEmpty().withMessage('Debes completar el nombre'),
-    check('lastName').notEmpty().withMessage('Debes completar el nombre'),
-    check('password').notEmpty().withMessage('Debes completar la contrasena')
+    check('userName').notEmpty().withMessage('Debes completar el nombre de cuenta'),
+    check('email').notEmpty().withMessage('Debes completar el email'),
+    check('password').notEmpty().withMessage('Debes completar la contraseña')
 ]
 let validateAccountLogin = [
     check('email').notEmpty().withMessage('Debes completar el mail'),
-    check('password').notEmpty().withMessage('Debes completar la contrasena')
+    check('password').notEmpty().withMessage('Debes completar la contraseña')
 ]
 
 /* ACCOUNT INFO*/
