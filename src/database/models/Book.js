@@ -24,11 +24,11 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING(300),
             allowNull: false
         },
-        genreId: {
+        genre_id: {
             type: dataTypes.INTEGER,
             allowNull: false
         },
-        userId: {
+        user_id: {
             type: dataTypes.INTEGER,
             allowNull: false
         },
@@ -41,13 +41,25 @@ module.exports = (sequelize, dataTypes) => {
     Book.associate = function(models) {
         Book.belongsTo(models.Genre, {
             as: "genre", 
-            foreignKey: "genreId"
+            foreignKey: "genre_id"
         })
     }
     Book.associate = function(models) {
         Book.belongsTo(models.User, {
             as: "user", 
-            foreignKey: "userId"
+            foreignKey: "user_id"
+        })
+    }
+    Book.associate = function(models){
+        Book.hasMany(model.Favourite_book, {
+            as: "favourite_books",
+            foreignKey: "book_id"
+        })
+    }
+    Book.associate = function(models){
+        Book.hasMany(model.Transaction, {
+            as: "transactions",
+            foreignKey: "book_id"
         })
     }
 

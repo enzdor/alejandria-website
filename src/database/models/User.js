@@ -22,7 +22,7 @@ module.exports = (sequelize, dataTypes) => {
             allowNull: false,
             unique: true
         },
-        categoryId: {
+        category_id: {
             type: dataTypes.INTEGER,
             allowNull: false
         }
@@ -34,14 +34,26 @@ module.exports = (sequelize, dataTypes) => {
 
     User.associate = function(models) {
         User.belongsTo(models.Category, {
-            as: "categories", 
-            foreignKey: "categoryId"
+            as: "category", 
+            foreignKey: "category_id"
         })
     }
     User.associate = function(models) {
         User.hasMany(models.Book, {
-            as: "books", 
-            foreignKey: "userId"
+            as: "users", 
+            foreignKey: "user_id"
+        })
+    }
+    User.associate = function(models) {
+        User.hasMany(models.Favourite_book, {
+            as: "favourite_books", 
+            foreignKey: "user_id"
+        })
+    }
+    User.associate = function(models) {
+        User.hasMany(models.transaction, {
+            as: "transactions", 
+            foreignKey: "user_id"
         })
     }
 
