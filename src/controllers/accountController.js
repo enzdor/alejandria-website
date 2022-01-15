@@ -21,45 +21,64 @@ const accountController = {
         res.render('register')
     },
     accountStore: (req, res) =>{
-        /*
         let errors = validationResult(req);
 
         if (errors.isEmpty()) {
-            let accountDb = accountsService.findByField('email', req.body.email)
-            
-            if (accountDb){
-                errors.errors.push({
-                    value: req.body.email,
-                    msg: 'Este mail ya esta en uso',
-                    param: 'email',
-                    location: 'body'
-                })
-                res.render('register',{errors: errors.errors})
-                return
-            }
-            let account = {
-                id: Date.now(),
-                ...req.body,
-                password: bcryptjs.hashSync(req.body.password, 10)
-            };
+            db.User.findOne({
+                where: {
+                    email: req.body.email
+                }
+            }).then((user) => {
+                let accountDb = user;
+
+                if (accountDb){
+                    errors.errors.push({
+                        value: req.body.email,
+                        msg: 'Este mail ya esta en uso',
+                        param: 'email',
+                        location: 'body'
+                    })
+                    res.render('register',{errors: errors.errors})
+                    return
+                }
     
-            accounts.push(account);
-            accountsService.saveAccounts();
-            
-            let userLogin = accountsService.findByField('email', req.body.email);
-            req.session.userLogged = userLogin;
-            res.redirect('/account');
-
-
+    
+                db.User.create({
+                    user_name: req.body.userName,
+                    email: req.body.email,
+                    password: bcryptjs.hashSync(req.body.password, 10),
+                    category_id: 1
+                }).then(()=>{
+                    
+                    let userLogin = db.User.findOne({
+                        where: {
+                            email: req.body.email
+                        }
+                    }).then((user) => { return user } )
+                    .catch((err) => {
+                        console.log(err);
+                    });
+    
+                    req.session.userLogged = userLogin;
+                    
+                    res.redirect('/account');
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+    
+            } );
         } else {
             res.render('register',
             {errors: errors.errors, old: req.body})
-        }*/
+        }
+
+        /*
 
         console.log(req.body);
 
         db.User.create({
-            userName: req.body.userName,
+            user_name: req.body.user_name,
             email: req.body.email,
             password: bcryptjs.hashSync(req.body.password, 10),
             categoryId: 1
@@ -70,6 +89,20 @@ const accountController = {
         
         console.log('Hello there');
         return
+
+
+        to do
+
+        - check if there are any errors
+            - if there are render errors
+
+        - find if user exists with that email
+            - if there is create and send error
+        
+        - create and store user in database
+
+
+        */
     },
     login: (req, res) => {
         res.render('login')

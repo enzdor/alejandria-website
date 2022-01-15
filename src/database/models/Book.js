@@ -51,13 +51,13 @@ module.exports = (sequelize, dataTypes) => {
         })
     }
     Book.associate = function(models){
-        Book.hasMany(model.Favourite_book, {
+        Book.hasMany(models.Favourite_book, {
             as: "favourite_books",
             foreignKey: "book_id"
         })
     }
     Book.associate = function(models){
-        Book.hasMany(model.Transaction, {
+        Book.hasMany(models.Transaction, {
             as: "transactions",
             foreignKey: "book_id"
         })

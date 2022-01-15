@@ -7,7 +7,7 @@ module.exports = (sequelize, dataTypes) => {
             allowNull: false,
             autoIncrement: true
         },
-        userName: {
+        user_name: {
             type: dataTypes.STRING(200),
             allowNull: false,
             unique: true
@@ -51,7 +51,7 @@ module.exports = (sequelize, dataTypes) => {
         })
     }
     User.associate = function(models) {
-        User.hasMany(models.transaction, {
+        User.hasMany(models.Transaction, {
             as: "transactions", 
             foreignKey: "user_id"
         })

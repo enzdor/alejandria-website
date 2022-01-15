@@ -10,11 +10,9 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 const {check} = require('express-validator')
 let validateAccountCreate = [
-    check('firstName').notEmpty().withMessage('Debes completar el nombre'),
-    check('lastName').notEmpty().withMessage('Debes completar el nombre'),
+    check('userName').notEmpty().withMessage('Debes completar el nombre'),
     check('email').notEmpty().withMessage('Debes completar el email').isEmail().withMessage('Tiene que ser un mail valido'),
     check('password').notEmpty().withMessage('Debes completar la contrasena'),
-    check('type').notEmpty().withMessage('Debes seleccionar el tipo de cuenta'),
 ]
 let validateAccountUpdate = [
     check('firstName').notEmpty().withMessage('Debes completar el nombre'),
