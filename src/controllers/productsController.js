@@ -179,22 +179,21 @@ const productsController = {
 	},
     productDelete: (req, res) => {
         const id = req.params.id
-        const product = productsService.findOne(id);
-        res.render('productDelete',
-        {product})
+        
+        db.Book.findByPk(id)
+        .then((product)=> {
+            res.render('productDelete', {product})
+        })
+
     },
     productDestroy: (req, res) => {
         const id = req.params.id;
 
-        const index = products.findIndex((prod)=>{
-			return prod.id == id;
-		})
-        
-        products.splice(index, 1);
-
-        productsService.saveProducts()
-
-        res.redirect('/products')
+        db.Book.destroy(
+            { where : {id: id}, force: true}
+        ).then(() => {
+            res.redirect('/products')
+        })
     },
     
 };
