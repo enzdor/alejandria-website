@@ -44,20 +44,20 @@
                     <a href="/products/add/product" class="button-regular account_button-add">Agregar</a>
                 </div>
             </div>
-            <% for (let i = 0; i < 4; i++){ %> 
+            <% for (let product of products){ %> 
                 <div class="products_outer-edge-product">
                     <div class="products_container-product container">
                         <div class="products-product_container-image">
-                            <a href="/products/<%= products[i].id %>">
-                                <img src="/images/<%= products[i].image %> " alt="" width="100%">
+                            <a href="/products/<%= product.id %>">
+                                <img src="/images/<%= product.image %>" alt="" width="100%">
                             </a>
                         </div>
                         <div class="products-product_container-description">
-                            <p><%= products[i].price %></p>
+                            <p>$<%= product.price %></p>
                         </div>
                         <div class="product_container-button">
-                            <a class="button-regular" href="/products/<%= products[i].id %>/delete">Borrar</a>
-                            <a class="button-regular" href="/products/<%= products[i].id %>/edit">Editar</a>
+                            <a class="button-regular" href="/products/<%= product.id %>/delete">Borrar</a>
+                            <a class="button-regular" href="/products/<%= product.id %>/edit">Editar</a>
                         </div>
                     </div>
                 </div>

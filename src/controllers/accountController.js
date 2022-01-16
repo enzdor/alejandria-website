@@ -8,11 +8,24 @@ const {validationResult} = require('express-validator');
 
 const accountController = {
     account: (req ,res) =>{
+
+        db.Book.findAll({
+            where: {
+                user_id: req.session.userLogged.id
+            }
+        }).then((products) => {
+            res.render('account', {products, user: req.session.userLogged})
+        })
+
+        /*
+
         res.render('account',
         {products,
         productsPopular,
         user: req.session.userLogged,
         })
+
+        */
     },
     register: (req, res) =>{
         res.render('register')

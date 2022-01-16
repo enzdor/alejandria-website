@@ -1,3 +1,6 @@
+const db = require('../database/models/index.js');
+const { Op } = require('sequelize')
+
 productsService = require('../services/productsServices.js')
 
 const products = productsService.getAll();
@@ -6,8 +9,13 @@ const productsPopular = productsService.getPopular();
 
 const mainController = {
     index: (req, res) => {
-        res.render('index',
-        {productsPopular, products})
+
+        db.Book.findAll({
+            where: { id: {[Op.lt] : 5}}
+        })
+        .then((products) => {
+            res.render('index', {products})
+        })
     },
     basket: (req, res) =>{
         res.render('basket',
