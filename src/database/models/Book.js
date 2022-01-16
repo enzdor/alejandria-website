@@ -24,6 +24,10 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING(300),
             allowNull: false
         },
+        price: {
+            type: dataTypes.INTEGER,
+            allowNull: false
+        },
         genre_id: {
             type: dataTypes.INTEGER,
             allowNull: false

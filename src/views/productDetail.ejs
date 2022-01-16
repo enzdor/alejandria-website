@@ -26,10 +26,16 @@
                             <p>Autor: <%= product.author %></p>
                         </div>
                         <div class="detail-information_container">
+                            <p>Seller: <%= product.user_id %></p>
+                        </div>
+                        <div class="detail-information_container">
                             <p><%= product.description %></p>
                         </div>
                         <div class="detail-information_container">
-                            <p class="detail-information_price"><%= product.price %></p>
+                            <p><%= product.genre_id %></p>
+                        </div>
+                        <div class="detail-information_container">
+                            <p class="detail-information_price">$<%= product.price %></p>
                         </div>
                         <div class="detail-information_container">
                             <div class="product_container-button">

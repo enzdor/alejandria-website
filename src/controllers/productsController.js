@@ -8,17 +8,29 @@ const {validationResult} = require('express-validator');
 
 const productsController = {
     products: (req, res) => {
-        res.render('products',
-        {products})
+        db.Book.findAll()
+        .then((products) => {
+            res.render('products' , {products})
+        })
     },
     categories: (req, res) => {
         res.render('categories')
     },
     productDetail: (req, res) => {
-        const id = req.params.id
+        const id = req.params.id;
+
+        db.Book.findByPk(id)
+        .then((product) => {
+            res.render('productDetail', {product})
+        })
+
+        /*
+
         const product = productsService.findOne(id);
         res.render('productDetail',
         {product})
+
+        */
     },
     productEdit: (req, res) => {
         const id = req.params.id
@@ -67,6 +79,7 @@ const productsController = {
                 author: req.body.author,
                 description: req.body.description,
                 image: (req.file.path).split('images').pop(),
+                price: req.body.price,
                 genre_id: Number(req.body.genre),
                 user_id: req.session.userLogged.id
             }).then(() => {
