@@ -33,13 +33,54 @@ const productsController = {
         */
     },
     productEdit: (req, res) => {
-        const id = req.params.id
+        const id = req.params.id;
+
+        db.Book.findByPk(id)
+        .then((product) => {
+            res.render('productEdit', {product})
+        })
+
+        /*
+
         const product = productsService.findOne(id);
         res.render('productEdit',
         {product})
+
+        */
     },
     productUpdate: (req, res) => {
+        const id = req.params.id;
         let errors = validationResult(req);
+
+        if (errors.isEmpty()){
+
+            db.Book.update(
+                {
+                    name: req.body.name,
+                    author: req.body.author,
+                    description: req.body.description,
+                    image: (req.file.path).split('images').pop(),
+                    price: req.body.price,
+                    genre_id: req.body.genre,
+                    user_id: req.session.userLogged.id
+                },
+                {
+                    where: { id: id }
+                }
+            ).then(()=> {
+                res.redirect('/products/' + id);
+            })
+
+        } else {
+
+            db.Book.findByPk(id)
+            .then((product) => {
+                res.render('productEdit', {product, errors: errors.errors})
+            })
+
+        }
+
+        /*
 
         if (errors.isEmpty()){
             const id = req.params.id
@@ -63,6 +104,19 @@ const productsController = {
             res.render('productEdit',
             {product, errors: errors.errors, old: req.body})
         }
+
+
+        to do 
+
+        - check if there are errors
+            - if there are, render errors
+
+        - findByPk product and update it
+
+        - redirect to product/id
+
+
+        */
         
     },
     productAdd: (req, res) => {

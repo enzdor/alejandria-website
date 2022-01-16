@@ -1,8 +1,6 @@
 const bcryptjs = require('bcryptjs');
 const db = require('../database/models');
-const productsService = require('../services/productsServices.js');
-const products = productsService.getAll();
-const productsPopular = productsService.getPopular();
+
 
 const {validationResult} = require('express-validator');
 

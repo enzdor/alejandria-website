@@ -50,7 +50,7 @@ router.get('/:id/' , productsController.productDetail)
 /* EDIT ONE PRODUCT */
 
 router.get('/:id/edit' , productsController.productEdit)
-router.put('/:id' , validateProduct ,productsController.productUpdate)
+router.put('/:id', uploadFile.single('image') ,validateProduct ,productsController.productUpdate)
 
 
 

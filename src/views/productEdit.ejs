@@ -25,38 +25,45 @@
                         <div class="form_outer-edge-input">
                             <div class="form_container-input">
                                 <label for="name">Nombre:</label>
-                                <input type="text" name="name" id="name" value="<%= product.name %> ">
+                                <input type="text" name="name" id="name" value="<%= product.name %>">
                             </div>
                         </div>
                         <div class="form_outer-edge-input">
                             <div class="form_container-input">
                                 <label for="author">Autor:</label>
-                                <input type="text" name="author" id="author" value="<%= product.author %> ">
+                                <input type="text" name="author" id="author" value="<%= product.author %>">
                             </div>
                         </div>
                         <div class="form_outer-edge-input">
                             <div class="form_container-input">
                                 <label for="descritpion">Descripcion:</label>
-                                <textarea name="description" id="description" cols="30" rows="10"><%= product.description %> </textarea>
+                                <textarea name="description" id="description" cols="30" rows="10"><%= product.description %></textarea>
                             </div>
                         </div>
                         <div class="form_outer-edge-input">
                             <div class="form_container-input">
                                 <label for="price">Precio:</label>
-                                <input type="text" name="price" id="price" value="<%= product.price %> ">
+                                <input type="number" name="price" id="price" value="<%= product.price %>">
                             </div>
                         </div>
                         <div class="form_outer-edge-input">
                             <div class="form_container-input">
                                 <label for="image">Imagen:</label>
-                                <input type="file" name="image" id="image" value="<%= product.image %> ">
+                                <input type="file" name="image" id="image" value="<%= product.image %>">
                             </div>
                         </div>
                         <div class="form_outer-edge-input">
                             <div class="form_container-input">
                                 <label for="genre">Genero literario:</label>
                                 <select name="genre" id="genre">
-                                    <option value="Aventura">Aventura</option>
+                                    <option value="1">Acción y aventura</option>
+                                    <option value="2">Comedia</option>
+                                    <option value="3">Crimen</option>
+                                    <option value="4">Fantasía</option>
+                                    <option value="5">Horror</option>
+                                    <option value="6">Ciencia ficción</option>
+                                    <option value="7">Romance</option>
+                                    <option value="8">No ficción</option>
                                 </select>
                             </div>
                         </div>
