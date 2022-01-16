@@ -8,7 +8,8 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 /* EXPRESS VALIDATOR*/
 
-const {check} = require('express-validator')
+const {check} = require('express-validator');
+
 let validateAccountCreate = [
     check('userName').notEmpty().withMessage('Debes completar el nombre'),
     check('email').notEmpty().withMessage('Debes completar el email').isEmail().withMessage('Tiene que ser un mail valido'),
@@ -41,6 +42,11 @@ router.post('/login', validateAccountLogin ,accountController.loginProcess)
 /*EDIT ACCOUNT*/
 router.get('/edit' , authMiddleware ,accountController.edit)
 router.put('/edit' , validateAccountUpdate ,accountController.accountUpdate)
+
+
+// SHOW FAVOURITES
+
+router.get('/favourite', authMiddleware , accountController.favourite);
 
 
 module.exports = router;

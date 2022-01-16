@@ -17,10 +17,6 @@ const mainController = {
             res.render('index', {products})
         })
     },
-    basket: (req, res) =>{
-        res.render('basket',
-        {productsPopular, products})
-    },
     about: (req, res) =>{
         res.render('about',
         {user: req.session.userLogged,})

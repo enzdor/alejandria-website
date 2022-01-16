@@ -19,10 +19,28 @@ const productsController = {
     productDetail: (req, res) => {
         const id = req.params.id;
 
-        db.Book.findByPk(id)
-        .then((product) => {
-            res.render('productDetail', {product})
-        })
+        const user = req.session.userLogged;
+
+
+        if (user == undefined){
+            db.Book.findByPk(id)
+            .then((product) => {
+                res.render('productDetail' , {product})
+            })
+        } else {
+            const findBook = db.Book.findByPk(id);
+            const findFavourites = db.Favourite_book.findAll();
+            const user = db.User.findByPk(req.session.userLogged.id);
+    
+            Promise.all([findBook, findFavourites, user])
+    
+            .then((values) => {
+                res.render('productDetail', {product: values[0], favourites: values[1], user: values[2] })
+            })
+        }
+        
+
+        
 
         /*
 
@@ -195,6 +213,33 @@ const productsController = {
             res.redirect('/products')
         })
     },
+    productFavourite: (req, res) => {
+        const id = req.params.id;
+
+        db.Favourite_book.create({
+            book_id: id,
+            user_id: req.session.userLogged.id
+        }).then(()=> {
+            res.send('Done')
+        }).catch((err) => {
+            console.log(err);
+        });
+    },
+    productUnfavourite: (req, res) => {
+        const id = req.params.id;
+        const userId = req.session.userLogged.id;
+
+        console.log(id);
+        console.log(userId);
+
+        db.Favourite_book.destroy(
+            {where: {book_id: id, user_id: userId}, force: true}
+        ).then(() => {
+            res.send('Destroyed')
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
     
 };
 

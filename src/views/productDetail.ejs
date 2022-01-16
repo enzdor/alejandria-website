@@ -46,13 +46,27 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div>
-                                    <form action="">
-                                        <div>
-                                            <button class="button-regular">Favorito</button>
-                                        </div>
-                                    </form>
-                                </div>
+                                <% if (locals.user) { let isFavourite = false;
+                                    for (let favourite of favourites) { 
+                                        if (product.id == favourite.book_id && user.id == favourite.user_id) {
+                                            isFavourite = true; } }
+                                        if (isFavourite){%>
+                                            <div>
+                                                <form action="/products/<%= product.id %>?_method=DELETE" method="post">
+                                                    <div>
+                                                        <button class="button-regular">No mas favorito</button>
+                                                    </div>
+                                                </form>
+                                            </div> 
+                                        <% } else { %>
+                                            <div>
+                                                <form action="/products/<%= product.id %>" method="post"> 
+                                                    <div>
+                                                        <button class="button-regular">Favorito</button>
+                                                    </div>
+                                                </form>
+                                            </div> 
+                                        <% } }%>
                             </div>
                         </div>
                     </div>

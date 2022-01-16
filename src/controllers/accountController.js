@@ -222,6 +222,10 @@ const accountController = {
 
 
         */
+    },
+    favourite: (req, res) =>{
+        res.render('favourite',
+        {productsPopular, products})
     }
 };
 

@@ -66,4 +66,14 @@ router.get('/:id/delete' ,productsController.productDelete)
 router.delete('/:id' , productsController.productDestroy)
 
 
+// FAVOURITE ONE PRODUCT
+
+router.post('/:id', productsController.productFavourite)
+
+
+// UNFAVOURITE ONE PRODUCT
+
+router.delete('/:id', productsController.productUnfavourite)
+
+
 module.exports = router;
