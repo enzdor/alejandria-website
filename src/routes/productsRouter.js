@@ -63,7 +63,7 @@ router.post('/', uploadFile.single('image'), validateProduct ,productsController
 // DELETE ONE PRODUCT
 
 router.get('/:id/delete' ,productsController.productDelete)
-router.delete('/:id' , productsController.productDestroy)
+router.delete('/:id/delete' , productsController.productDestroy)
 
 
 // FAVOURITE ONE PRODUCT

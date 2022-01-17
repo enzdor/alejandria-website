@@ -15,7 +15,7 @@
                 <h2>Estas seguro que queres borrar:</h2>
                 <h2 class="delete_container-name"><%= product.name %> </h2>
                 <div class="delete_container-button">
-                    <form action="/products/<%= product.id %>?_method=DELETE" method="post">
+                    <form action="/products/<%= product.id %>/delete?_method=DELETE" method="post">
                         <div>
                             <button type="submit" class="button-regular">Borrar</button>
                         </div>

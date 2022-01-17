@@ -235,7 +235,7 @@ const productsController = {
         db.Favourite_book.destroy(
             {where: {book_id: id, user_id: userId}, force: true}
         ).then(() => {
-            res.send('Destroyed')
+            res.redirect('/account')
         }).catch((err) => {
             console.log(err)
         })
