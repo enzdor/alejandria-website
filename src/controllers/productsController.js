@@ -220,7 +220,7 @@ const productsController = {
             book_id: id,
             user_id: req.session.userLogged.id
         }).then(()=> {
-            res.send('Done')
+            res.redirect('/account')
         }).catch((err) => {
             console.log(err);
         });

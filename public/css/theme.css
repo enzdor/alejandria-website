@@ -20,7 +20,7 @@ main{
 body{
     font-family: 'andale-mono-regular' , sans-serif;
     overflow-x: hidden;
-    background-color: black;
+    background-color: #EEE;
     line-height: 1.5;
 }
 

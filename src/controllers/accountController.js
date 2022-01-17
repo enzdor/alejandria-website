@@ -33,12 +33,16 @@ const accountController = {
         let errors = validationResult(req);
 
         if (errors.isEmpty()) {
+            console.log('I work');
+
             db.User.findOne({
                 where: {
                     email: req.body.email
                 }
             }).then((user) => {
                 let accountDb = user;
+
+                console.log('I work 2');
 
                 if (accountDb){
                     errors.errors.push({
@@ -51,14 +55,31 @@ const accountController = {
                     return
                 }
     
-    
                 db.User.create({
                     user_name: req.body.userName,
                     email: req.body.email,
                     password: bcryptjs.hashSync(req.body.password, 10),
                     category_id: 1
                 }).then(()=>{
-                    
+                    db.User.findOne({
+                        where: {
+                            email: req.body.email
+                        }
+                    }).then((user) => {
+                        req.session.userLogged = user;
+
+                        res.redirect('/account')
+                    })
+                })
+            }) } else {
+                res.render('register',
+                {errors: errors.errors, old: req.body})
+                console.log('I work 4');
+            }
+
+                    /*
+
+                    console.log('I work 3');
                     let userLogin = db.User.findOne({
                         where: {
                             email: req.body.email
@@ -69,18 +90,13 @@ const accountController = {
                     });
     
                     req.session.userLogged = userLogin;
+
+                    console.log('I work 3.5');
                     
                     res.redirect('/account');
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-    
-            } );
-        } else {
-            res.render('register',
-            {errors: errors.errors, old: req.body})
-        }
+
+                    */
+                
 
         /*
 
