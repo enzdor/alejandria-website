@@ -1,5 +1,6 @@
 const bcryptjs = require('bcryptjs');
 const db = require('../database/models');
+const { Op } = require('sequelize');
 
 
 const {validationResult} = require('express-validator');
@@ -224,8 +225,41 @@ const accountController = {
         */
     },
     favourite: (req, res) =>{
-        res.render('favourite',
-        {productsPopular, products})
+        const books = db.Book.findAll();
+        db.Favourite_book.findAll({
+            where: {user_id: req.session.userLogged.id}
+        }).then((favourites) => {
+            let value = null;
+            let array = [];
+
+            for (let fav of favourites) {
+                array.push(fav.book_id)
+            }
+
+
+            if (array.length == 0){
+                value = true;
+            } else { value = false}
+
+
+            if (value){
+                let products = [];
+                res.render('favourites', {products})
+            } else {
+                db.Book.findAll({
+                    where: {
+                        id: { [Op.or]: array}
+                    }
+                }).then((products) => {
+                    res.render('favourites', {products})
+                })
+            }
+            
+        })
+
+
+        
+
     }
 };
 

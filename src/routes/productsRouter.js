@@ -47,6 +47,7 @@ router.get('/:id/' , productsController.productDetail)
 
 
 
+
 /* EDIT ONE PRODUCT */
 
 router.get('/:id/edit' , productsController.productEdit)

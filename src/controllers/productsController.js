@@ -229,9 +229,6 @@ const productsController = {
         const id = req.params.id;
         const userId = req.session.userLogged.id;
 
-        console.log(id);
-        console.log(userId);
-
         db.Favourite_book.destroy(
             {where: {book_id: id, user_id: userId}, force: true}
         ).then(() => {

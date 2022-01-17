@@ -13,62 +13,23 @@
         <div class="products_container">
             <div class="title_outer-edge">
                 <div class="title_container container">
-                    <h2>Libros en tu cesto</h2>
+                    <h2>Libros favoritos</h2>
                 </div>
             </div>
-            <% for (let i = 0; i < 4; i++) {%> 
+            <% for(let product of products) { %>
                 <div class="products_outer-edge-product">
                     <div class="products_container-product container">
                         <div class="products-product_container-image">
-                            <a href="/products/<%= products[i].id %>">
-                                <img src="/images/<%= products[i].image %> " alt="" width="100%">
+                            <a href="/products/<%= product.id %>">
+                                <img src="/images/<%= product.image %> " alt="" width="100%">
                             </a>
                         </div>
                         <div class="products-product_container-description">
-                            <p><%= products[i].price %></p>
-                        </div>
-                        <div class="product_container-button">
-                            <div>
-                                <form action="">
-                                    <div>
-                                        <button class="button-regular">Borrar</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div>
-                                <form action="">
-                                    <div>
-                                        <button class="button-regular">Favorito</button>
-                                    </div>
-                                </form>
-                            </div>
+                            <p><%= product.price %></p>
                         </div>
                     </div>
                 </div>
-            <% } %> 
-            <div class="basket_outer-edge-price">
-                <div class="basket_container-price container">
-                    <h3>Total a pagar: 2000$</h3>
-                    <% for (let i = 0; i < 4; i++) {%> 
-                    <div class="basket-price_container-product">
-                        <p class="basket-price_product-name"><%= products[i].name %> </p>
-                        <p class="basket-price_product-price"><%= products[i].price %> </p>
-                    </div>
-                    <% } %> 
-                    <div class="basket-price_container-form">
-                        <form action="">
-                            <div>
-                                <button class="button-regular">Vaciar</button>
-                            </div>
-                        </form>
-                        <form action="">
-                            <div>
-                                <button class="button-regular">Pagar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            <% } %>
         </div>
     </main>
     <footer>
