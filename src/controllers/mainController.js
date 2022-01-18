@@ -10,9 +10,9 @@ const productsPopular = productsService.getPopular();
 const mainController = {
     index: (req, res) => {
 
-        db.Book.findAll({
-            where: { id: {[Op.lt] : 5}}
-        })
+        db.Book.findAll(
+            { limit: 4 }
+        )
         .then((products) => {
             res.render('index', {products})
         })

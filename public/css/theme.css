@@ -11,14 +11,8 @@ main{
 }
 
 
-@font-face {
-    font-family: 'andale-mono-regular';
-    src: url('/font/andalemo.ttf');
-}
-
-
 body{
-    font-family: 'andale-mono-regular' , sans-serif;
+    font-family: 'Roboto Mono', monospace;
     overflow-x: hidden;
     background-color: #EEE;
     line-height: 1.5;
