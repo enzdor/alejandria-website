@@ -8,10 +8,29 @@ const {validationResult} = require('express-validator');
 
 const productsController = {
     products: (req, res) => {
-        db.Book.findAll()
-        .then((products) => {
-            res.render('products' , {products})
-        })
+
+        const userl = req.session.userLogged;
+
+        if(userl == undefined){
+            db.Book.findAll()
+            .then((products) => {
+                res.render('products' , {products})
+            })
+        } else {
+            const findBooks = db.Book.findAll();
+            const findFavourites = db.Favourite_book.findAll({
+                where: {
+                    user_id: userl.id
+                }
+            });
+            const user = db.User.findByPk(userl.id);
+
+            Promise.all([findBooks, findFavourites, user])
+            .then((values) => {
+                res.render('products', {products: values[0], favourites: values[1], user: values[2]})
+            })
+        }
+
     },
     categories: (req, res) => {
         res.render('categories')
@@ -210,17 +229,19 @@ const productsController = {
         db.Book.destroy(
             { where : {id: id}, force: true}
         ).then(() => {
-            res.redirect('/products')
+            res.redirect('/account')
         })
     },
     productFavourite: (req, res) => {
         const id = req.params.id;
 
+        const back = req.header('Referer') || '/';
+
         db.Favourite_book.create({
             book_id: id,
             user_id: req.session.userLogged.id
         }).then(()=> {
-            res.redirect('/account')
+            res.redirect(back)
         }).catch((err) => {
             console.log(err);
         });
@@ -229,10 +250,12 @@ const productsController = {
         const id = req.params.id;
         const userId = req.session.userLogged.id;
 
+        const back = req.header('Referer') || '/';
+
         db.Favourite_book.destroy(
             {where: {book_id: id, user_id: userId}, force: true}
         ).then(() => {
-            res.redirect('/account')
+            res.redirect(back)
         }).catch((err) => {
             console.log(err)
         })
