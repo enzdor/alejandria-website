@@ -231,36 +231,7 @@ const productsController = {
         ).then(() => {
             res.redirect('/account')
         })
-    },
-    productFavourite: (req, res) => {
-        const id = req.params.id;
-
-        const back = req.header('Referer') || '/';
-
-        db.Favourite_book.create({
-            book_id: id,
-            user_id: req.session.userLogged.id
-        }).then(()=> {
-            res.redirect(back)
-        }).catch((err) => {
-            console.log(err);
-        });
-    },
-    productUnfavourite: (req, res) => {
-        const id = req.params.id;
-        const userId = req.session.userLogged.id;
-
-        const back = req.header('Referer') || '/';
-
-        db.Favourite_book.destroy(
-            {where: {book_id: id, user_id: userId}, force: true}
-        ).then(() => {
-            res.redirect(back)
-        }).catch((err) => {
-            console.log(err)
-        })
     }
-    
 };
 
 module.exports = productsController;

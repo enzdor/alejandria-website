@@ -1,9 +1,10 @@
 
 window.onload = async () => {
-    let id;
+    let id, str;
     let fav = [];
-    const stars = document.querySelectorAll('.star')
 
+    const containers = document.querySelectorAll('.products_container-product')
+    
     if (localStorage.getItem('fav') != null) {
         fav = JSON.parse(localStorage.getItem('fav'));
     } else {
@@ -11,36 +12,50 @@ window.onload = async () => {
         fav = JSON.parse(localStorage.getItem('fav'));
     }
 
-    console.log(fav);
 
-    stars.forEach((star) => {
-        star.addEventListener('click', () => {
-            id = Number(star.dataset.id)
+    for (let container of containers) {
+        if (fav.length < 1) {
+            str = document.createElement("i");
+            str.classList.add('star', 'fa-star', 'far')
+            container.appendChild(str)
+        } else {
+            if (fav.includes(Number(container.dataset.id))) {
+                str = document.createElement("i");
+                str.classList.add('star', 'fa-star', 'fas')
+                container.appendChild(str)
+            } else {
+                str = document.createElement("i");
+                str.classList.add('star', 'fa-star', 'far')
+                container.appendChild(str)
+            }
+        }
+    }
+    
+    
+    const stars = document.querySelectorAll('.star')
+
+
+    for (let i = 0; i < stars.length; i++) {
+        stars[i].addEventListener('click', () => {
+            id = Number(containers[i].dataset.id)
             console.log('bololo');
             console.log(id);
             const index = fav.indexOf(id);
             console.log(index);
-            console.log(star);
 
             if (index == -1) {
                 fav.push(id)
-                star.classList.replace("far", "fas");
+                stars[i].classList.replace("far", "fas");
                 console.log(1);
             } else {
                 fav.splice(index, 1)
-                star.classList.replace("fas", "far");
+                stars[i].classList.replace("fas", "far");
                 console.log(2);
             }
 
             
             localStorage.setItem('fav', JSON.stringify(fav))
         })
-    })
-
-
-    console.log('hola');
-
-    
-
-
+        
+    }
 }

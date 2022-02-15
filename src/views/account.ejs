@@ -46,7 +46,7 @@
             </div>
             <% for (let product of products){ %> 
                 <div class="products_outer-edge-product">
-                    <div class="products_container-product container">
+                    <div class="products_container-product container" data-id="<%= product.id %>">
                         <div class="products-product_container-image">
                             <a href="/products/<%= product.id %>">
                                 <img src="/images/<%= product.image %>" alt="" width="100%">
@@ -67,5 +67,6 @@
     <footer>
         <%- include('partials/footer') %> 
     </footer>
+    <script src="js/fav.js"></script>
 </body>
 </html>
