@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head', {title: 'Home'}) %>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/products.css">
+</head>
+<body>
+    <header>
+        <%- include('partials/header') %> 
+    </header>
+    <main>
+        <div class="index_outer-edge">
+            <div class="container index_container-search">
+                <h2>Conectando librerias de barrio con lectores apasionados</h2>
+                <form action="">
+                    <div class="index-search_container-form">
+                        <input type="text" name="" id="" placeholder="Encontra tu libro...">
+                        <button class="button-regular"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="index_outer-edge">
+            <div class="container index_container-register">
+                <div class="index-register_container-text">
+                    <h2>Registrate</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, ipsa dicta totam nostrum ex consequuntur</p>
+                </div>            
+                <div class="index-register_container-form">
+                    <a href="/account/register" class="button-regular">Lector</a>
+                    <a href="/account/register" class="button-regular">Vendedor</a>
+                </div>
+            </div>
+        </div>
+        <div class="index_outer-edge">
+            <div class="container index_container-info">
+                <h2>Porque elegirnos a nosotros?</h2>
+                <div class="index-info_info">
+                    <i class="fas fa-book index-info_icon"></i>
+                    <p>Tenemos muchas mas opciones</p>
+                </div>
+                <div class="index-info_info">
+                    <i class="fas fa-fist-raised index-info_icon"></i>
+                    <p>Vas a estar apoyando librerias independientes</p>
+                </div>
+                <div class="index-info_info">
+                    <i class="fas fa-money-bill-wave index-info_icon"></i>
+                    <p>Nuestras opciones son mas baratas</p>
+                </div>
+            </div>
+        </div>
+        <div class="products_container">
+            <div class="title_outer-edge">
+                <div class="title_container container">
+                    <h2>Libros populares</h2>
+                </div>
+            </div>
+            <% for (let product of products) { %> 
+                <div class="products_outer-edge-product">
+                    <div class="products_container-product container">
+                        <div class="products-product_container-image">
+                            <a href="/products/<%= product.id %>">
+                                <img src="/images/<%= product.image %>" alt="" width="100%">
+                            </a>
+                        </div>
+                        <div class="products-product_container-description">
+                            <p>$<%= product.price %></p>
+                        </div>
+                    </div>
+                </div>
+            <% } %> 
+        </div>
+    </main>
+    <footer>
+        <%- include('partials/footer') %> 
+    </footer>
+</body>
+</html>
+
+
+<!-- Link for logo logomaker.thehoth.com/?project=38752037
+     Link for simple logo logomaker.thehoth.com/?project=38752037
+-->

@@ -1,0 +1,71 @@
+/*
+
+
+OVERALL BASKET STYLES
+
+
+*/
+
+
+
+.basket_outer-edge-price{
+    width: 100%;
+}
+
+
+/*
+
+
+
+BASKET PRICE STYLES
+
+
+*/
+
+
+.basket_container-price {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+
+.basket_container-price h3{
+    margin: 10px;
+    font-size: 1.5rem;
+}
+
+
+.basket-price_container-product {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 15px 10px;
+}
+
+
+.basket-price_product-name{
+    width: 80%;
+    font-size: 1.2rem;
+}
+
+
+.basket-price_product-price{
+    width: 20%;
+    align-self: center;
+    padding-left: 10px;
+    font-size: 1.2rem;
+    color: darkgreen;
+}
+
+
+
+.basket-price_container-form {
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+

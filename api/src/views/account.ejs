@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head', {title: 'Mi Cuenta'}) %>
+    <link rel="stylesheet" href="/css/account.css">
+    <link rel="stylesheet" href="/css/products.css">
+</head>
+<body>
+    <header>
+        <%- include('partials/header') %> 
+    </header>
+    <main>
+        <h1><%= user.email %> </h1>
+        <div class="account_outer-edge">
+            <div class="account_container container">
+                <h2 class="account_title">Informacion de tu cuenta</h2>
+                <div class="account_container-information">
+                    <p class="account_information-type">Nombre de cuenta: </p>
+                    <p><%= user.user_name %> </p>
+                </div>
+                <div class="account_container-information">
+                    <p class="account_information-type">Email: </p>
+                    <p><%= user.email %></p>
+                </div>
+                <div class="account_container-information">
+                    <p class="account_information-type">Tipo de cuenta: </p>
+                    <% if (user.category_id == 1) { %>
+                        <p>User</p>
+                    <% } else { %>
+                        <p>Admin</p>
+                    <% } %>
+                </div>
+                <div class="account_container-information account_container-button">
+                    <a class="button-regular account_button-edit" href="/account/edit">Editar</a>
+                </div>
+           </div>
+        </div>
+        <div class="products_container">
+            <div class="title_outer-edge">
+                <div class="title_container container account_container-title">
+                    <div>
+                        <h2>Tus libros a la venta</h2>
+                    </div>
+                    <a href="/products/add/product" class="button-regular account_button-add">Agregar</a>
+                </div>
+            </div>
+            <% for (let product of products){ %> 
+                <div class="products_outer-edge-product">
+                    <div class="products_container-product container" data-id="<%= product.id %>">
+                        <div class="products-product_container-image">
+                            <a href="/products/<%= product.id %>">
+                                <img src="/images/<%= product.image %>" alt="" width="100%">
+                            </a>
+                        </div>
+                        <div class="products-product_container-description">
+                            <p>$<%= product.price %></p>
+                        </div>
+                        <div class="product_container-button">
+                            <a class="button-regular" href="/products/<%= product.id %>/delete">Borrar</a>
+                            <a class="button-regular" href="/products/<%= product.id %>/edit">Editar</a>
+                        </div>
+                    </div>
+                </div>
+            <% } %> 
+        </div>
+    </main>
+    <footer>
+        <%- include('partials/footer') %> 
+    </footer>
+    <script src="js/fav.js"></script>
+</body>
+</html>

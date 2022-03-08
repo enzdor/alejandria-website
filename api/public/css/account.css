@@ -1,0 +1,103 @@
+/*
+
+
+OVERALL ACCOUNT STYLES
+
+
+*/
+
+
+.account_outer-edge {
+    margin: 10px;
+}
+
+.account_title{
+    width: 100%;
+    margin: 10px;
+}
+
+/*
+
+
+INDIVIDUAL INFORMATION STYLES
+
+
+*/
+
+
+
+.account_container-information {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+
+.account_container-information p{
+    font-size: 1.2rem;
+    margin: 20px 0 20px 10px;
+}
+
+
+.account_information-type {
+    font-weight: 600;
+}
+
+
+/*
+
+
+EDIT ACCOUNT INFORMATION BUTTON SYTLES
+
+
+*/
+
+
+.account_container-button{
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    padding-left: 10px;
+}
+
+.account_button-edit{
+    margin: 10px 0;
+}
+
+
+
+/*
+
+
+ADD PRODUCT BUTTON STYLES
+
+
+*/
+
+
+.account_container-title{
+    justify-content: space-between;
+}
+
+.account_button-add {
+    margin: 10px;
+}
+
+
+
+
+/*
+
+
+MEDIA QUERIES
+
+
+*/
+
+@media(min-width:768px){
+    .account_container-information{
+        width: 50%;
+        flex-direction: row;
+    }
+}

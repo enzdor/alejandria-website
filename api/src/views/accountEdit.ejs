@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head', {title: 'Home'}) %>
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+    <header>
+        <%- include('partials/header') %> 
+    </header>
+    <main>
+        <div class="register_outer-edge">
+            <div class="register_container container">
+                <h2>Editar tu cuenta</h2>
+                <div class="form_container">
+                    <form action="/account/edit?_method=PUT" method="post">
+                        <div class="form_outer-edge-input">
+                            <div class="form_container-input">
+                                <label for="first-name">Nombre de Usuario:</label>
+                                <input type="text" name="userName" id="userName" value="<%= user.user_name %>">
+                            </div>
+                        <div class="form_outer-edge-input">
+                            <div class="form_container-input">
+                                <label for="email">Email:</label>
+                                <input type="email" name="email" id="email" value="<%= user.email %>">
+                            </div>
+                        </div>
+                        <div class="form_outer-edge-input">
+                            <div class="form_container-input">
+                                <label for="password">Contrasena:</label>
+                                <input type="password" name="password" id="password">
+                            </div>
+                        </div>
+                        <div class="form_container-button">
+                            <button class="button-regular">Editar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <%- include('partials/footer') %> 
+    </footer>
+</body>
+</html>

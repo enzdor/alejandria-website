@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head', {title: 'Productos'}) %>
+    <link rel="stylesheet" href="/css/products.css">
+</head>
+<body>
+    <header>
+        <%- include('partials/header') %> 
+    </header>
+    <main>
+        <div class="products_container">
+            <div class="title_outer-edge">
+                <div class="title_container container">
+                    <h2>Libros</h2>
+                </div>
+            </div>
+            <% for (let product of products) { %> 
+                <div class="products_container-product container" data-id="<%= product.id %>">
+                    <a href="/products/<%= product.id %>" class="products_outer-edge-product">
+                        <div class="products-product_container-image">
+                            <img src="/images/<%= product.image %>" alt="" width="100%">
+                        </div>
+                    </a>
+                    <div class="products-product_container-description">
+                        <p>$<%= product.price %></p>
+                        <p class="products-product_description-title"><%= product.name %> </p>
+                    </div>
+                </div>
+            <% } %> 
+        </div>
+    </main>
+    <footer>
+        <%- include('partials/footer') %> 
+    </footer>
+    <script src="js/fav.js"></script>
+</body>
+</html>
