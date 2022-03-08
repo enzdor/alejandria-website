@@ -1,8 +1,12 @@
 import React from "react";
+import Header from "../Components/Header";
 
 function Books(){
     return(
-        <h1>This is books</h1>
+        <>
+            <Header />
+            <h1>This is books</h1>
+        </>
     )
 }
 
