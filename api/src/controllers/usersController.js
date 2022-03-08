@@ -8,7 +8,7 @@ module.exports = {
                 meta: {
                     status: 200,
                     total: users.length,
-                    url: "api/vinos",
+                    url: "api/users",
                 },
                 data: users
             }

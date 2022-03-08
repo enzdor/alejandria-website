@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const usersRouter = require('./src/routers/usersRouter')
+
 
 app.use(express.json());
 
@@ -12,5 +12,12 @@ app.listen(3000, () => {
 });
 
 
+const usersRouter = require('./src/routers/usersRouter')
+const booksRouter = require('./src/routers/booksRouter')
+const genresRouter = require('./src/routers/genresRouter')
+
+
 app.use('/api/' , usersRouter)
+app.use('/api/' , booksRouter)
+app.use('/api/' , genresRouter)
 

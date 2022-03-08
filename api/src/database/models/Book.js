@@ -51,10 +51,6 @@ module.exports = (sequelize, dataTypes) => {
             as: "user", 
             foreignKey: "user_id"
         })
-        Book.hasMany(models.Favourite, {
-            as: "favourite_books",
-            foreignKey: "BookId"
-        })
         Book.belongsToMany(models.User, {
             through: models.Basket,
             as: "book_basket"
