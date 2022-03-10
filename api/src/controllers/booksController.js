@@ -34,5 +34,23 @@ module.exports = {
         };
 
         res.json(response);
+    },
+    create: async (req, res) => {
+        try{
+            await db.Book.create({
+                name: req.body.name,
+                author: req.body.author,
+                description: req.body.description,
+                image: req.body.image,
+                price: req.body.price,
+                genre_id: Number(req.body.genre),
+                user_sub: req.body.user_id
+            })
+    
+            console.log(req.body);
+            res.send('done')
+        } catch (error){
+            console.log(error);
+        }
     }
 }

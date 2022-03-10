@@ -32,8 +32,8 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.INTEGER,
             allowNull: false
         },
-        user_id: {
-            type: dataTypes.INTEGER,
+        user_sub: {
+            type: dataTypes.STRING(300),
             allowNull: false
         },
     };
@@ -46,18 +46,6 @@ module.exports = (sequelize, dataTypes) => {
         Book.belongsTo(models.Genre, {
             as: "genre", 
             foreignKey: "genre_id"
-        })
-        Book.belongsTo(models.User, {
-            as: "user", 
-            foreignKey: "user_id"
-        })
-        Book.belongsToMany(models.User, {
-            through: models.Basket,
-            as: "book_basket"
-        })
-        Book.belongsToMany(models.User, {
-            through: models.Favourite,
-            as: "book_favourite"
         })
     }
 
