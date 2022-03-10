@@ -5,19 +5,21 @@ import Header from "../Components/Header";
 export default function AddBook(){
     const { user } = useAuth0()
 
-    async function postBook(){
-        console.log(user.sub);
+    async function postBook(event){
+        event.preventDefault()
+        
         await fetch('http://localhost:3001/api/books', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name: document.querySelector('#name').value, 
-                                author: document.querySelector('#author').value, 
-                                description: document.querySelector('#description').value, 
-                                image: document.querySelector('#image').value, 
-                                price: document.querySelector('#price').value, 
-                                genre: document.querySelector('#genre').value, 
-                                user_id: user.sub
-                                })
+            body: JSON.stringify({ 
+                name: document.querySelector('#name').value, 
+                author: document.querySelector('#author').value, 
+                description: document.querySelector('#description').value, 
+                image: document.querySelector('#image').value, 
+                price: document.querySelector('#price').value, 
+                genre: document.querySelector('#genre').value, 
+                user_id: user.sub
+                })
         })
     }
 
