@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -5,6 +6,8 @@ import BooksContainer from "../Components/BooksContainer";
 import Header from "../Components/Header";
 
 function Books(){
+
+    const {isAuthenticated, user, isLoading} = useAuth0()
 
     const [books, setBooks] = useState([])
     useEffect(() => {
@@ -14,16 +17,28 @@ function Books(){
     
             setBooks(newBooks)
         }
+        async function getBooksUserSub(){
+            let newBooks = await fetch(`http://localhost:3001/api/books/logged/${user.sub}`)
+            newBooks = (await newBooks.json()).data
 
-        getBooks()
-    }, [])
+            setBooks(newBooks)
+        }
+
+        if (isAuthenticated){
+            getBooksUserSub()
+        } else {
+            getBooks()
+        }
+    },[isAuthenticated, isLoading])
 
 
     return(
         <>
             <Header />
             <h1>This is books</h1>
-            <BooksContainer books={books} />
+            {isLoading 
+            ? <p>Loading</p>
+            : <BooksContainer books={books} />}
         </>
     )
 }

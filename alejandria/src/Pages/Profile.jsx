@@ -12,6 +12,7 @@ function Profile(){
                 <Header />
                 <h1>This is your profile</h1>
                 <p>{ user.nickname }</p>
+                <p>{ user.sub }</p>
                 <Link to="/addbook">Add Book</Link>
             </div>
         )
