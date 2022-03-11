@@ -1,10 +1,12 @@
 import React from "react";
+import BookCard from "./BookCard";
 
-export default function BooksContainer(props){
+
+export default function BooksContainer(props){ 
     return(
         <div>
             {props.books.map((book) => (
-                <div key={book.id}>{book.name}</div>
+                <BookCard key={book.id} data={book} />
             ))}
         </div>
     )

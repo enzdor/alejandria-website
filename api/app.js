@@ -12,12 +12,12 @@ app.listen(3001, () => {
 });
 
 
-const usersRouter = require('./src/routers/usersRouter')
 const booksRouter = require('./src/routers/booksRouter')
 const genresRouter = require('./src/routers/genresRouter')
+const favouritesRouter = require('./src/routers/favouritesRouter')
 
 
-app.use('/api/' , usersRouter)
 app.use('/api/' , booksRouter)
 app.use('/api/' , genresRouter)
+app.use('/api/' , favouritesRouter)
 
