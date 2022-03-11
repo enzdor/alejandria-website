@@ -1,5 +1,7 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function BookCard(props){
     const { user } = useAuth0()
@@ -16,10 +18,15 @@ export default function BookCard(props){
         })
     }
 
+    const [favourite, setFavourite] = useState(false)
+    useEffect(() => {
+
+    },[])
+
     return (
         <div>
             <h3>Name: {props.data.name}</h3>
-            <button onClick={createDeleteFavourite}>Favourite</button>
+            <button onClick={createDeleteFavourite}>Unfavourite</button>
         </div>
     )
 }

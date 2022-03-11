@@ -1,0 +1,7 @@
+show correct favourite button if the product is favourite or not
+
+create bookDetail view
+
+make the search of books possible
+
+choose an api for checkout
