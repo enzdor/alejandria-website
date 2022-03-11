@@ -24,7 +24,14 @@ module.exports = {
             console.log('done! created');
             res.send('done! created')
         }
+    },
+    isFavourite: async (req, res) => {
+        const isFavourite = await db.Favourite.findOne({where: {
+            user_sub: req.body.user_sub,
+            book_id: req.body.book_id
+        }})
 
-        
+        console.log(isFavourite);
+        res.send('done')
     }
 }
