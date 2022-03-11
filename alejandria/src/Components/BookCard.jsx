@@ -6,6 +6,13 @@ import { useEffect } from "react";
 export default function BookCard(props){
     const {isAuthenticated, user} = useAuth0()
 
+    const [favourite, setFavourite] = useState(false)
+    useEffect(() => {
+        if (props.data.isFavourite){
+            setFavourite(true)
+        }
+    },[])
+
     async function createDeleteFavourite(event){
         event.preventDefault()
         if (isAuthenticated){
@@ -17,13 +24,18 @@ export default function BookCard(props){
                     book_id: props.data.id
                 })
             })
+            if (favourite == true) {
+                setFavourite(false)
+            } else {
+                setFavourite(true)
+            }
         }
     }
 
     return (
         <div>
             <h3>Name: {props.data.name}</h3>
-            {props.data.isFavourite  
+            {favourite  
                 ? <button onClick={createDeleteFavourite}>Unfavourite</button>
                 : <button onClick={createDeleteFavourite}>Favourite</button>}
         </div>
