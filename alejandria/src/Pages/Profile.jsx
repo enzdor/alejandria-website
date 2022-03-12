@@ -37,6 +37,19 @@ function Profile(){
         }
     }, [isLoading])
 
+    const [createdFavourite, setCreatedFavourite] = useState(false)
+    useEffect(() => {
+
+    },[])
+
+    function changeCreatedFavourite(){
+        if (createdFavourite === false) {
+            setCreatedFavourite(true)
+        } else {
+            setCreatedFavourite(false)
+        }
+    }
+
     if (isAuthenticated){
         return (
             <div>
@@ -45,10 +58,12 @@ function Profile(){
                 <p>{ user.nickname }</p>
                 <p>{ user.sub }</p>
                 <Link to="/addbook">Add Book</Link>
-                <h2>Your books for sale</h2>
-                <BooksContainer books={booksCreated}/>
-                <h2>Your favourite books</h2>
-                <BooksContainer books={booksFavourite}/>
+                <h2 onClick={changeCreatedFavourite}>Your books for sale</h2>
+                <h2 onClick={changeCreatedFavourite}>Your favourite books</h2>
+                {createdFavourite
+                    ? <BooksContainer books={booksCreated} />
+                    : <BooksContainer books={booksFavourite} />
+                }
             </div>
         )
     } else {
