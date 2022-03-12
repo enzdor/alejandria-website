@@ -29,6 +29,8 @@ export default function BookCard(props){
             } else {
                 setFavourite(true)
             }
+        } else {
+            alert('You need to be logged in to use this')
         }
     }
 
