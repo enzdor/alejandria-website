@@ -1,4 +1,4 @@
-create bookDetail view
+fix profile to see favourites or created
 
 make the search of books possible
 

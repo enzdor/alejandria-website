@@ -90,34 +90,49 @@ module.exports = {
             }
         }
 
-        const books = await db.Book.findAll({
-            include: {all: true},
-            where: {id: {[Op.or]: arrayBooks}}
-        })
-
-        for (const book of books) {
-            finalBooks.push(book.dataValues)
-        }
-
-        for (const book of finalBooks) {
-            book.isFavourite = false
-            for (let fav of book.favourite) {
-                if(fav.user_sub === req.params.user_sub){
-                    book.isFavourite = true
+        if(arrayBooks.length < 1){
+            const response = {
+                meta: {
+                    status: 200,
+                    total: 0,
+                    url: "api/books",
+                },
+                data: []
+            }
+    
+            res.json(response)
+        } else {
+            const books = await db.Book.findAll({
+                include: {all: true},
+                where: {id: {[Op.or]: arrayBooks}}
+            })
+    
+            for (const book of books) {
+                finalBooks.push(book.dataValues)
+            }
+    
+            for (const book of finalBooks) {
+                book.isFavourite = false
+                for (let fav of book.favourite) {
+                    if(fav.user_sub === req.params.user_sub){
+                        book.isFavourite = true
+                    }
                 }
             }
+    
+            const response = {
+                meta: {
+                    status: 200,
+                    total: books.length,
+                    url: "api/books",
+                },
+                data: books
+            }
+    
+            res.json(response)
         }
 
-        const response = {
-            meta: {
-                status: 200,
-                total: books.length,
-                url: "api/books",
-            },
-            data: books
-        }
-
-        res.json(response)
+        
     },
     detail: async (req, res) => {
         const book = await db.Book.findByPk(req.params.id,
@@ -130,6 +145,30 @@ module.exports = {
                 url: "api/users/:id",
             },
             data: book,
+        };
+
+        res.json(response);
+    },
+    detailUserSub: async (req, res) => {
+        const book = await db.Book.findByPk(req.params.id,
+            { include: { all: true } }
+        );
+        const sendBook = book.dataValues
+
+        sendBook.isFavourite = false
+
+        for (let fav of sendBook.favourite) {
+            if(fav.user_sub === req.params.user_sub){
+                sendBook.isFavourite = true
+            }
+        }
+
+        const response = {
+            meta: {
+                status: 200,
+                url: "api/users/:id",
+            },
+            data: sendBook,
         };
 
         res.json(response);

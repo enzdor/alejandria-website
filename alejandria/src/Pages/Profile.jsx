@@ -6,7 +6,7 @@ import BooksContainer from "../Components/BooksContainer";
 import { useState } from "react";
 import { useEffect } from "react";
 
-function Profile(){
+export default function Profile(){
     const { user, isAuthenticated, isLoading } = useAuth0()
 
     const [booksCreated, setBooksCreated] = useState([])
@@ -37,18 +37,18 @@ function Profile(){
         }
     }, [isLoading])
 
-    const [createdFavourite, setCreatedFavourite] = useState(false)
-    useEffect(() => {
+    // const [createdFavourite, setCreatedFavourite] = useState(false)
+    // useEffect(() => {
 
-    },[])
+    // },[])
 
-    function changeCreatedFavourite(){
-        if (createdFavourite === false) {
-            setCreatedFavourite(true)
-        } else {
-            setCreatedFavourite(false)
-        }
-    }
+    // function changeCreatedFavourite(){
+    //     if (createdFavourite === false) {
+    //         setCreatedFavourite(true)
+    //     } else {
+    //         setCreatedFavourite(false)
+    //     }
+    // }
 
     if (isAuthenticated){
         return (
@@ -58,12 +58,11 @@ function Profile(){
                 <p>{ user.nickname }</p>
                 <p>{ user.sub }</p>
                 <Link to="/addbook">Add Book</Link>
-                <h2 onClick={changeCreatedFavourite}>Your books for sale</h2>
-                <h2 onClick={changeCreatedFavourite}>Your favourite books</h2>
-                {createdFavourite
-                    ? <BooksContainer books={booksCreated} />
-                    : <BooksContainer books={booksFavourite} />
-                }
+                <h2>Your books for sale</h2>
+                <BooksContainer books={booksCreated} />
+                <h2>Your favourite books</h2>
+                <BooksContainer books={booksFavourite} />
+                
             </div>
         )
     } else {
@@ -76,4 +75,3 @@ function Profile(){
     }
 }
 
-export default Profile

@@ -1,11 +1,9 @@
-import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { Link } from 'react-router-dom';
+import React from "react";
+import { useState, useEffect } from "react";
 
-export default function BookCard(props){
-    const {isAuthenticated, user} = useAuth0()
+export default function BookDetailInformation(props){
+    const { isAuthenticated, user } = useAuth0()
 
     const [favourite, setFavourite] = useState(false)
     useEffect(() => {
@@ -37,12 +35,11 @@ export default function BookCard(props){
 
     return (
         <div>
-            <Link to={`/books/${props.data.id}`}>Name: {props.data.name}</Link>
+            <p>{props.data.name}</p>
             {favourite  
                 ? <button onClick={createDeleteFavourite}>Unfavourite</button>
                 : <button onClick={createDeleteFavourite}>Favourite</button>
             }
-            <p>Price: ${props.data.price}</p>
         </div>
     )
 }
