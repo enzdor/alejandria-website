@@ -1,5 +1,7 @@
 fix profile to see favourites or created
 
-make the search of books possible
+make the search of books with more than one parameter possible
+
+see to how to store images
 
 choose an api for checkout

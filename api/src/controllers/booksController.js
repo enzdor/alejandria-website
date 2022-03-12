@@ -185,5 +185,24 @@ module.exports = {
         })
 
         res.send('done')
+    },
+    search: async (req, res) => {
+        const books = await db.Book.findAll({
+            include: {all: true},
+            where: {
+                name: { [Op.like]: "%" + req.params.name + "%" },
+            }
+        })
+
+        const response = {
+            meta: {
+                status: 200,
+                total: books.length,
+                url: "api/books",
+            },
+            data: books
+        }
+
+        res.json(response)
     }
 }

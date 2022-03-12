@@ -31,11 +31,29 @@ function Books(){
         }
     },[isAuthenticated, isLoading])
 
+    async function searchBooks(event){
+        event.preventDefault()
+
+        let newBooks = await fetch(`http://localhost:3001/api/books/search/${document.querySelector('#name').value}`)
+        newBooks = (await newBooks.json()).data
+        console.log('searched');
+
+        console.log(newBooks);
+
+        setBooks(newBooks)
+    }
+
 
     return(
         <>
             <Header />
             <h1>This is books</h1>
+            <form onSubmit={searchBooks}>
+                <h2>Search for a book</h2>
+                <label htmlFor="name">Name:</label>
+                <input type="text" name="name" id="name"/>
+                <input type="submit" name="Submit" id="Submit" />
+            </form>
             {isLoading 
             ? <p>Loading</p>
             : <BooksContainer books={books} />}
