@@ -1,7 +1,11 @@
-fix profile to see favourites or created
-
-make the search of books with more than one parameter possible
+choose an api for checkout
 
 see to how to store images
 
-choose an api for checkout
+make possible the deletion of books
+
+disable button when processing request
+
+make front end validation for forms
+
+make the search of books with more than one parameter possible
