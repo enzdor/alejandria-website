@@ -12,8 +12,12 @@ export default function CheckOutForm(props){
     const stripe = useStripe()
     const elements = useElements()
 
+
     useEffect(() => {
         async function getPaymentIntent(){
+            if (!props.item.price){
+                return
+            }
             let data = await fetch(`http://localhost:3001/create-payment-intent`, {
                 method: "POST",
                 headers: {
@@ -23,25 +27,44 @@ export default function CheckOutForm(props){
             })
             data = await data.json()
 
+
             setClientSecret(data.clientSecret)
         }
-
         getPaymentIntent()
-    }, [])
+    }, [props.item.price])
+
+    async function handleChange(event){
+        setDisabled(event.empty)
+        setError(event.error ? event.error.message : "")
+    }
 
 
     async function handleFormSubmit(event){
         event.preventDefault()
         setProcessing(true)
 
+        console.log(clientSecret);
+
         const payload = await stripe.confirmCardPayment(clientSecret, {
-            
+            payment_method: {
+                card: elements.getElement(CardElement)
+            }
         })
+
+        if(payload.error){
+            console.log(payload.error);
+            setError(`Payment Failed ${payload.error.message}`);
+            setProcessing(false)
+        } else {
+            setError(null)
+            setProcessing(false)
+            setSucceed(true)
+        }
     }
 
     return (
         <div>
-            <form id="form" onSubmit={handleFormSubmit}>
+            <form id="form" onSubmit={handleFormSubmit} >
                 <label htmlFor="fullName">Full Name:</label>
                 <input type="text" name="fullName" id="fullName" />
                 <br />
@@ -54,10 +77,21 @@ export default function CheckOutForm(props){
                 <input type="text" name="adress" id="adress" />
                 <br />
                 <br />
-                <CardElement />
+                <CardElement onChange={handleChange}/>
                 <br />
                 <br />
-                <input type="submit" name="submit" id="submit" />
+                <button disabled={processing || disabled || succeed}>
+                    {
+                        processing ? (
+                            <span>Processing</span>
+                        ) : (
+                            <span>Pay Now</span>
+                        )
+                    }
+                </button>
+                {error && (
+                    <div>{error}</div>
+                )}
             </form>
         </div>
     )

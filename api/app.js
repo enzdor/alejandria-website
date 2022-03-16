@@ -4,7 +4,7 @@ const cors = require('cors')
 
 const secretKey = process.env.SECRET_KEY
 
-const stripe = require('stripe')(`${secretKey}`)
+const stripe = require('stripe')(`sk_test_51KcpwhEP3GAKC61y9b7GAKx2Z9e9A5X3VPzgJff55OnHz3Y3RCkRmgAjvfM2kbiw1hoIzJ9YJSYxWkU0jCNPx03c00MsxfisoG`)
 app.use(express.json());
 app.use(cors(['http://localhost:3000', 'https://localhost:3000']))
 
@@ -25,19 +25,26 @@ app.use('/api/' , favouritesRouter)
 
 
 const calculateOrderAmounts = item => {
+    console.log(item);
     return item.price * 100
 }
 
 app.post('/create-payment-intent', async (req, res) => {
-    const { item } = req.body
+    try {
+        const { item } = req.body
 
-    const paymentIntent = await stripe.paymentIntents.create({
-        amount: calculateOrderAmounts(item),
-        currency: 'usd'
-    })
+        console.log(req.body);
 
-    res.send({
-        clientSecret: paymentIntent.client_secret
-    })
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: calculateOrderAmounts(item),
+            currency: 'usd'
+        })
+
+        res.send({
+            clientSecret: paymentIntent.client_secret
+        })
+    } catch (error){
+        console.log(error);
+    }
 })
 
