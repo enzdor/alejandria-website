@@ -1,4 +1,6 @@
-choose an api for checkout
+make use of env keys and make them work
+
+make redirect for when the purchase is succesful
 
 see to how to store images
 
