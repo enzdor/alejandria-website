@@ -9,7 +9,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 
 
-const publishableKey = process.env
+const publishableKey = `pk_test_51KcpwhEP3GAKC61yHzYBfR6K5tREGP4EhG4d0cpkOnXLO2TVqHj9fOOREFEwrn5bQqZzgrF6axxLMRYVewjzFUOW00tF76JWPP`
 const stripePromise = loadStripe(publishableKey)
 
 export default function BookBuy(){

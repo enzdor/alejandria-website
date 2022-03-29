@@ -1,11 +1,12 @@
-make use of env keys and make them work
-
-see to how to store images
 
 make possible the deletion of books
 
 disable button when processing request
 
+see to how to store images
+
 make front end validation for forms
 
 make the search of books with more than one parameter possible
+
+make use of env keys and make them work
