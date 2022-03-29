@@ -204,5 +204,17 @@ module.exports = {
         }
 
         res.json(response)
+    },
+    delete: async (req, res) => {
+        await db.Book.destroy({where: {id: req.params.id}})
+
+        const response = {
+            meta: {
+                status: 200
+            }
+        }
+        console.log('book deleted');
+
+        res.json(response)
     }
 }

@@ -11,5 +11,6 @@ router.get('/books/created/:user_sub', booksController.listCreatedSub)
 router.get('/books/favourite/:user_sub', booksController.listFavouriteSub)
 router.get('/books/search/:name', booksController.search)
 router.post('/books', booksController.create)
+router.delete('/books/:id', booksController.delete)
 
 module.exports = router
