@@ -7,6 +7,9 @@ import { useEffect } from "react";
 export default function CheckOutForm(props){
     const [succeed, setSucceed] = useState(false)
     const [error, setError] = useState(null)
+    const initialValues = {fullName: "", email:"", adress:""}
+    const [formValues, setFormValues] = useState(initialValues)
+    const [formErrors, setFormErrors] = useState([])
     const [processing, setProcessing] = useState('')
     const [disabled, setDisabled] = useState(true)
     const [clientSecret, setClientSecret] = useState('')
@@ -40,12 +43,26 @@ export default function CheckOutForm(props){
         setError(event.error ? event.error.message : "")
     }
 
+    function handleChangeForm(event) {
+        const { name, value } = event.target
+        setFormValues({...formValues, [name]: value})
+    }
 
-    async function handleFormSubmit(event){
-        event.preventDefault()
-        setProcessing(true)
+    function validate(values) {
+        const errors = []
+        if(!values.fullName){
+            errors.push('You need to write your name')
+        }
+        if(!values.email){
+            errors.push('You need to write your email')
+        }
+        if(!values.adress){
+            errors.push('You need to write your adress')
+        }
+        return errors
+    }
 
-        console.log(clientSecret);
+    async function makePayment(){
 
         const payload = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
@@ -53,8 +70,7 @@ export default function CheckOutForm(props){
             }
         })
 
-        if(payload.error){
-            console.log(payload.error);
+        if(payload.error || formErrors.length != 0){
             setError(`Payment Failed ${payload.error.message}`);
             setProcessing(false)
         } else {
@@ -65,19 +81,41 @@ export default function CheckOutForm(props){
         }
     }
 
+    function handleFormSubmit(event){
+        event.preventDefault()
+        setProcessing(true)
+        setFormErrors(validate(formValues))
+    }
+
+    useEffect(() => {
+        if (!error && formErrors.length === 0 && processing === true){
+            makePayment()
+        }
+        setProcessing(false)
+    }, [formErrors])
+
     return (
         <div>
             <form id="form" onSubmit={handleFormSubmit} >
+                <p>{JSON.stringify(formValues, undefined, 2)}</p>
+                <div>
+                    {formErrors.length == 0
+                        ? <></>
+                        : formErrors.map((error, index)=> (
+                            <p key={index}>{error}</p>
+                        ))
+                    }
+                </div>
                 <label htmlFor="fullName">Full Name:</label>
-                <input type="text" name="fullName" id="fullName" />
+                <input type="text" name="fullName" id="fullName" onChange={handleChangeForm}/>
                 <br />
                 <br />
                 <label htmlFor="email">Email:</label>
-                <input type="email" name="email" id="email" />
+                <input type="email" name="email" id="email" onChange={handleChangeForm}/>
                 <br />
                 <br />
                 <label htmlFor="adress">Adress</label>
-                <input type="text" name="adress" id="adress" />
+                <input type="text" name="adress" id="adress" onChange={handleChangeForm}/>
                 <br />
                 <br />
                 <CardElement onChange={handleChange}/>

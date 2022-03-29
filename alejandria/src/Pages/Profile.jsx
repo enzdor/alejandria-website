@@ -36,19 +36,7 @@ export default function Profile(){
             getBooksFavouriteSub()
         }
     }, [isLoading])
-
-    // const [createdFavourite, setCreatedFavourite] = useState(false)
-    // useEffect(() => {
-
-    // },[])
-
-    // function changeCreatedFavourite(){
-    //     if (createdFavourite === false) {
-    //         setCreatedFavourite(true)
-    //     } else {
-    //         setCreatedFavourite(false)
-    //     }
-    // }
+    
 
     if (isAuthenticated){
         return (

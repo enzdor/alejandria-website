@@ -20,7 +20,7 @@ export default function AddBook(){
     function handleSubmit(event) {
         event.preventDefault()
         setFormErrors(validate(formValues))
-        setSubmit(true)   
+        setSubmit(true)
     }
 
     function validate(values) {
@@ -62,9 +62,7 @@ export default function AddBook(){
     }
 
     useEffect(() => {
-        console.log(formErrors);
         if(formErrors.length == 0 && submit == true){
-            console.log(formValues);
             postBook()
             navigate('/profile')
         }
