@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { useState } from "react";
 import { useEffect } from "react";
@@ -11,6 +12,7 @@ export default function CheckOutForm(props){
     const [clientSecret, setClientSecret] = useState('')
     const stripe = useStripe()
     const elements = useElements()
+    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -59,6 +61,7 @@ export default function CheckOutForm(props){
             setError(null)
             setProcessing(false)
             setSucceed(true)
+            navigate('/profile')
         }
     }
 

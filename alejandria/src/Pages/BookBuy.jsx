@@ -9,7 +9,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 
 
-const publishableKey = `pk_test_51KcpwhEP3GAKC61yHzYBfR6K5tREGP4EhG4d0cpkOnXLO2TVqHj9fOOREFEwrn5bQqZzgrF6axxLMRYVewjzFUOW00tF76JWPP`
+const publishableKey = process.env
 const stripePromise = loadStripe(publishableKey)
 
 export default function BookBuy(){
@@ -17,6 +17,7 @@ export default function BookBuy(){
 
     const [data, setData] = useState({})
     useEffect(() => {
+        console.log(publishableKey);
         async function getData(){
             let newData = await fetch(`http://localhost:3001/api/books/${params.id}`)
             newData = (await newData.json()).data
