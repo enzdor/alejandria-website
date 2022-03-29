@@ -1,12 +1,11 @@
-
-make possible the deletion of books
-
 disable button when processing request
 
-see to how to store images
+create new column for books to see if they are sold or not
 
-make front end validation for forms
+make front end validation for checkout
 
 make the search of books with more than one parameter possible
+
+see to how to store images
 
 make use of env keys and make them work

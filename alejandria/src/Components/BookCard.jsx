@@ -35,12 +35,28 @@ export default function BookCard(props){
         }
     }
 
+    async function deleteBook(event){
+        event.preventDefault()
+        if(isAuthenticated){
+            await fetch(`http://localhost:3001/api/books/${props.data.id}`, {
+                method: 'DELETE'
+            })
+            console.log('book deleted');
+        } else {
+            alert('You need to be logged in to use this')
+        }
+    }
+
     return (
         <div>
             <Link to={`/books/${props.data.id}`}>Name: {props.data.name}</Link>
             {favourite  
                 ? <button onClick={createDeleteFavourite}>Unfavourite</button>
                 : <button onClick={createDeleteFavourite}>Favourite</button>
+            }
+            {props.data.user_sub == user.sub
+                ? <button onClick={deleteBook}>Delete</button>
+                : <></>
             }
             <p>Price: ${props.data.price}</p>
         </div>

@@ -1,8 +1,10 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
+import {useNavigate} from "react-router-dom"
 import { useState, useEffect } from "react";
 
 export default function BookDetailInformation(props){
+    const navigate = useNavigate()
     const { isAuthenticated, user } = useAuth0()
 
     const [favourite, setFavourite] = useState(false)
@@ -40,6 +42,7 @@ export default function BookDetailInformation(props){
                 ? <button onClick={createDeleteFavourite}>Unfavourite</button>
                 : <button onClick={createDeleteFavourite}>Favourite</button>
             }
+            <button onClick={() => navigate(`/buy/${props.data.id}`)}>Buy</button>
         </div>
     )
 }
