@@ -36,6 +36,10 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING(300),
             allowNull: false
         },
+        available: {
+            type: dataTypes.STRING(10),
+            allowNull: false
+        }
     };
     let config = {
         timestamps: false,

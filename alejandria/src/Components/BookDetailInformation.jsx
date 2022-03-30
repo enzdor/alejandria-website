@@ -42,7 +42,12 @@ export default function BookDetailInformation(props){
                 ? <button onClick={createDeleteFavourite}>Unfavourite</button>
                 : <button onClick={createDeleteFavourite}>Favourite</button>
             }
-            <button onClick={() => navigate(`/buy/${props.data.id}`)}>Buy</button>
+            {props.data.available == 'true'
+                ? <button onClick={() => navigate(`/buy/${props.data.id}`)}>Buy</button>
+                : <button disabled>Sold</button>
+            }
+            
+            
         </div>
     )
 }

@@ -1,5 +1,7 @@
 create new column for books to see if they are sold or not
 
+be able to edit products
+
 disable button when processing request
 
 see to how to store images

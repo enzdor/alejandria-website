@@ -49,7 +49,7 @@ export default function BookCard(props){
 
     return (
         <div>
-            <Link to={`/books/${props.data.id}`}>Name: {props.data.name}</Link>
+            <Link to={`/books/${props.data.id}`}>{props.data.name}</Link>
             {favourite  
                 ? <button onClick={createDeleteFavourite}>Unfavourite</button>
                 : <button onClick={createDeleteFavourite}>Favourite</button>

@@ -81,9 +81,14 @@ export default function CheckOutForm(props){
             setError(`Payment Failed ${payload.error.message}`);
             setProcessing(false)
         } else {
+            await fetch(`http://localhost:3001/api/books/sold/${props.item.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' }
+            })
+    
+            setSucceed(true)
             setError(null)
             setProcessing(false)
-            setSucceed(true)
             navigate('/profile')
         }
     }

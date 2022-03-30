@@ -181,7 +181,8 @@ module.exports = {
             image: req.body.image,
             price: req.body.price,
             genre_id: Number(req.body.genre),
-            user_sub: req.body.user_id
+            user_sub: req.body.user_id,
+            available: 'true'
         })
 
         res.send('done')
@@ -224,7 +225,22 @@ module.exports = {
                 status: 200
             }
         }
-        console.log('book deleted');
+
+        res.json(response)
+    },
+    sold: async (req, res) => {
+        await db.Book.update(
+            {available: 'false'},
+            {where: {id: req.params.id}}
+        )
+
+        console.log('book sold');
+
+        const response = {
+            meta: {
+                status: 200
+            }
+        }
 
         res.json(response)
     }
