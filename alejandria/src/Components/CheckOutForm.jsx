@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { useState } from "react";
 import { useEffect } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function CheckOutForm(props){
     const [succeed, setSucceed] = useState(false)
@@ -16,6 +17,7 @@ export default function CheckOutForm(props){
     const stripe = useStripe()
     const elements = useElements()
     const navigate = useNavigate()
+    const { user } = useAuth0()
 
 
     useEffect(() => {
@@ -23,12 +25,16 @@ export default function CheckOutForm(props){
             if (!props.item.price){
                 return
             }
+            console.log(user);
             let data = await fetch(`http://localhost:3001/create-payment-intent`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({item: props.item})
+                body: JSON.stringify({
+                    item: props.item,
+                    user: user
+                })
             })
             data = await data.json()
 
@@ -36,7 +42,7 @@ export default function CheckOutForm(props){
             setClientSecret(data.clientSecret)
         }
         getPaymentIntent()
-    }, [props.item.price])
+    }, [props.item.price, user])
 
     async function handleChange(event){
         setDisabled(event.empty)
@@ -63,6 +69,7 @@ export default function CheckOutForm(props){
     }
 
     async function makePayment(){
+        console.log(clientSecret);
 
         const payload = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {

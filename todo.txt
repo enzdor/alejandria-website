@@ -1,7 +1,5 @@
 create new column for books to see if they are sold or not
 
-add the product and the user to the stripe payment
-
 make the search of books with more than one parameter possible
 
 disable button when processing request

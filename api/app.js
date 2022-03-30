@@ -3,7 +3,6 @@ const app = express();
 const cors = require('cors')
 
 const secretKey = `sk_test_51KcpwhEP3GAKC61y9b7GAKx2Z9e9A5X3VPzgJff55OnHz3Y3RCkRmgAjvfM2kbiw1hoIzJ9YJSYxWkU0jCNPx03c00MsxfisoG`
-console.log(secretKey);
 
 const stripe = require('stripe')(secretKey.toString())
 app.use(express.json());
@@ -26,19 +25,20 @@ app.use('/api/' , favouritesRouter)
 
 
 const calculateOrderAmounts = item => {
-    console.log(item);
     return item.price * 100
 }
 
 app.post('/create-payment-intent', async (req, res) => {
     try {
-        const { item } = req.body
-
-        console.log(req.body);
+        const { item, user } = req.body
 
         const paymentIntent = await stripe.paymentIntents.create({
             amount: calculateOrderAmounts(item),
-            currency: 'usd'
+            currency: 'usd',
+            metadata: {
+                user_sub: user.sub,
+                product_id: item.id
+            }
         })
 
         res.send({
