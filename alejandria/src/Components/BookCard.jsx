@@ -54,8 +54,10 @@ export default function BookCard(props){
                 ? <button onClick={createDeleteFavourite}>Unfavourite</button>
                 : <button onClick={createDeleteFavourite}>Favourite</button>
             }
-            {props.data.user_sub == user.sub
-                ? <button onClick={deleteBook}>Delete</button>
+            {isAuthenticated
+                ? props.data.user_sub == user.sub
+                    ? <button onClick={deleteBook}>Delete</button>
+                    : <></>
                 : <></>
             }
             <p>Price: ${props.data.price}</p>

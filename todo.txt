@@ -1,6 +1,6 @@
 create new column for books to see if they are sold or not
 
-make it possible for non logged user to see products
+add the product and the user to the stripe payment
 
 make the search of books with more than one parameter possible
 
