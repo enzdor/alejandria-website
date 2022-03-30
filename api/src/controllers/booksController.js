@@ -187,10 +187,20 @@ module.exports = {
         res.send('done')
     },
     search: async (req, res) => {
+        if (req.query.priceMin === ''){
+            req.query.priceMin = 0
+        }
+        if (req.query.priceMax === ''){
+            req.query.priceMin = 0
+        }
+
         const books = await db.Book.findAll({
             include: {all: true},
             where: {
-                name: { [Op.like]: "%" + req.params.name + "%" },
+                name: { [Op.like]: "%" + req.query.name + "%" },
+                author: { [Op.like]: "%" + req.query.author + "%" },
+                genre_id: { [Op.like]: "%" + req.query.genre + "%" },
+                price: { [Op.between]: [ Number(req.query.priceMin), Number(req.query.priceMax)]}
             }
         })
 
@@ -204,6 +214,7 @@ module.exports = {
         }
 
         res.json(response)
+    
     },
     delete: async (req, res) => {
         await db.Book.destroy({where: {id: req.params.id}})

@@ -1,7 +1,5 @@
 create new column for books to see if they are sold or not
 
-make the search of books with more than one parameter possible
-
 disable button when processing request
 
 see to how to store images
