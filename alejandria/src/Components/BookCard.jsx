@@ -2,9 +2,10 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function BookCard(props){
+    const navigate = useNavigate()
     const {isAuthenticated, user} = useAuth0()
 
     const [favourite, setFavourite] = useState(false)
@@ -57,6 +58,12 @@ export default function BookCard(props){
             {isAuthenticated
                 ? props.data.user_sub == user.sub
                     ? <button onClick={deleteBook}>Delete</button>
+                    : <></>
+                : <></>
+            }
+            {isAuthenticated
+                ? props.data.user_sub == user.sub
+                    ? <button onClick={() => navigate(`/books/edit/${props.data.id}`)}>Edit</button>
                     : <></>
                 : <></>
             }
