@@ -1,5 +1,3 @@
 disable button when processing request
 
 see to how to store images
-
-make use of env keys and make them work

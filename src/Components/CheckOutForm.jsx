@@ -69,7 +69,6 @@ export default function CheckOutForm(props){
     }
 
     async function makePayment(){
-        console.log(clientSecret);
 
         const payload = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
