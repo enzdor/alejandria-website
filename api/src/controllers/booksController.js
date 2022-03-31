@@ -181,7 +181,7 @@ module.exports = {
             image: req.body.image,
             price: req.body.price,
             genre_id: Number(req.body.genre),
-            user_sub: req.body.user_id,
+            user_sub: req.body.user_sub,
             available: 'true'
         })
 
@@ -235,6 +235,20 @@ module.exports = {
         )
 
         console.log('book sold');
+
+        const response = {
+            meta: {
+                status: 200
+            }
+        }
+
+        res.json(response)
+    },
+    edit: async (req, res) => {
+        await db.Book.update(
+            {...req.body},
+            {where: {id: req.params.id}}
+        )
 
         const response = {
             meta: {

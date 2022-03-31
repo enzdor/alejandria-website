@@ -12,6 +12,7 @@ router.get('/books/created/:user_sub', booksController.listCreatedSub)
 router.get('/books/favourite/:user_sub', booksController.listFavouriteSub)
 router.post('/books', booksController.create)
 router.delete('/books/:id', booksController.delete)
+router.put('/books/:id', booksController.edit)
 router.put('/books/sold/:id', booksController.sold)
 
 module.exports = router
