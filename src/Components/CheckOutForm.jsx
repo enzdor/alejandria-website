@@ -25,7 +25,6 @@ export default function CheckOutForm(props){
             if (!props.item.price){
                 return
             }
-            console.log(user);
             let data = await fetch(`http://localhost:3001/create-payment-intent`, {
                 method: "POST",
                 headers: {
@@ -94,13 +93,16 @@ export default function CheckOutForm(props){
 
     function handleFormSubmit(event){
         event.preventDefault()
-        setProcessing(true)
         setFormErrors(validate(formValues))
+        setProcessing(true)
     }
 
     useEffect(() => {
         if (!error && formErrors.length === 0 && processing === true){
             makePayment()
+            return
+        } else if (error) {
+            setError(`Payment Failed ${payload.error.message}`);
         }
         setProcessing(false)
     }, [formErrors])

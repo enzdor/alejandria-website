@@ -38,8 +38,6 @@ function Books(){
         newBooks = (await newBooks.json()).data
 
         setBooks(newBooks)
-
-        console.log(newBooks);
     }
 
 
