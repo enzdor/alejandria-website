@@ -8,6 +8,7 @@ import Header from "../Components/Header";
 function Books(){
 
     const {isAuthenticated, user, isLoading} = useAuth0()
+    const [processing, setProcessing] = useState()
 
     const [books, setBooks] = useState([])
     useEffect(() => {
@@ -31,21 +32,32 @@ function Books(){
         }
     },[isAuthenticated, isLoading])
 
-    async function searchBooks(event){
-        event.preventDefault()
+    async function searchBooks(){
 
         let newBooks = await fetch(`http://localhost:3001/api/books/search?name=${document.querySelector('#name').value}&author=${document.querySelector('#author').value}&genre=${document.querySelector('#genre').value}&priceMin=${document.querySelector('#priceMin').value}&priceMax=${document.querySelector('#priceMax').value}`)
         newBooks = (await newBooks.json()).data
 
         setBooks(newBooks)
+        setProcessing(false)
     }
+
+    function handleSubmit(event){
+        event.preventDefault()
+        setProcessing(true)
+    }
+
+    useEffect(() => {
+        if(processing === true) {
+            searchBooks()
+        }
+    }, [processing])
 
 
     return(
         <>
             <Header />
             <h1>This is books</h1>
-            <form onSubmit={searchBooks}>
+            <form onSubmit={handleSubmit}>
                 <h2>Search for a book</h2>
                 <label htmlFor="name">Name:</label>
                 <input type="text" name="name" id="name"/>
@@ -59,7 +71,7 @@ function Books(){
                 <label htmlFor="prices">Price:</label>
                 <input type="number" name="priceMin" id="priceMin" placeholder="Minimum" min={0}/>
                 <input type="number" name="priceMax" id="priceMax" placeholder="Max"/>
-                <input type="submit" name="Submit" id="Submit" />
+                <input type="submit" name="Submit" id="Submit" disabled={isLoading || processing} />
             </form>
             {isLoading 
             ? <p>Loading</p>
