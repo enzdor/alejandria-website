@@ -69,6 +69,7 @@ export default function CheckOutForm(props){
 
     async function makePayment(){
 
+
         const payload = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: elements.getElement(CardElement)
@@ -78,6 +79,7 @@ export default function CheckOutForm(props){
         if(payload.error || formErrors.length != 0){
             setError(`Payment Failed ${payload.error.message}`);
             setProcessing(false)
+            console.log('bye');
         } else {
             await fetch(`http://localhost:3001/api/books/sold/${props.item.id}`, {
                 method: 'PUT',
@@ -101,8 +103,6 @@ export default function CheckOutForm(props){
         if (!error && formErrors.length === 0 && processing === true){
             makePayment()
             return
-        } else if (error) {
-            setError(`Payment Failed ${payload.error.message}`);
         }
         setProcessing(false)
     }, [formErrors])

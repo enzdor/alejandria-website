@@ -1,20 +1,22 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { React, useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function EditBookForm(props){
-    const { user } = useAuth0()
+    const { user, isAuthenticated, isLoading } = useAuth0()
     const navigate = useNavigate()
     const [data, setData] = useState({})
 
     useEffect(() => {
         setData(props.data)
+        setFormValues(props.data)
     }, [props])
 
-    const initialValues = {name: "", author:"", description:"", image:"", price:"", genre:"Action"}
+    let initialValues = {name: "", author:"", description:"", image:"", price:"", genre:"Action"}
     const [formValues, setFormValues] = useState(initialValues)
     const [formErrors, setFormErrors] = useState([])
-    const [submit, setSubmit] = useState(false)
+    const [processing, setProcessing] = useState(false)
+    const [succeed, setSucceed] = useState(false)
 
     function handleChange(event) {
         const { name, value } = event.target
@@ -24,7 +26,7 @@ export default function EditBookForm(props){
     function handleSubmit(event) {
         event.preventDefault()
         setFormErrors(validate(formValues))
-        setSubmit(true)
+        setProcessing(true)
     }
 
     function validate(values) {
@@ -62,19 +64,30 @@ export default function EditBookForm(props){
                 user_sub: user.sub
                 })
         })
+        setSucceed(true)
+        setProcessing(false)
+        navigate('/profile')
     }
 
     useEffect(() => {
-        console.log(formErrors);
-        console.log(submit);
-        if(formErrors.length == 0 && submit == true){
+        if(formErrors.length == 0 && processing == true){
             putBook()
-            navigate('/profile')
+        } else if (formErrors.length != 0){
+            setProcessing(false)
         }
     }, [formErrors])
 
     return (
         <form onSubmit={handleSubmit}>
+            <p>{JSON.stringify(formValues, undefined, 2)}</p>
+            <div>
+                {formErrors.length == 0
+                    ? <></>
+                    : formErrors.map((error, index)=> (
+                        <p key={index}>{error}</p>
+                    ))
+                }
+            </div>
             <label htmlFor="name">Name:</label>
             <input type="text" name="name" id="name" defaultValue={data ? data.name : "Name"} onChange={handleChange} />
             <br />
@@ -101,7 +114,7 @@ export default function EditBookForm(props){
             </select>
             <br />
             <br />
-            <input type="submit" name="Submit"/>
+            <input type="submit" name="Submit" disabled={processing || succeed || isLoading || !isAuthenticated} />
         </form>
     )
 }

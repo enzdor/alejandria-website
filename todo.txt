@@ -1,7 +1,4 @@
 disable button when processing request
-    - add book
-    - edit book
     - search books
-    - buy books
 
 see to how to store images

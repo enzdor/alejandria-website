@@ -22,8 +22,6 @@ export default function EditBook(){
         getBook()
     }, [user, isAuthenticated, isLoading])
 
-    console.log(data);
-
     return(
         <div>
             <Header />

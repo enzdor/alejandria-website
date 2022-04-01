@@ -10,7 +10,8 @@ export default function AddBook(){
     const initialValues = {name: "", author:"", description:"", image:"", price:"", genre:"Action"}
     const [formValues, setFormValues] = useState(initialValues)
     const [formErrors, setFormErrors] = useState([])
-    const [submit, setSubmit] = useState(false)
+    const [processing, setProcessing] = useState(false)
+    const [succeed, setSucceed] = useState(false)
 
     function handleChange(event) {
         const { name, value } = event.target
@@ -20,7 +21,7 @@ export default function AddBook(){
     function handleSubmit(event) {
         event.preventDefault()
         setFormErrors(validate(formValues))
-        setSubmit(true)
+        setProcessing(true)
     }
 
     function validate(values) {
@@ -44,7 +45,6 @@ export default function AddBook(){
     }
 
     async function postBook(){
-
         await fetch('http://localhost:3001/api/books', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -58,13 +58,14 @@ export default function AddBook(){
                 user_sub: user.sub
                 })
         })
-
+        setSucceed(true)
+        setProcessing(false)
+        navigate('/profile')
     }
 
     useEffect(() => {
-        if(formErrors.length == 0 && submit == true){
+        if(formErrors.length == 0 && processing == true){
             postBook()
-            navigate('/profile')
         }
     }, [formErrors])
 
@@ -77,8 +78,8 @@ export default function AddBook(){
                 <div>
                     {formErrors.length == 0
                         ? <></>
-                        : formErrors.map((error)=> (
-                            <p>{error}</p>
+                        : formErrors.map((error, index)=> (
+                            <p key={index}>{error}</p>
                         ))
                     }
                 </div>
@@ -108,7 +109,7 @@ export default function AddBook(){
                 </select>
                 <br />
                 <br />
-                <input type="submit" name="Submit" onChange={handleChange} disabled={isLoading || !isAuthenticated}/>
+                <input type="submit" name="Submit" onChange={handleChange} disabled={isLoading || !isAuthenticated || processing || succeed}/>
             </form>
         </div>
     )
