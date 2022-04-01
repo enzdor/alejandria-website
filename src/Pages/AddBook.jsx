@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../Components/Header";
 
 export default function AddBook(){
-    const { user } = useAuth0()
+    const { user, isAuthenticated, isLoading } = useAuth0()
     const navigate = useNavigate()
 
     const initialValues = {name: "", author:"", description:"", image:"", price:"", genre:"Action"}
@@ -55,7 +55,7 @@ export default function AddBook(){
                 image: document.querySelector('#image').value, 
                 price: document.querySelector('#price').value, 
                 genre: document.querySelector('#genre').value, 
-                user_id: user.sub
+                user_sub: user.sub
                 })
         })
 
@@ -108,7 +108,7 @@ export default function AddBook(){
                 </select>
                 <br />
                 <br />
-                <input type="submit" name="Submit" onChange={handleChange}/>
+                <input type="submit" name="Submit" onChange={handleChange} disabled={isLoading || !isAuthenticated}/>
             </form>
         </div>
     )
