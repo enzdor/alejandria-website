@@ -1,13 +1,20 @@
 import React from "react";
 import BookCard from "./BookCard";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid";
 
+const gridStyles = {
+	px: "3%"
+}
 
 export default function BooksContainer(props){ 
     return(
-        <div>
+        <Grid container spacing={6} sx={gridStyles} >
             {props.books.map((book) => (
-                <BookCard key={book.id} data={book} />
+				<Grid item xs={12} sm={4} lg={3}>
+					<BookCard key={book.id} data={book} />
+				</Grid>
             ))}
-        </div>
+        </Grid>
     )
 }
