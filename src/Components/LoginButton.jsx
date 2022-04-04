@@ -2,11 +2,11 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react"
 import Button from '@mui/material/Button';
 
-function LoginButton(){
+function LoginButton(props){
     const { loginWithRedirect } = useAuth0();
 
     return (
-        <Button variant="contained" color="primary" onClick={() => loginWithRedirect()}>Log In</Button>
+        <Button variant={props.variant} color="primary" onClick={() => loginWithRedirect()} sx={{...props.sx,}}>Log In</Button>
     )
 }
 
