@@ -14,7 +14,8 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import Grid from "@mui/material/Grid"
-
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Button from "@mui/material/Button"
 
 const genresSelect = {
 	widht: "200"
@@ -24,12 +25,17 @@ const fixed = {
 	position: "fixed"
 }
 
+const empty = {
+
+}
+
 function Books(){
     const {isAuthenticated, user, isLoading} = useAuth0()
     const [processing, setProcessing] = useState()
 
 	const [genre, setGenre] = useState('Genre')
 	const [open, setOpen] = useState(false)
+
 
 	function handleGenreOpen(){
 		setOpen(true)
@@ -91,10 +97,19 @@ function Books(){
         <>
             <Header />
             <h1>This is books</h1>
-			<Grid container spacing={3}>
-				<Grid item xs={3}>
+			<Grid container spacing={3} sx={{justifyContent: "center"}}>
+				<Grid item xs={12} sm={4} md={3}>
 					<form onSubmit={handleSubmit}>
-						<List sx={fixed}>
+						<List 
+							sx={{
+								position: {
+									sm: "fixed",
+									md: "fixed",
+									lg: "fixed",
+									xl: "fixed"
+								}	
+							}}
+						> 
 							<ListItem>
 								<Typography variant="h4" color="secondary">Search</Typography>
 							</ListItem>
@@ -105,7 +120,7 @@ function Books(){
 								<TextField variant="outlined" label="Author" id="author"/>
 							</ListItem>
 							<ListItem>
-								<FormControl style={{minWidth:120}}>	
+								<FormControl style={{minWidth:"12em"}}>	
 									<Select Label="Genre" id="genre" onChange={handleGenreChange} onOpen={handleGenreOpen} onClose={handleGenreClose} open={open} value={genre}>
 										<MenuItem value="Genre" disabled>Genre</MenuItem>
 										<MenuItem value="1">Action</MenuItem>
@@ -119,12 +134,12 @@ function Books(){
 								<TextField type="number" name="priceMax" id="priceMax" label="Max Price"/>
 							</ListItem>
 							<ListItem>
-								<input type="submit" name="Submit" id="Submit" disabled={isLoading || processing} />
+								<Button type="submit" id="Submit" variant="contained" color="secondary" disabled={isLoading || processing}>Submit</Button>
 							</ListItem>
 						</List>
 					</form>
 				</Grid>
-				<Grid item xs={9}>
+				<Grid item xs={12} sm={8} md={9}>
 				{isLoading 
 					? <p>Loading</p>
 					: <BooksContainer books={books} />
