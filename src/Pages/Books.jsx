@@ -4,6 +4,16 @@ import { useState } from "react";
 import { useEffect } from "react";
 import BooksContainer from "../Components/BooksContainer";
 import Header from "../Components/Header";
+import TextField from "@mui/material/TextField"
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+
+
+const genresSelect = {
+	widht: "200"
+}
 
 function Books(){
 
@@ -59,18 +69,17 @@ function Books(){
             <h1>This is books</h1>
             <form onSubmit={handleSubmit}>
                 <h2>Search for a book</h2>
-                <label htmlFor="name">Name:</label>
-                <input type="text" name="name" id="name"/>
-                <label htmlFor="author">Author:</label>
-                <input type="text" name="author" id="author"/>
-                <label htmlFor="genre">Genre:</label>
-                <select name="genre" id="genre">
-                    <option value="">Choose</option>
-                    <option value="1">Action</option>
-                </select>
-                <label htmlFor="prices">Price:</label>
-                <input type="number" name="priceMin" id="priceMin" placeholder="Minimum" min={0}/>
-                <input type="number" name="priceMax" id="priceMax" placeholder="Max"/>
+                <TextField variant="outlined" label="Name" id="name"/>
+				<TextField variant="outlined" label="Author" id="author"/>
+				<InputLabel id="genre-label">Genre</InputLabel>
+				<FormControl style={{minWidth:120}}>	
+					<Select Label="Genre" id="genre" labelId="genre-label">
+						<MenuItem value="" disabled>Choose</MenuItem>
+						<MenuItem value="1">Action</MenuItem>
+					</Select>
+				</FormControl>
+					<TextField type="number" name="priceMin" id="priceMin" label="Minimum Price" min={0}/>
+                <TextField type="number" name="priceMax" id="priceMax" label="Max Price"/>
                 <input type="submit" name="Submit" id="Submit" disabled={isLoading || processing} />
             </form>
             {isLoading 

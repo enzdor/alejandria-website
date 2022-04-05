@@ -2,3 +2,6 @@ disable button when processing request
     - search books
 
 see to how to store images
+
+styles 
+    - make use of typeography in header (i tried to do it but it seems that it has some black magic involved)

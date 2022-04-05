@@ -12,12 +12,14 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ClearIcon from "@mui/icons-material/Clear";
 import EditIcon from "@mui/icons-material/Edit";
 import CardActions from "@mui/material/CardActions";
-
+import Typography from "@mui/material/Typography"
 
 const contentStyles = {
 	pb: "0"
 }
-
+const title = {
+	textDecoration: "none",
+}
 
 export default function BookCard(props){
     const navigate = useNavigate()
@@ -67,8 +69,8 @@ export default function BookCard(props){
         <Card>
 			<CardMedia component="img" height="300" image="http://localhost:3000/cover1.jpeg" alt="cover of the book"/>
 			<CardContent sx={contentStyles}>
-				<Link to={`/books/${props.data.id}`}>{props.data.name}</Link>
-				<p>${props.data.price}</p>
+				<Typography to={`/books/${props.data.id}`} component={Link} variant="h5" color="primary" sx={title}>{props.data.name}</Typography>
+				<Typography variant="h5" color="secondary">${props.data.price}</Typography>
 			</CardContent>
 			<CardActions>
 				{favourite  

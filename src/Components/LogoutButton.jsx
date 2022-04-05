@@ -6,7 +6,7 @@ function LogoutButton(props){
     const { logout } = useAuth0()
 
     return(
-        <Button variant={props.variant} color="primary" onClick={ () => logout() } sx={{...props.sx,}}>
+		<Button variant={props.variant} color="secondary" onClick={ () => logout() } sx={{...props.sx,}}>
             Log Out
         </Button>
     )

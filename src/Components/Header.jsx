@@ -28,7 +28,7 @@ const toolbar = {
     backgroundColor: "white"
 }
 const menuButton = {
-    ml: "2em"
+    ml: "2em",
 }
 
 export default function Header(){
@@ -38,14 +38,14 @@ export default function Header(){
     function displayDesktop(){
         return (
             <Toolbar sx={toolbar}>
-		<Button component={Link} to="/" variant="text" sx={{...logo}}>Alejandria</Button>
+		<Button component={Link} to="/" variant="text" color="secondary" sx={{...logo}}>Alejandria</Button>
 		<Hidden smDown>
                 <div>
-                    <Button component={ Link } to="/books" variant="text" sx={menuButton}>Books</Button>
+                    <Button component={ Link } to="/books" variant="text" color="secondary" sx={menuButton}>Books</Button>
                     {isLoading 
                         ? <p>Loading</p> 
                         : isAuthenticated ? <>
-			    <Button component={ Link } to="/profile" variant="text" color="primary" sx={menuButton}>Profile</Button>
+			    <Button component={ Link } to="/profile" variant="text" color="secondary" sx={menuButton}>Profile</Button>
 			    <LogoutButton sx={{...menuButton,}} variant="contained"/>
 			</> 
 			: <LoginButton sx={{...menuButton,}} variant="contained"/>
