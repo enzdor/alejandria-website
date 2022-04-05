@@ -9,16 +9,39 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
+import Typography from "@mui/material/Typography"
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import Grid from "@mui/material/Grid"
 
 
 const genresSelect = {
 	widht: "200"
 }
 
-function Books(){
+const fixed = {
+	position: "fixed"
+}
 
+function Books(){
     const {isAuthenticated, user, isLoading} = useAuth0()
     const [processing, setProcessing] = useState()
+
+	const [genre, setGenre] = useState('Genre')
+	const [open, setOpen] = useState(false)
+
+	function handleGenreOpen(){
+		setOpen(true)
+	}
+
+	function handleGenreClose(){
+		setOpen(false)
+	}
+	
+	function handleGenreChange(event){
+		setGenre(event.target.value)
+	}
 
     const [books, setBooks] = useState([])
     useEffect(() => {
@@ -44,8 +67,9 @@ function Books(){
 
     async function searchBooks(){
 
-        let newBooks = await fetch(`http://localhost:3001/api/books/search?name=${document.querySelector('#name').value}&author=${document.querySelector('#author').value}&genre=${document.querySelector('#genre').value}&priceMin=${document.querySelector('#priceMin').value}&priceMax=${document.querySelector('#priceMax').value}`)
-        newBooks = (await newBooks.json()).data
+
+        let newBooks = await fetch(`http://localhost:3001/api/books/search?name=${document.querySelector('#name').value}&author=${document.querySelector('#author').value}&genre=${genre}&priceMin=${document.querySelector('#priceMin').value}&priceMax=${document.querySelector('#priceMax').value}`) 
+		newBooks = (await newBooks.json()).data
 
         setBooks(newBooks)
         setProcessing(false)
@@ -67,24 +91,46 @@ function Books(){
         <>
             <Header />
             <h1>This is books</h1>
-            <form onSubmit={handleSubmit}>
-                <h2>Search for a book</h2>
-                <TextField variant="outlined" label="Name" id="name"/>
-				<TextField variant="outlined" label="Author" id="author"/>
-				<InputLabel id="genre-label">Genre</InputLabel>
-				<FormControl style={{minWidth:120}}>	
-					<Select Label="Genre" id="genre" labelId="genre-label">
-						<MenuItem value="" disabled>Choose</MenuItem>
-						<MenuItem value="1">Action</MenuItem>
-					</Select>
-				</FormControl>
-					<TextField type="number" name="priceMin" id="priceMin" label="Minimum Price" min={0}/>
-                <TextField type="number" name="priceMax" id="priceMax" label="Max Price"/>
-                <input type="submit" name="Submit" id="Submit" disabled={isLoading || processing} />
-            </form>
-            {isLoading 
-            ? <p>Loading</p>
-            : <BooksContainer books={books} />}
+			<Grid container spacing={3}>
+				<Grid item xs={3}>
+					<form onSubmit={handleSubmit}>
+						<List sx={fixed}>
+							<ListItem>
+								<Typography variant="h4" color="secondary">Search</Typography>
+							</ListItem>
+							<ListItem>
+								<TextField variant="outlined" label="Name" id="name"/>
+							</ListItem>
+							<ListItem>
+								<TextField variant="outlined" label="Author" id="author"/>
+							</ListItem>
+							<ListItem>
+								<FormControl style={{minWidth:120}}>	
+									<Select Label="Genre" id="genre" onChange={handleGenreChange} onOpen={handleGenreOpen} onClose={handleGenreClose} open={open} value={genre}>
+										<MenuItem value="Genre" disabled>Genre</MenuItem>
+										<MenuItem value="1">Action</MenuItem>
+									</Select>
+								</FormControl>
+							</ListItem>
+							<ListItem>
+								<TextField type="number" name="priceMin" id="priceMin" label="Minimum Price" min={0}/>
+							</ListItem>
+							<ListItem>
+								<TextField type="number" name="priceMax" id="priceMax" label="Max Price"/>
+							</ListItem>
+							<ListItem>
+								<input type="submit" name="Submit" id="Submit" disabled={isLoading || processing} />
+							</ListItem>
+						</List>
+					</form>
+				</Grid>
+				<Grid item xs={9}>
+				{isLoading 
+					? <p>Loading</p>
+					: <BooksContainer books={books} />
+				}
+				</Grid>
+			</Grid>
         </>
     )
 }
