@@ -16,7 +16,6 @@ export default function AddBook(){
     const { user, isAuthenticated, isLoading } = useAuth0()
     const navigate = useNavigate()
 
-	const [genre, setGenre] = useState('Genre')
 	const [open, setOpen] = useState(false)
 
 	function handleGenreOpen(){
@@ -122,7 +121,7 @@ export default function AddBook(){
 							<MenuItem value="1">Action</MenuItem>
 						</Select>
 					</FormControl>
-					<Button type="submit" onChange={handleChange} variant="contained" sx={{width: "50%", alignSelf: "center"}} disabled={isLoading || !isAuthenticated || processing || succeed}>
+					<Button type="submit" variant="contained" sx={{width: "50%", alignSelf: "center"}} disabled={isLoading || !isAuthenticated || processing || succeed}>
 					   Submit
 					</Button>
 				</Stack>

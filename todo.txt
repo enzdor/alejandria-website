@@ -3,5 +3,7 @@ disable button when processing request
 
 see to how to store images
 
+make it possible to other users profiles
+
 styles 
-    - make use of typeography in header (i tried to do it but it seems that it has some black magic involved)
+    - make use of typeography in header (i tried to do it but it seems that it has some black magic involved) may work with stack
