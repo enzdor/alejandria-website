@@ -96,7 +96,6 @@ function Books(){
     return(
         <>
             <Header />
-            <h1>This is books</h1>
 			<Grid container spacing={3} sx={{justifyContent: "center"}}>
 				<Grid item xs={12} sm={4} md={3}>
 					<form onSubmit={handleSubmit}>
@@ -139,10 +138,10 @@ function Books(){
 						</List>
 					</form>
 				</Grid>
-				<Grid item xs={12} sm={8} md={9}>
+				<Grid item xs={12} sm={8} md={9} sx={{my: "1em"}}>
 				{isLoading 
 					? <p>Loading</p>
-					: <BooksContainer books={books} />
+					: <BooksContainer books={books}/>
 				}
 				</Grid>
 			</Grid>

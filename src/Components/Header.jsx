@@ -85,6 +85,6 @@ export default function Header(){
 
     
     return(
-        <AppBar sx={{backgroundColor: "white"}}>{displayDesktop()}</AppBar>
+        <AppBar sx={{backgroundColor: "white"}} position="sticky">{displayDesktop()}</AppBar>
     )
 }

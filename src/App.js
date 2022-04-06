@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom"
 import Home from './Pages/Home';
 import Books from './Pages/Books';
 import Profile from './Pages/Profile';
@@ -8,6 +8,7 @@ import BookDetail from './Pages/BookDetail';
 import BookBuy from './Pages/BookBuy';
 import EditBook from './Pages/EditBook';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
+
 
 const theme = createTheme({
 	palette: {
@@ -30,8 +31,9 @@ function App() {
 					<Route path="/books/:id" element={<BookDetail />} />
 					<Route path="/books/edit/:id" element={<EditBook />} />
 					<Route path="/buy/:id" element={<BookBuy />} />
-					<Route path="/profile" element={<Profile />} />
+					<Route path="/profile/:page" element={<Profile />} />
 					<Route path="/addbook" element={<AddBook />} />
+					<Route path="/profile" element={<Navigate to="/profile/sale"/>}/>
 			  </Routes>
 			</Router>
 		</ThemeProvider>
