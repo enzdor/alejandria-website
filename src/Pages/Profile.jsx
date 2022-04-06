@@ -86,7 +86,7 @@ export default function Profile(){
 							<Typography varian="h5">{ user.email }</Typography>
 						</ListItem>
 						<ListItem>
-							<Button component={ Link } variant="contained" color="secondary" to="/addbook">Add Book</Button>
+							<Button component={ Link } variant="contained" color="secondary" to="/addbook">Sell Book</Button>
 						</ListItem>
 						<ListItem>
 							<Tabs value={selectedTab} onChange={handleChange}>
