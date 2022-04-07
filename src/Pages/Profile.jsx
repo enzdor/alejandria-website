@@ -46,15 +46,31 @@ export default function Profile(){
         }
     }, [isLoading])
 
+    const [booksSold, setBooksSold] = useState([])
+    useEffect(() => {
+        async function getBooksSoldSub(){
+            let newBooks = await fetch(`http://localhost:3001/api/books/sold/${user.sub}`)
+            newBooks = (await newBooks.json()).data
+
+            setBooksSold(newBooks)
+        }
+
+        if(isAuthenticated){
+            getBooksSoldSub()
+        }
+    }, [isLoading])
+
 
 	const tabNameToIndex = {
 		0: "sale",
-		1: "favourite"
+		1: "favourite",
+		2: "sold"
 	}
 
 	const tabIndexToName = {
 		sale: 0,
-		favourite: 1
+		favourite: 1,
+		sold: 2
 	}
 
 	const [selectedTab, setSelectedTab] = useState(tabIndexToName[params.page])
@@ -80,11 +96,27 @@ export default function Profile(){
 						}
 						}}>
 						<ListItem>
-							<Typography variant="h4">Profile</Typography>
+							<Typography variant="h3">Profile</Typography>
 						</ListItem>
 						<ListItem>
-							<Typography varian="h5">{ user.email }</Typography>
+							<Typography variant="h5">{ user.email }</Typography>
 						</ListItem>
+						<ListItem>
+							<Typography variant="h5">
+								Books for sale: {booksCreated.length}
+							</Typography>
+						</ListItem>
+						<ListItem>
+							<Typography variant="h5">
+								Favourite books: {booksFavourite.length}
+							</Typography>
+						</ListItem>
+						<ListItem>
+							<Typography variant="h5">
+								Sold books: {booksSold.length}
+							</Typography>
+						</ListItem>
+	
 						<ListItem>
 							<Button component={ Link } variant="contained" color="secondary" to="/addbook">Sell Book</Button>
 						</ListItem>
@@ -92,6 +124,7 @@ export default function Profile(){
 							<Tabs value={selectedTab} onChange={handleChange}>
 								<Tab label="For Sale"/>
 								<Tab label="Favourites"/>
+								<Tab label="Sold"/>
 							</Tabs>
 						</ListItem>
 					</List>
@@ -104,6 +137,11 @@ export default function Profile(){
 				{selectedTab === 1 && 
 					<Grid item xs={12} md={8} lg={9} sx={{my: "1em"}}>
 						<BooksContainer books={booksFavourite} />
+					</Grid>
+				}
+				{selectedTab === 2 &&
+					<Grid item xs={12} md={8} lg={9} sx={{my: "1em"}}>
+						<BooksContainer books={booksSold} />
 					</Grid>
 				}
             </Grid>
