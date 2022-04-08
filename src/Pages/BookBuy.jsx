@@ -6,6 +6,7 @@ import BookBuyInformation from "../Components/BookBuyInformation";
 import CheckOutForm from "../Components/CheckOutForm";
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
+import Header from "../Components/Header";
 
 const publishableKey = `${process.env.REACT_APP_PUBLISHABLE_KEY}`
 const stripePromise = loadStripe(publishableKey)
@@ -22,12 +23,11 @@ export default function BookBuy(){
             setData(newData)
         }
         getData()
-        console.log(stripePromise);
     },[])
 
     return(
         <Elements stripe={stripePromise}>
-            <BookBuyInformation data={data}/>
+			<Header />
             <CheckOutForm item={data}/>
         </Elements>
     )
