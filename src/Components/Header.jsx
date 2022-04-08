@@ -14,21 +14,20 @@ import Divider from "@mui/material/Divider";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 
 const logo = {
     fontSize: "2em",
     textDecoration: "none",
-    color: "primary",
-    '&visited': {
-        color: "primary" 
-}}
+}
 const toolbar = {
     display: "flex",
     justifyContent: "space-between",
     backgroundColor: "white"
 }
-const menuButton = {
-    ml: "2em",
+const menuLink = {
+	textDecoration: "none",
 }
 
 export default function Header(){
@@ -38,19 +37,19 @@ export default function Header(){
     function displayDesktop(){
         return (
             <Toolbar sx={toolbar}>
-		<Button component={Link} to="/" variant="text" color="secondary" sx={{...logo}}>Alejandria</Button>
+		<Typography component={Link} to="/" variant="h5" color="secondary" sx={{...logo}}>Alejandria</Typography>
 		<Hidden smDown>
-                <div>
-                    <Button component={ Link } to="/books" variant="text" color="secondary" sx={menuButton}>Books</Button>
+                <Stack direction="row" spacing={5}>
+                    <Typography component={ Link } to="/books" variant="h6" color="secondary" sx={menuLink}>Books</Typography>
                     {isLoading 
                         ? <p>Loading</p> 
                         : isAuthenticated ? <>
-			    <Button component={ Link } to="/profile" variant="text" color="secondary" sx={menuButton}>Profile</Button>
-			    <LogoutButton sx={{...menuButton,}} variant="contained"/>
-			</> 
-			: <LoginButton sx={{...menuButton,}} variant="contained"/>
+							<Typography component={ Link } to="/profile" variant="h6" color="secondary" sx={menuLink}>Profile</Typography>
+							<LogoutButton sx={{...menuLink,}} variant="contained"/>
+						</> 
+						: <LoginButton sx={{...menuLink,}} variant="contained"/>
                     }
-                </div>
+                </Stack>
 		</Hidden>
 		<Hidden smUp>
 		    <IconButton onClick={()=>setOpen(true)}>
