@@ -14,6 +14,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { useParams, useNavigate } from "react-router-dom";
 
+
+
 export default function Profile(){
     const { user, isAuthenticated, isLoading } = useAuth0()
 	const params = useParams()
@@ -96,51 +98,61 @@ export default function Profile(){
 						}
 						}}>
 						<ListItem>
-							<Typography variant="h3">Profile</Typography>
+							<Typography variant="h4">Profile</Typography>
 						</ListItem>
 						<ListItem>
-							<Typography variant="h5">{ user.email }</Typography>
+							<Typography variant="h6">{ user.email }</Typography>
 						</ListItem>
 						<ListItem>
-							<Typography variant="h5">
+							<Typography variant="h6">
 								Books for sale: {booksCreated.length}
 							</Typography>
 						</ListItem>
 						<ListItem>
-							<Typography variant="h5">
+							<Typography variant="h6">
 								Favourite books: {booksFavourite.length}
 							</Typography>
 						</ListItem>
 						<ListItem>
-							<Typography variant="h5">
+							<Typography variant="h6">
 								Sold books: {booksSold.length}
 							</Typography>
 						</ListItem>
-	
 						<ListItem>
-							<Button component={ Link } variant="contained" color="secondary" to="/addbook">Sell Book</Button>
+							<Button component={ Link } variant="contained" color="primary" to="/addbook">Sell Book</Button>
 						</ListItem>
 						<ListItem>
-							<Tabs value={selectedTab} onChange={handleChange}>
-								<Tab label="For Sale"/>
-								<Tab label="Favourites"/>
-								<Tab label="Sold"/>
-							</Tabs>
+
 						</ListItem>
 					</List>
 				</Grid>
 				{selectedTab === 0 && 
 					<Grid item xs={12} md={8} lg={9} sx={{my: "1em"}}>
+						<Tabs value={selectedTab} color="secondary" onChange={handleChange} sx={{mb: "1rem"}}>
+							<Tab label="For Sale"/>
+							<Tab label="Favourites"/>
+							<Tab label="Sold"/>
+						</Tabs>
 						<BooksContainer books={booksCreated} />
 					</Grid>
 				}
 				{selectedTab === 1 && 
 					<Grid item xs={12} md={8} lg={9} sx={{my: "1em"}}>
+						<Tabs value={selectedTab} color="secondary" onChange={handleChange} sx={{mb: "1rem"}}>
+							<Tab label="For Sale"/>
+							<Tab label="Favourites"/>
+							<Tab label="Sold"/>
+						</Tabs>
 						<BooksContainer books={booksFavourite} />
 					</Grid>
 				}
 				{selectedTab === 2 &&
 					<Grid item xs={12} md={8} lg={9} sx={{my: "1em"}}>
+						<Tabs value={selectedTab} color="secondary" onChange={handleChange} sx={{mb: "1rem"}}>
+							<Tab label="For Sale"/>
+							<Tab label="Favourites"/>
+							<Tab label="Sold"/>
+						</Tabs>
 						<BooksContainer books={booksSold} />
 					</Grid>
 				}

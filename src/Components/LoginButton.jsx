@@ -6,7 +6,7 @@ function LoginButton(props){
     const { loginWithRedirect } = useAuth0();
 
     return (
-		<Button variant={props.variant} color="secondary" onClick={() => loginWithRedirect()} sx={{...props.sx,}}>Log In</Button>
+		<Button variant={props.variant} color="primary" onClick={() => loginWithRedirect()} sx={{...props.sx,}}>Log In</Button>
     )
 }
 

@@ -37,14 +37,14 @@ export default function Header(){
     function displayDesktop(){
         return (
             <Toolbar sx={toolbar}>
-		<Typography component={Link} to="/" variant="h5" color="secondary" sx={{...logo}}>Alejandria</Typography>
+		<Typography component={Link} to="/" variant="h5" color="primary" sx={{...logo}}>Alejandría</Typography>
 		<Hidden smDown>
                 <Stack direction="row" spacing={5}>
-                    <Typography component={ Link } to="/books" variant="h6" color="secondary" sx={menuLink}>Books</Typography>
+                    <Typography component={ Link } to="/books" variant="h6" color="black" sx={menuLink}>Books</Typography>
                     {isLoading 
                         ? <p>Loading</p> 
                         : isAuthenticated ? <>
-							<Typography component={ Link } to="/profile" variant="h6" color="secondary" sx={menuLink}>Profile</Typography>
+							<Typography component={ Link } to="/profile" variant="h6" color="black" sx={menuLink}>Profile</Typography>
 							<LogoutButton sx={{...menuLink,}} variant="contained"/>
 						</> 
 						: <LoginButton sx={{...menuLink,}} variant="contained"/>

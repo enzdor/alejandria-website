@@ -25,6 +25,13 @@ const fixed = {
 	position: "fixed"
 }
 
+const listItem = {
+	display: "flex",
+	flexDirection: "column",
+	alignItems: "center",
+	px: "0"
+}
+
 const empty = {
 
 }
@@ -95,48 +102,47 @@ function Books(){
 
     return(
         <>
+			<form onSubmit={handleSubmit}>
             <Header />
-			<Grid container spacing={3} sx={{justifyContent: "center"}}>
-				<Grid item xs={12} sm={4} md={3}>
-					<form onSubmit={handleSubmit}>
-						<List 
-							sx={{
-								position: {
-									sm: "fixed",
-									md: "fixed",
-									lg: "fixed",
-									xl: "fixed"
-								}	
-							}}
-						> 
-							<ListItem>
-								<Typography variant="h4" color="secondary">Search</Typography>
-							</ListItem>
-							<ListItem>
-								<TextField variant="outlined" label="Name" id="name"/>
-							</ListItem>
-							<ListItem>
-								<TextField variant="outlined" label="Author" id="author"/>
-							</ListItem>
-							<ListItem>
-								<FormControl style={{minWidth:"12em"}}>	
-									<Select Label="Genre" id="genre" onChange={handleGenreChange} onOpen={handleGenreOpen} onClose={handleGenreClose} open={open} value={genre}>
-										<MenuItem value="Genre" disabled>Genre</MenuItem>
-										<MenuItem value="1">Action</MenuItem>
-									</Select>
-								</FormControl>
-							</ListItem>
-							<ListItem>
-								<TextField type="number" name="priceMin" id="priceMin" label="Minimum Price" min={0}/>
-							</ListItem>
-							<ListItem>
-								<TextField type="number" name="priceMax" id="priceMax" label="Max Price"/>
-							</ListItem>
-							<ListItem>
-								<Button type="submit" id="Submit" variant="contained" color="secondary" disabled={isLoading || processing}>Submit</Button>
-							</ListItem>
-						</List>
-					</form>
+			<Grid container spacing={3}>
+				<Grid item xs={12} sm={4} md={3} sx={{display: "flex", flexDirection:"column", alignItems: "center"}}>
+					<List 
+						sx={{
+							position: {
+								sm: "fixed",
+								md: "fixed",
+								lg: "fixed",
+								xl: "fixed"
+							}	
+						}}
+					> 
+						<ListItem sx={listItem}>
+							<Typography variant="h4">Search</Typography>
+						</ListItem>
+						<ListItem sx={listItem}>
+							<TextField variant="outlined" label="Name" id="name"/>
+						</ListItem>
+						<ListItem sx={listItem}>
+							<TextField variant="outlined" label="Author" id="author"/>
+						</ListItem>
+						<ListItem sx={listItem}>
+							<FormControl style={{minWidth:"12em"}}>	
+								<Select Label="Genre" id="genre" onChange={handleGenreChange} onOpen={handleGenreOpen} onClose={handleGenreClose} open={open} value={genre}>
+									<MenuItem value="Genre" disabled>Genre</MenuItem>
+									<MenuItem value="1">Action</MenuItem>
+								</Select>
+							</FormControl>
+						</ListItem>
+						<ListItem sx={listItem}>
+							<TextField type="number" name="priceMin" id="priceMin" label="Minimum Price" min={0}/>
+						</ListItem>
+						<ListItem sx={listItem}>
+							<TextField type="number" name="priceMax" id="priceMax" label="Max Price"/>
+						</ListItem>
+						<ListItem sx={listItem}>
+							<Button type="submit" id="Submit" variant="contained" color="primary" disabled={isLoading || processing}>Submit</Button>
+						</ListItem>
+					</List>
 				</Grid>
 				<Grid item xs={12} sm={8} md={9} sx={{my: "1em"}}>
 				{isLoading 
@@ -145,6 +151,7 @@ function Books(){
 				}
 				</Grid>
 			</Grid>
+			</form>
         </>
     )
 }
