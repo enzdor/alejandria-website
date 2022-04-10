@@ -16,6 +16,11 @@ import ListItemButton from "@mui/material/ListItemButton";
 import Grid from "@mui/material/Grid"
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Button from "@mui/material/Button"
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Divider from "@mui/material/Divider";
+import Hidden from "@mui/material/Hidden";
+
 
 const genresSelect = {
 	widht: "200"
@@ -36,7 +41,7 @@ const empty = {
 
 }
 
-function Books(){
+export default function Books(){
     const {isAuthenticated, user, isLoading} = useAuth0()
     const [processing, setProcessing] = useState()
 
@@ -100,60 +105,62 @@ function Books(){
     }, [processing])
 
 
+
     return(
         <>
-			<form onSubmit={handleSubmit}>
             <Header />
+			<Hidden smDown>
+			<Container sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+				<Box sx={{width: "40%"}}component="img" src="https://cdn.dribbble.com/users/2460712/screenshots/8140285/media/86ee2d6154dadfe955ff5ce16a2f2f71.png"/>
+				<Typography variant="h4" sx={{my: "1rem"}}>
+					Discover books that you will love
+				</Typography>
+				<Divider orientation="horizontal" sx={{my: "1rem"}} flexItem />
+			</Container>
+			</Hidden>
 			<Grid container spacing={3}>
-				<Grid item xs={12} sm={4} md={3} sx={{display: "flex", flexDirection:"column", alignItems: "center"}}>
-					<List 
-						sx={{
-							position: {
-								sm: "fixed",
-								md: "fixed",
-								lg: "fixed",
-								xl: "fixed"
-							}	
-						}}
-					> 
-						<ListItem sx={listItem}>
-							<Typography variant="h4">Search</Typography>
-						</ListItem>
-						<ListItem sx={listItem}>
-							<TextField variant="outlined" label="Name" id="name"/>
-						</ListItem>
-						<ListItem sx={listItem}>
-							<TextField variant="outlined" label="Author" id="author"/>
-						</ListItem>
-						<ListItem sx={listItem}>
-							<FormControl style={{minWidth:"12em"}}>	
-								<Select Label="Genre" id="genre" onChange={handleGenreChange} onOpen={handleGenreOpen} onClose={handleGenreClose} open={open} value={genre}>
-									<MenuItem value="Genre" disabled>Genre</MenuItem>
-									<MenuItem value="1">Action</MenuItem>
-								</Select>
-							</FormControl>
-						</ListItem>
-						<ListItem sx={listItem}>
-							<TextField type="number" name="priceMin" id="priceMin" label="Minimum Price" min={0}/>
-						</ListItem>
-						<ListItem sx={listItem}>
-							<TextField type="number" name="priceMax" id="priceMax" label="Max Price"/>
-						</ListItem>
-						<ListItem sx={listItem}>
-							<Button type="submit" id="Submit" variant="contained" color="primary" disabled={isLoading || processing}>Submit</Button>
-						</ListItem>
-					</List>
+				<Grid item className="search" xs={12} sm={4} md={3} sx={{display: "flex", flexDirection:"column", alignItems: "center"}}>
+					<Box sx={{position: {sm: "sticky", md: "sticky", lg: "sticky", xl: "sticky"}, top: "10vh"}}> 
+						<List>
+							<form onSubmit={handleSubmit}>
+								<ListItem sx={listItem} >
+									<Typography variant="h4">Search</Typography>
+								</ListItem>
+								<ListItem sx={listItem}>
+									<TextField variant="outlined" label="Name" id="name"/>
+								</ListItem>
+								<ListItem sx={listItem}>
+									<TextField variant="outlined" label="Author" id="author"/>
+								</ListItem>
+								<ListItem sx={listItem}>
+									<FormControl style={{minWidth:"12em"}}>	
+										<Select Label="Genre" id="genre" onChange={handleGenreChange} onOpen={handleGenreOpen} onClose={handleGenreClose} open={open} value={genre}>
+											<MenuItem value="Genre" disabled>Genre</MenuItem>
+											<MenuItem value="1">Action</MenuItem>
+										</Select>
+									</FormControl>
+								</ListItem>
+								<ListItem sx={listItem}>
+									<TextField type="number" name="priceMin" id="priceMin" label="Minimum Price" min={0}/>
+								</ListItem>
+								<ListItem sx={listItem}>
+									<TextField type="number" name="priceMax" id="priceMax" label="Max Price"/>
+								</ListItem>
+								<ListItem sx={listItem}>
+									<Button type="submit" id="Submit" variant="contained" color="primary" disabled={isLoading || processing}>Submit</Button>
+								</ListItem>
+							</form>
+						</List>
+					</Box>
 				</Grid>
-				<Grid item xs={12} sm={8} md={9} sx={{my: "1em"}}>
+				<Grid item xs={12} sm={8} md={9} sx={{my: "1em", ml: "auto"}}>
 				{isLoading 
 					? <p>Loading</p>
 					: <BooksContainer books={books}/>
 				}
 				</Grid>
 			</Grid>
-			</form>
         </>
     )
 }
 
-export default Books

@@ -36,47 +36,47 @@ export default function Header(){
 
     function displayDesktop(){
         return (
-            <Toolbar sx={toolbar}>
-		<Typography component={Link} to="/" variant="h5" color="primary" sx={{...logo}}>Alejandría</Typography>
-		<Hidden smDown>
-                <Stack direction="row" spacing={5}>
-                    <Typography component={ Link } to="/books" variant="h6" color="black" sx={menuLink}>Books</Typography>
-                    {isLoading 
-                        ? <p>Loading</p> 
-                        : isAuthenticated ? <>
-							<Typography component={ Link } to="/profile" variant="h6" color="black" sx={menuLink}>Profile</Typography>
-							<LogoutButton sx={{...menuLink,}} variant="contained"/>
+		<Toolbar sx={toolbar}>
+			<Typography component={Link} to="/" variant="h5" color="primary" sx={{...logo}}>Alejandría</Typography>
+			<Hidden smDown>
+					<Stack direction="row" spacing={5}>
+						<Typography component={ Link } to="/books" variant="h6" color="black" sx={menuLink}>Books</Typography>
+						{isLoading 
+							? <p>Loading</p> 
+							: isAuthenticated ? <>
+								<Typography component={ Link } to="/profile" variant="h6" color="black" sx={menuLink}>Profile</Typography>
+								<LogoutButton sx={{...menuLink,}} variant="contained"/>
+							</> 
+							: <LoginButton sx={{...menuLink,}} variant="contained"/>
+						}
+					</Stack>
+			</Hidden>
+			<Hidden smUp>
+				<IconButton onClick={()=>setOpen(true)}>
+				<MenuIcon />
+				</IconButton>
+			</Hidden>
+			<SwipeableDrawer open={open} anchor="right" onOpen={()=>setOpen(true)} onClose={()=>setOpen(false)}>
+				<div>
+					<IconButton onClick={()=>setOpen(false)}>
+					<ChevronRightIcon />
+					</IconButton>
+				</div>
+				<Divider />
+				<List>
+				<ListItem>
+						<Button component={ Link } to="/books" variant="text">Books</Button>
+				</ListItem>
+					{isLoading 
+								? <p>Loading</p> 
+								: isAuthenticated ? <>
+					   <ListItem><Button component={ Link } to="/profile" variant="text" color="primary">Profile</Button></ListItem>
+						<ListItem><LogoutButton variant="text"/></ListItem>
 						</> 
-						: <LoginButton sx={{...menuLink,}} variant="contained"/>
-                    }
-                </Stack>
-		</Hidden>
-		<Hidden smUp>
-		    <IconButton onClick={()=>setOpen(true)}>
-			<MenuIcon />
-		    </IconButton>
-		</Hidden>
-		<SwipeableDrawer open={open} anchor="right" onOpen={()=>setOpen(true)} onClose={()=>setOpen(false)}>
-		    <div>
-		        <IconButton onClick={()=>setOpen(false)}>
-			    <ChevronRightIcon />
-		        </IconButton>
-		    </div>
-		    <Divider />
-		    <List>
-			<ListItem>
-		            <Button component={ Link } to="/books" variant="text">Books</Button>
-			</ListItem>
-		        {isLoading 
-                            ? <p>Loading</p> 
-                            : isAuthenticated ? <>
-			       <ListItem><Button component={ Link } to="/profile" variant="text" color="primary">Profile</Button></ListItem>
-			        <ListItem><LogoutButton variant="text"/></ListItem>
-		       	    </> 
-			    : <ListItem><LoginButton variant="text"/></ListItem>
-                        }
-		    </List>
-	        </SwipeableDrawer>
+					: <ListItem><LoginButton variant="text"/></ListItem>
+							}
+				</List>
+				</SwipeableDrawer>
             </Toolbar>
 	   
         )
