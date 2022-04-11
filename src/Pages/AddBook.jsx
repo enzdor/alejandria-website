@@ -10,6 +10,8 @@ import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import { db } from "../firebase";
+import {collection, getDocs, addDoc} from "firebase/firestore";
 
 
 export default function AddBook(){
@@ -64,7 +66,25 @@ export default function AddBook(){
         }
 
         return errors
-    }
+	}
+
+
+	const booksCollectionRef = collection(db, "books")
+
+	async function postBookFirestore(){
+		await addDoc(booksCollectionRef, {
+			name: formValues.name.trim(), 
+			author: formValues.author.trim(), 
+			description: formValues.description.trim(), 
+			image: formValues.image.trim(), 
+			price: formValues.price.trim(),
+			genre: formValues.genre.trim(), 
+			user_sub: user.sub
+		})	 
+		setSucceed(true)
+        setProcessing(false)
+        navigate('/profile')
+	}
 
     async function postBook(){
         await fetch('http://localhost:3001/api/books', {
@@ -87,7 +107,8 @@ export default function AddBook(){
 
     useEffect(() => {
         if(Object.keys(formErrors).length == 0 && processing == true){
-            postBook()
+			postBook()
+			postBookFirestore()
 		} else if(formErrors.length !=  0){
 			setProcessing(false)
 		}
@@ -118,7 +139,7 @@ export default function AddBook(){
 					<FormControl style={{minWidth:"12em"}}>	
 						<Select error={formErrors.genre} helperText={formErrors.genre ? formErrors.genre : ""} Label="Genre" id="genre" name="genre" onChange={handleChange} onOpen={handleGenreOpen} onClose={handleGenreClose} open={open} value={formValues.genre}>
 							<MenuItem value="Genre" disabled placeHolder>Genre</MenuItem>
-							<MenuItem value="1">Action</MenuItem>
+							<MenuItem value="Action">Action</MenuItem>
 						</Select>
 					</FormControl>
 					<Button type="submit" variant="contained" sx={{width: "50%", alignSelf: "center"}} disabled={isLoading || !isAuthenticated || processing || succeed}>

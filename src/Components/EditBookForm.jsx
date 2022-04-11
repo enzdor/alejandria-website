@@ -9,6 +9,9 @@ import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import {db} from "../firebase";
+import {updateDoc, doc} from "firebase/firestore";
+
 
 export default function EditBookForm(props){
     const { user, isAuthenticated, isLoading } = useAuth0()
@@ -43,10 +46,10 @@ export default function EditBookForm(props){
         setFormValues({...formValues, [name]: value})
     }
 
-    function handleSubmit(event) {
+	function handleSubmit(event) {
         event.preventDefault()
         setFormErrors(validate(formValues))
-        setProcessing(true)
+		setProcessing(true)
     }
 	
 	function validate(values) {
@@ -70,9 +73,24 @@ export default function EditBookForm(props){
 
         return errors
 	}
+	
+	async function putBookGoogle(){
+		const bookDoc = doc(db, "books", "EMcnVap2RfN4HtVAEXqo")	
+		await updateDoc(bookDoc, {
+			name: formValues.name.trim(), 
+			author: formValues.author.trim(), 
+			description: formValues.description.trim(), 
+			image: formValues.image.trim(), 
+			price: formValues.price.trim(), 
+			genre: formValues.genre.trim(), 
+			user_sub: user.sub
+		})
+        setSucceed(true)
+        setProcessing(false)
+        navigate('/profile')
+	}
 
-
-       async function putBook(){
+    async function putBook(){
         await fetch(`http://localhost:3001/api/books/${data.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -92,10 +110,11 @@ export default function EditBookForm(props){
         navigate('/profile')
     }
 
-    useEffect(() => {
-        if(formErrors.length == 0 && processing == true){
+	useEffect(() => {
+		if(Object.keys(formErrors).length == 0 && processing == true){
+			putBookGoogle()
             putBook()
-        } else if (formErrors.length != 0){
+		} else if (Object.keys(formErrors).length != 0){
             setProcessing(false)
         }
     }, [formErrors])
