@@ -11,34 +11,41 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import {doc, updateDoc} from "firebase/firestore";
+import {db} from "../firebase";
+
 
 export default function BookDetailInformation(props){
     const navigate = useNavigate()
     const { isAuthenticated, user } = useAuth0()
 
     const [favourite, setFavourite] = useState(false)
-    useEffect(() => {
-        if (props.data.isFavourite){
-            setFavourite(true)
-        }
-    },[])
+	useEffect(() => {
+		if (props.data){
+			if (isAuthenticated){
+				if (props.data.favourites.includes(user.sub)){
+					setFavourite(true)
+				}
+			}
+		}
+    },[user, isAuthenticated, props])
 
     async function createDeleteFavourite(event){
         event.preventDefault()
         if (isAuthenticated){
-            await fetch('http://localhost:3001/api/favourites/create-delete', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    user_sub: user.sub, 
-                    book_id: props.data.id
-                })
-            })
-            if (favourite == true) {
-                setFavourite(false)
-            } else {
-                setFavourite(true)
-            }
+            const bookDoc = doc(db,"books", props.data.id)
+		if (favourite){
+			const index = props.data.favourites.indexOf(user.sub)
+			const array = props.data.favourites
+			array.splice(index, 1)
+			setFavourite(false)
+			await updateDoc(bookDoc, {favourites: array})
+		} else {
+			const array = props.data.favourites
+			array.push(user.sub)
+			setFavourite(true)
+			await updateDoc(bookDoc, {favourites: array})
+		}
         } else {
             alert('You need to be logged in to use this')
         }
@@ -52,14 +59,16 @@ export default function BookDetailInformation(props){
 			<Grid item xs={12} sm={6} md={8} sx={{mt: "2rem"}}>
 				<Stack direction="row" spacing={5}>
 					<Typography variant="h3" sx={{px: "0.5rem"}}>{props.data.name}</Typography>
-					{favourite  
-						? <IconButton onClick={createDeleteFavourite} size="large"><FavoriteIcon/></IconButton>
-						: <IconButton onClick={createDeleteFavourite} size="large"><FavoriteBorderIcon/></IconButton>
+					{isAuthenticated
+						? favourite  
+							? <IconButton onClick={createDeleteFavourite} size="large"><FavoriteIcon/></IconButton>
+							: <IconButton onClick={createDeleteFavourite} size="large"><FavoriteBorderIcon/></IconButton>
+						: <></>
 					}
 				</Stack>
 				<Typography variant="h4" sx={{mt: "2rem",px: "0.5rem"}}>{props.data.author}</Typography>
 				<Typography variant="h6" sx={{mt: "2rem",px: "0.5rem"}}>{props.data.description}</Typography>
-				{props.data.available == 'true'
+				{props.data.sold == false
 					? <Button variant="contained" sx={{mt: "2rem", mx:"0.5rem" }} onClick={() => navigate(`/buy/${props.data.id}`)}>Buy</Button>
 					: <Button disabled sx={{mt: "2rem", mx:"0.5rem"}}>Sold</Button>
 				}

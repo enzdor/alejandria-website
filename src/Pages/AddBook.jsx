@@ -11,7 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { db } from "../firebase";
-import {collection, getDocs, addDoc} from "firebase/firestore";
+import {collection,  addDoc} from "firebase/firestore";
 
 
 export default function AddBook(){
@@ -28,7 +28,7 @@ export default function AddBook(){
 		setOpen(false)
 	}
 
-    const initialValues = {name: "", author:"", description:"", image:"", price:"", genre:"Genre"}
+	const initialValues = {name: "", author:"", description:"", image:"", price:"", genre:"Genre", favourites: []}
     const [formValues, setFormValues] = useState(initialValues)
     const [formErrors, setFormErrors] = useState({})
     const [processing, setProcessing] = useState(false)
@@ -79,6 +79,7 @@ export default function AddBook(){
 			image: formValues.image.trim(), 
 			price: formValues.price.trim(),
 			genre: formValues.genre.trim(), 
+			favourites: [],
 			user_sub: user.sub
 		})	 
 		setSucceed(true)
@@ -86,28 +87,9 @@ export default function AddBook(){
         navigate('/profile')
 	}
 
-    async function postBook(){
-        await fetch('http://localhost:3001/api/books', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                name: formValues.name.trim(), 
-                author: formValues.author.trim(), 
-                description: formValues.description.trim(), 
-                image: formValues.image.trim(), 
-                price: formValues.price.trim(),
-                genre: formValues.genre.trim(), 
-                user_sub: user.sub
-                })
-        })
-        setSucceed(true)
-        setProcessing(false)
-        navigate('/profile')
-    }
 
     useEffect(() => {
         if(Object.keys(formErrors).length == 0 && processing == true){
-			postBook()
 			postBookFirestore()
 		} else if(formErrors.length !=  0){
 			setProcessing(false)

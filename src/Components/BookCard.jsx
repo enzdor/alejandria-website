@@ -13,6 +13,8 @@ import ClearIcon from "@mui/icons-material/Clear";
 import EditIcon from "@mui/icons-material/Edit";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography"
+import {deleteDoc, doc, updateDoc} from "firebase/firestore";
+import {db} from "../firebase";
 
 const contentStyles = {
 	pb: "0"
@@ -23,48 +25,43 @@ const title = {
 
 export default function BookCard(props){
     const navigate = useNavigate()
-    const {isAuthenticated, user} = useAuth0()
+	const {isAuthenticated, user} = useAuth0()
 
-    const [favourite, setFavourite] = useState(false)
-    useEffect(() => {
-        if (props.data.isFavourite){
-            setFavourite(true)
-        }
-    },[])
+	const [favourite, setFavourite] = useState(false)
+	useEffect(() => {
+		if (user){
+			if (props.data){
+				if (props.data.favourites.includes(user.sub)){
+					setFavourite(true)
+				}
+			} 
+		}
+	}, [user, props])
+        
+	async function createDeleteFavouriteGoogle(event){
+		event.preventDefault()
+		const bookDoc = doc(db,"books", props.data.id)
+		if (favourite){
+			const index = props.data.favourites.indexOf(user.sub)
+			const array = props.data.favourites
+			array.splice(index, 1)
+			setFavourite(false)
+			await updateDoc(bookDoc, {favourites: array})
+		} else {
+			const array = props.data.favourites
+			array.push(user.sub)
+			setFavourite(true)
+			await updateDoc(bookDoc, {favourites: array})
+		}
+	}
 
-    async function createDeleteFavourite(event){
-        event.preventDefault()
-        if (isAuthenticated){
-            await fetch('http://localhost:3001/api/favourites/create-delete', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    user_sub: user.sub, 
-                    book_id: props.data.id
-                })
-            })
-            if (favourite == true) {
-                setFavourite(false)
-            } else {
-                setFavourite(true)
-            }
-        } else {
-            alert('You need to be logged in to use this')
-        }
-    }
+	async function deleteBookGoogle(event){
+		event.preventDefault()
 
-    async function deleteBook(event){
-        event.preventDefault()
-        if(isAuthenticated){
-            await fetch(`http://localhost:3001/api/books/${props.data.id}`, {
-                method: 'DELETE'
-            })
-            console.log('book deleted');
-        } else {
-            alert('You need to be logged in to use this')
-        }
-    }
-
+		const bookDoc = doc(db, "books", props.data.id)
+		await deleteDoc(bookDoc)
+	}
+    
     return (
 		<Card>
 			<CardMedia component="img" height="300" image="http://localhost:3000/cover1.jpeg" alt="cover of the book"/>
@@ -73,13 +70,15 @@ export default function BookCard(props){
 				<Typography variant="h6" color="primary">${props.data.price}</Typography>
 			</CardContent>
 			<CardActions>
-				{favourite  
-					? <IconButton onClick={createDeleteFavourite}><FavoriteIcon color="secondary"/></IconButton>
-					: <IconButton onClick={createDeleteFavourite}><FavoriteBorderIcon color="secondary"/></IconButton>
+				{props.data
+					? favourite 
+						? <IconButton onClick={createDeleteFavouriteGoogle}><FavoriteIcon color="secondary"/></IconButton>
+						: <IconButton onClick={createDeleteFavouriteGoogle}><FavoriteBorderIcon color="secondary"/></IconButton>
+					: <></>
 				}
 				{isAuthenticated
 					? props.data.user_sub == user.sub
-						? <IconButton onClick={deleteBook}><ClearIcon/></IconButton>
+						? <IconButton onClick={deleteBookGoogle}><ClearIcon/></IconButton>
 						: <></>
 					: <></>
 				}

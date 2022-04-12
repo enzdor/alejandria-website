@@ -11,7 +11,7 @@ export default function BooksContainer(props){
     return(
         <Grid container spacing={3} sx={gridStyles} >
             {props.books.map((book) => (
-				<Grid item xs={12} sm={6} md={4} lg={3}>
+				<Grid item key={book.id} xs={12} sm={6} md={4} lg={3}>
 					<BookCard key={book.id} data={book} />
 				</Grid>
             ))}

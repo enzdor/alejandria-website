@@ -7,28 +7,20 @@ import Header from "../Components/Header";
 import TextField from "@mui/material/TextField"
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Typography from "@mui/material/Typography"
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
 import Grid from "@mui/material/Grid"
-import useMediaQuery from "@mui/material/useMediaQuery";
 import Button from "@mui/material/Button"
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Hidden from "@mui/material/Hidden";
+import { collection, getDocs } from "firebase/firestore";
+import {db} from "../firebase";
 
 
-const genresSelect = {
-	widht: "200"
-}
-
-const fixed = {
-	position: "fixed"
-}
 
 const listItem = {
 	display: "flex",
@@ -37,9 +29,7 @@ const listItem = {
 	px: "0"
 }
 
-const empty = {
 
-}
 
 export default function Books(){
     const {isAuthenticated, user, isLoading} = useAuth0()
@@ -63,24 +53,14 @@ export default function Books(){
 
     const [books, setBooks] = useState([])
     useEffect(() => {
-        async function getBooks(){
-            let newBooks = await fetch('http://localhost:3001/api/books')
-            newBooks = (await newBooks.json()).data
-    
-            setBooks(newBooks)
-        }
-        async function getBooksUserSub(){
-            let newBooks = await fetch(`http://localhost:3001/api/books/logged/${user.sub}`)
-            newBooks = (await newBooks.json()).data
+		async function getBooksGoogle(){
+			const booksCollectionRef = collection(db, "books")
+			let newBooks = await getDocs(booksCollectionRef)
 
-            setBooks(newBooks)
-        }
+			setBooks(newBooks.docs.map((doc) => ({...doc.data(),id: doc.id})))
+		}
 
-        if (isAuthenticated){
-            getBooksUserSub()
-        } else {
-            getBooks()
-        }
+		getBooksGoogle()
     },[isAuthenticated, isLoading])
 
     async function searchBooks(){

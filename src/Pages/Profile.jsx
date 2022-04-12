@@ -13,52 +13,59 @@ import Typography from "@mui/material/Typography";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { useParams, useNavigate } from "react-router-dom";
-
+import {collection, query, where, getDocs} from "firebase/firestore";
+import {db} from "../firebase";
 
 
 export default function Profile(){
     const { user, isAuthenticated, isLoading } = useAuth0()
 	const params = useParams()
 
+	const booksCollectionRef = collection(db, "books")
+
     const [booksCreated, setBooksCreated] = useState([])
-    useEffect(() => {
-        async function getBooksCreatedSub(){
-            let newBooks = await fetch(`http://localhost:3001/api/books/created/${user.sub}`)
-            newBooks = (await newBooks.json()).data
+    useEffect(() => { 
 
-            setBooksCreated(newBooks)
-        }
+		async function getBooksCreatedGoogle(){
+			const createdQuery = query(booksCollectionRef, where("user_sub", "==", user.sub))
+			const newBooks = await getDocs(createdQuery)
 
-        if(isAuthenticated){
-            getBooksCreatedSub()
+			setBooksCreated(newBooks.docs.map((doc) => ({...doc.data(), id: doc.id})))
+		}
+	
+
+		if(isAuthenticated){
+			getBooksCreatedGoogle()
         }
     }, [isLoading])
 
     const [booksFavourite, setBooksFavourite] = useState([])
     useEffect(() => {
-        async function getBooksFavouriteSub(){
-            let newBooks = await fetch(`http://localhost:3001/api/books/favourite/${user.sub}`)
-            newBooks = (await newBooks.json()).data
 
-            setBooksFavourite(newBooks)
-        }
+		async function getBooksFavouriteGoogle(){
+			const favouriteQuery = query(booksCollectionRef, where("favourites", "array-contains", user.sub))
+			const newBooks = await getDocs(favouriteQuery)
 
-        if(isAuthenticated){
-            getBooksFavouriteSub()
+			setBooksFavourite(newBooks.docs.map((doc) => ({...doc.data(), id: doc.id})))
+		}
+
+		if(isAuthenticated){
+			getBooksFavouriteGoogle()
         }
     }, [isLoading])
 
     const [booksSold, setBooksSold] = useState([])
     useEffect(() => {
-        async function getBooksSoldSub(){
-            let newBooks = await fetch(`http://localhost:3001/api/books/sold/${user.sub}`)
-            newBooks = (await newBooks.json()).data
 
-            setBooksSold(newBooks)
-        }
+		async function getBooksSoldGoogle(){
+			const soldQuery = query(booksCollectionRef, where("sold", "==", true))
+			const newBooks = await getDocs(soldQuery)
 
-        if(isAuthenticated){
-            getBooksSoldSub()
+			setBooksSold(newBooks.docs.map((doc) => ({...doc.data(), id: doc.id})))
+		}
+
+		if(isAuthenticated){
+			getBooksSoldGoogle()
         }
     }, [isLoading])
 

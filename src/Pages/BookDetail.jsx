@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import BookDetailInformation from "../Components/BookDetailInformation";
 import Header from "../Components/Header";
+import {doc, getDoc} from "firebase/firestore";
+import {db} from "../firebase";
 
 export default function BookDetail(){
     const params = useParams()
@@ -12,31 +14,19 @@ export default function BookDetail(){
 
     const [data, setData] = useState({})
     useEffect(() => {
-        async function getBook(){
-            let book = await fetch(`http://localhost:3001/api/books/${params.id}`)
-            book = (await book.json()).data
+		async function getBookGoogle(){
+			const bookDoc = doc(db, "books", params.id)
 
-            setData(book)
-        }
-        async function getBookUserSub(){
-            let book = await fetch(`http://localhost:3001/api/books/logged/${user.sub}/${params.id}`)
-            book = (await book.json()).data
-
-            setData(book)
-        }
-
-
-        if(isAuthenticated){
-            getBookUserSub()
-        } else {
-            getBook()
-        }
+			const book = await getDoc(bookDoc)
+			setData({...book.data(), id: book.id})
+		}
+		getBookGoogle()
     }, [user, isLoading, isAuthenticated])
 
     return (
         <div>
-            <Header />
-            <BookDetailInformation data={data}/>
+			<Header />
+			<BookDetailInformation data={data}/>
         </div>
         
     )
