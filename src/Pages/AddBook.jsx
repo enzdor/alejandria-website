@@ -80,7 +80,8 @@ export default function AddBook(){
 			price: formValues.price.trim(),
 			genre: formValues.genre.trim(), 
 			favourites: [],
-			user_sub: user.sub
+			user_sub: user.sub,
+			sold: false
 		})	 
 		setSucceed(true)
         setProcessing(false)
@@ -119,7 +120,7 @@ export default function AddBook(){
 					</label>
 					<TextField error={formErrors.price} helperText={formErrors.price ? formErrors.price : ""} type="number" id="price" name="price" onChange={handleChange} label="Price"/>
 					<FormControl style={{minWidth:"12em"}}>	
-						<Select error={formErrors.genre} helperText={formErrors.genre ? formErrors.genre : ""} Label="Genre" id="genre" name="genre" onChange={handleChange} onOpen={handleGenreOpen} onClose={handleGenreClose} open={open} value={formValues.genre}>
+						<Select error={formErrors.genre} helperText={formErrors.genre ? formErrors.genre : ""}  id="genre" name="genre" onChange={handleChange} onOpen={handleGenreOpen} onClose={handleGenreClose} open={open} value={formValues.genre}>
 							<MenuItem value="Genre" disabled placeHolder>Genre</MenuItem>
 							<MenuItem value="Action">Action</MenuItem>
 						</Select>

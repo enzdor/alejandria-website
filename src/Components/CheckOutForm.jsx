@@ -10,7 +10,8 @@ import Input from "@mui/material/Input"
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-
+import {doc, updateDoc} from "firebase/firestore";
+import {db} from "../firebase";
 
 export default function CheckOutForm(props){
     const [succeed, setSucceed] = useState(false)
@@ -29,7 +30,7 @@ export default function CheckOutForm(props){
 
     useEffect(() => {
         async function getPaymentIntent(){
-            if (!props.item.price){
+            if (!props.data.price){
                 return
             }
             let data = await fetch(`http://localhost:3001/create-payment-intent`, {
@@ -38,7 +39,7 @@ export default function CheckOutForm(props){
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    item: props.item,
+                    item: props.data,
                     user: user
                 })
             })
@@ -48,7 +49,7 @@ export default function CheckOutForm(props){
             setClientSecret(data.clientSecret)
         }
         getPaymentIntent()
-    }, [props.item.price, user])
+    }, [props.data.price, user])
 
     async function handleChange(event){
         setDisabled(event.empty)
@@ -87,10 +88,10 @@ export default function CheckOutForm(props){
             setProcessing(false)
             console.log('bye');
         } else {
-            await fetch(`http://localhost:3001/api/books/sold/${props.item.id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' }
-            })
+			const bookDoc = doc(db, "books", props.data.id) 
+			await updateDoc(bookDoc, {
+				sold: true
+			})
     
             setSucceed(true)
             setError(null)
@@ -125,8 +126,8 @@ export default function CheckOutForm(props){
 						xl: "40%"
 				}, mx:"auto", justifyContent: "center", my: "2em"}}>
 					<Typography variant="h5">Book Information:</Typography>
-					<Typography variant="body">Name: {props.item.name}</Typography>
-					<Typography variant="body">Price: ${props.item.price}</Typography>
+					<Typography variant="body">Name: {props.data.name}</Typography>
+					<Typography variant="body">Price: ${props.data.price}</Typography>
 					<Typography variant="h5">Personal Information:</Typography>
 					<TextField error={formErrors.fullName} helperText={formErrors.fullName ? formErrors.fullName : ""} type="text" name="fullName" id="fullName" label="Full Name" onChange={handleChangeForm}/>
 					<TextField error={formErrors.email} helperText={formErrors.email ? formErrors.email : ""} type="email" name="email" id="email" label="Email" onChange={handleChangeForm}/>

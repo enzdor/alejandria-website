@@ -21,7 +21,7 @@ export default function BookDetailInformation(props){
 
     const [favourite, setFavourite] = useState(false)
 	useEffect(() => {
-		if (props.data){
+		if (props.data.favourites){
 			if (isAuthenticated){
 				if (props.data.favourites.includes(user.sub)){
 					setFavourite(true)

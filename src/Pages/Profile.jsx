@@ -27,7 +27,7 @@ export default function Profile(){
     useEffect(() => { 
 
 		async function getBooksCreatedGoogle(){
-			const createdQuery = query(booksCollectionRef, where("user_sub", "==", user.sub))
+			const createdQuery = query(booksCollectionRef, where("user_sub", "==", user.sub), where("sold", "==", false))
 			const newBooks = await getDocs(createdQuery)
 
 			setBooksCreated(newBooks.docs.map((doc) => ({...doc.data(), id: doc.id})))

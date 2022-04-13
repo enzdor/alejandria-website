@@ -17,7 +17,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Hidden from "@mui/material/Hidden";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where} from "firebase/firestore";
 import {db} from "../firebase";
 
 
@@ -34,10 +34,18 @@ const listItem = {
 export default function Books(){
     const {isAuthenticated, user, isLoading} = useAuth0()
     const [processing, setProcessing] = useState()
-
-	const [genre, setGenre] = useState('Genre')
+	const [genre, setGenre] = useState("")
+	const [priceMax, setPriceMax] = useState(1000000000000)
 	const [open, setOpen] = useState(false)
+	const [originalBooks, setOriginalBooks] = useState([])
 
+	function handleMaxPriceChange(){
+		if (Number(document.querySelector("#priceMax").value) === 0){
+			setPriceMax(1000000000000)
+		} else {
+			setPriceMax(Number(document.querySelector("#priceMax").value))
+		}
+	}
 
 	function handleGenreOpen(){
 		setOpen(true)
@@ -55,19 +63,28 @@ export default function Books(){
     useEffect(() => {
 		async function getBooksGoogle(){
 			const booksCollectionRef = collection(db, "books")
-			let newBooks = await getDocs(booksCollectionRef)
+			const booksQuery = query(booksCollectionRef,where("sold", "==", false))
+			let newBooks = await getDocs(booksQuery)
 
 			setBooks(newBooks.docs.map((doc) => ({...doc.data(),id: doc.id})))
+			setOriginalBooks(newBooks.docs.map((doc) => ({...doc.data(),id: doc.id})))
 		}
 
 		getBooksGoogle()
     },[isAuthenticated, isLoading])
 
     async function searchBooks(){
+		let newBooks = []
 
-
-        let newBooks = await fetch(`http://localhost:3001/api/books/search?name=${document.querySelector('#name').value}&author=${document.querySelector('#author').value}&genre=${genre}&priceMin=${document.querySelector('#priceMin').value}&priceMax=${document.querySelector('#priceMax').value}`) 
-		newBooks = (await newBooks.json()).data
+		for (let book of originalBooks){
+			if (book.name.toLowerCase().includes(document.querySelector("#name").value.toLowerCase()) 
+				&& book.author.toLowerCase().includes(document.querySelector("#author").value.toLowerCase())
+				&& book.genre.includes(genre)
+				&& Number(book.price) >= Number(document.querySelector("#priceMin").value)
+				&& Number(book.price) <= priceMax){
+				newBooks.push(book)
+			}
+		}
 
         setBooks(newBooks)
         setProcessing(false)
@@ -115,8 +132,8 @@ export default function Books(){
 								<ListItem sx={listItem}>
 									<FormControl style={{minWidth:"12em"}}>	
 										<Select Label="Genre" id="genre" onChange={handleGenreChange} onOpen={handleGenreOpen} onClose={handleGenreClose} open={open} value={genre}>
-											<MenuItem value="Genre" disabled>Genre</MenuItem>
-											<MenuItem value="1">Action</MenuItem>
+											<MenuItem value="" disabled placeholder>Genre</MenuItem>
+											<MenuItem value="Action">Action</MenuItem>
 										</Select>
 									</FormControl>
 								</ListItem>
@@ -124,7 +141,7 @@ export default function Books(){
 									<TextField type="number" name="priceMin" id="priceMin" label="Minimum Price" min={0}/>
 								</ListItem>
 								<ListItem sx={listItem}>
-									<TextField type="number" name="priceMax" id="priceMax" label="Max Price"/>
+									<TextField type="number" name="priceMax" id="priceMax" label="Max Price" onChange={handleMaxPriceChange}/>
 								</ListItem>
 								<ListItem sx={listItem}>
 									<Button type="submit" id="Submit" variant="contained" color="primary" disabled={isLoading || processing}>Submit</Button>

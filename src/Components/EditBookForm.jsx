@@ -17,7 +17,6 @@ export default function EditBookForm(props){
     const { user, isAuthenticated, isLoading } = useAuth0()
     const navigate = useNavigate()
     const [data, setData] = useState({})
-
 	const [open, setOpen] = useState(false)
 
 	function handleGenreOpen(){
@@ -75,7 +74,7 @@ export default function EditBookForm(props){
 	}
 	
 	async function putBookGoogle(){
-		const bookDoc = doc(db, "books", "EMcnVap2RfN4HtVAEXqo")	
+		const bookDoc = doc(db, "books", props.data.id)	
 		await updateDoc(bookDoc, {
 			name: formValues.name.trim(), 
 			author: formValues.author.trim(), 
@@ -89,31 +88,11 @@ export default function EditBookForm(props){
         setProcessing(false)
         navigate('/profile')
 	}
-
-    async function putBook(){
-        await fetch(`http://localhost:3001/api/books/${data.id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                id: data.id,
-                name: document.querySelector('#name').value, 
-                author: document.querySelector('#author').value, 
-                description: document.querySelector('#description').value, 
-                image: document.querySelector('#image').value, 
-                price: document.querySelector('#price').value, 
-                genre: document.querySelector('#genre').value, 
-                user_sub: user.sub
-                })
-        })
-        setSucceed(true)
-        setProcessing(false)
-        navigate('/profile')
-    }
+    
 
 	useEffect(() => {
 		if(Object.keys(formErrors).length == 0 && processing == true){
 			putBookGoogle()
-            putBook()
 		} else if (Object.keys(formErrors).length != 0){
             setProcessing(false)
         }
@@ -140,9 +119,9 @@ export default function EditBookForm(props){
 				</label>
 				<TextField error={formErrors.price} helperText={formErrors.price ? formErrors.price : ""} label="price" type="number" name="price" id="price" value={formValues.price} onChange={handleChange} />
 				<FormControl style={{minWidth:"12em"}}>
-					<Select error={formErrors.genre} helperText={formErrors.genre ? formErrors.genre : ""} name="genre" id="genre" label="Genre" onClose={handleGenreClose} onOpen={handleGenreOpen} open={open} value={formValues.genre} onChange={handleChange}>
+					<Select error={formErrors.genre} helperText={formErrors.genre ? formErrors.genre : ""} name="genre" id="genre" onClose={handleGenreClose} onOpen={handleGenreOpen} open={open} value={formValues.genre} onChange={handleChange}>
 						<MenuItem value="Genre" disabled placeholder>Genre</MenuItem>
-						<MenuItem value="1">Action</MenuItem>
+						<MenuItem value="Action">Action</MenuItem>
 					</Select>
 				</FormControl>
 				<Button type="submit" name="Submit" variant="contained" sx={{widht:"50%", alignSelf: "center"}}disabled={processing || succeed || isLoading || !isAuthenticated}>

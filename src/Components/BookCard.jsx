@@ -84,7 +84,9 @@ export default function BookCard(props){
 				}
 				{isAuthenticated
 					? props.data.user_sub == user.sub
-						? <IconButton onClick={() => navigate(`/books/edit/${props.data.id}`)}><EditIcon/></IconButton>
+						? props.data.sold == false
+							? <IconButton onClick={() => navigate(`/books/edit/${props.data.id}`)}><EditIcon/></IconButton>
+							: <></>
 						: <></>
 					: <></>
 				}

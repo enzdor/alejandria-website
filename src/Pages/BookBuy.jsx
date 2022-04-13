@@ -7,6 +7,8 @@ import CheckOutForm from "../Components/CheckOutForm";
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import Header from "../Components/Header";
+import {doc, getDoc} from "firebase/firestore";
+import {db} from "../firebase";
 
 const publishableKey = `${process.env.REACT_APP_PUBLISHABLE_KEY}`
 const stripePromise = loadStripe(publishableKey)
@@ -16,19 +18,19 @@ export default function BookBuy(){
 
     const [data, setData] = useState({})
     useEffect(() => {
-        async function getData(){
-            let newData = await fetch(`http://localhost:3001/api/books/${params.id}`)
-            newData = (await newData.json()).data
+        async function getBookGoogle(){
+			const bookDoc = doc(db, "books", params.id)
 
-            setData(newData)
-        }
-        getData()
+			const book = await getDoc(bookDoc)
+			setData({...book.data(), id: book.id})
+		}
+		getBookGoogle()
     },[])
 
     return(
         <Elements stripe={stripePromise}>
 			<Header />
-            <CheckOutForm item={data}/>
+            <CheckOutForm data={data}/>
         </Elements>
     )
 }
