@@ -9,7 +9,8 @@ import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import {db} from "../firebase";
+import {db, storage} from "../firebase";
+import {ref, uploadBytes, getDownloadURL} from "firebase/storage";
 import {updateDoc, doc} from "firebase/firestore";
 
 
@@ -41,8 +42,12 @@ export default function EditBookForm(props){
 		}, [props])
 
     function handleChange(event) {
-        const { name, value } = event.target
-        setFormValues({...formValues, [name]: value})
+		if (event.target.name == "image"){
+			setFormValues({...formValues, image:event.target.files[0]})
+		} else {
+			const { name, value } = event.target
+			setFormValues({...formValues, [name]: value})
+		}
     }
 
 	function handleSubmit(event) {
@@ -74,15 +79,18 @@ export default function EditBookForm(props){
 	}
 	
 	async function putBookGoogle(){
+		const time = Date.now().toString()
+		const storageRef = ref(storage, time)
+		await uploadBytes(storageRef, formValues.image)
+		const imageUrl = await getDownloadURL(storageRef)
 		const bookDoc = doc(db, "books", props.data.id)	
 		await updateDoc(bookDoc, {
 			name: formValues.name.trim(), 
 			author: formValues.author.trim(), 
 			description: formValues.description.trim(), 
-			image: formValues.image.trim(), 
 			price: formValues.price.trim(), 
 			genre: formValues.genre.trim(), 
-			user_sub: user.sub
+			image: imageUrl
 		})
         setSucceed(true)
         setProcessing(false)

@@ -8,7 +8,7 @@ import BookDetail from './Pages/BookDetail';
 import BookBuy from './Pages/BookBuy';
 import EditBook from './Pages/EditBook';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-
+import {ProtectedRoute } from "./auth/ProtectedRoute";
 
 const theme = createTheme({
 	palette: {
@@ -24,18 +24,16 @@ const theme = createTheme({
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
-			<Router>
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/books" element={<Books />} />
-					<Route path="/books/:id" element={<BookDetail />} />
-					<Route path="/books/edit/:id" element={<EditBook />} />
-					<Route path="/buy/:id" element={<BookBuy />} />
-					<Route path="/profile/:page" element={<Profile />} />
-					<Route path="/addbook" element={<AddBook />} />
-					<Route path="/profile" element={<Navigate to="/profile/sale"/>}/>
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/books" element={<Books />} />
+				<Route path="/books/:id" element={<BookDetail />} />
+				<Route path="/books/edit/:id" element={<ProtectedRoute component={EditBook}/>} />
+				<Route path="/buy/:id" element={<ProtectedRoute component={BookBuy}/>} />
+				<Route path="/profile/:page" element={<ProtectedRoute component={Profile} />} />
+				<Route path="/addbook" element={<ProtectedRoute component={AddBook}/>} />
+				<Route path="/profile" element={<Navigate to="/profile/sale"/>}/>
 			  </Routes>
-			</Router>
 		</ThemeProvider>
 	);
 }
