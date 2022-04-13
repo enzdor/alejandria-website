@@ -64,7 +64,7 @@ export default function BookCard(props){
     
     return (
 		<Card>
-			<CardMedia component="img" height="300" image="http://localhost:3000/cover1.jpeg" alt="cover of the book"/>
+			<CardMedia component="img" height="300" image={props.data.image} alt="cover of the book"/>
 			<CardContent sx={contentStyles}>
 				<Typography to={`/books/${props.data.id}`} component={Link} variant="h6" color="black" sx={title}>{props.data.name}</Typography>
 				<Typography variant="h6" color="primary">${props.data.price}</Typography>

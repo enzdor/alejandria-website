@@ -6,7 +6,6 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Button from "@mui/material/Button";
@@ -54,7 +53,7 @@ export default function BookDetailInformation(props){
     return (
 		<Grid container spacing={3}>
 			<Grid item xs={12} sm={6} md={4}sx={{display: "flex", my: "2rem"}}>
-				<Box component="img" width="90%" src="http://localhost:3000/cover1.jpeg" sx={{mx: "auto"}} alt="bookcover"/>
+				<Box component="img" width="90%" src={props.data.image} sx={{mx: "auto"}} alt="bookcover"/>
 			</Grid>
 			<Grid item xs={12} sm={6} md={8} sx={{mt: "2rem"}}>
 				<Stack direction="row" spacing={5}>

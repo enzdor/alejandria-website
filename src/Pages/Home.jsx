@@ -6,15 +6,13 @@ import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
 import { Link } from "react-router-dom" 
 import Hidden from "@mui/material/Hidden";
-import { db } from "../firebase";
-import {collection, getDocs, addDoc} from "firebase/firestore";
 
 const image = {
 	width: "100%"
 }
 
-function Home(){
 
+function Home(){
     return(
         <>
 			<Header />

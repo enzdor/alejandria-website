@@ -10,8 +10,9 @@ import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { db } from "../firebase";
-import {collection,  addDoc} from "firebase/firestore";
+import { db, storage} from "../firebase";
+import {collection, addDoc} from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 
 export default function AddBook(){
@@ -34,9 +35,13 @@ export default function AddBook(){
     const [processing, setProcessing] = useState(false)
     const [succeed, setSucceed] = useState(false)
 
-    function handleChange(event) {
-        const { name, value } = event.target
-        setFormValues({...formValues, [name]: value})
+	function handleChange(event) {
+		if (event.target.name == "image"){
+			setFormValues({...formValues, image:event.target.files[0]})
+		} else {
+			const { name, value } = event.target
+			setFormValues({...formValues, [name]: value})
+		}
     }
 
     function handleSubmit(event) {
@@ -72,17 +77,21 @@ export default function AddBook(){
 	const booksCollectionRef = collection(db, "books")
 
 	async function postBookFirestore(){
+		const time = Date.now().toString()
+		const storageRef = ref(storage, time)
+		await uploadBytes(storageRef, formValues.image)
+		const imageUrl = await getDownloadURL(storageRef)
 		await addDoc(booksCollectionRef, {
 			name: formValues.name.trim(), 
 			author: formValues.author.trim(), 
 			description: formValues.description.trim(), 
-			image: formValues.image.trim(), 
 			price: formValues.price.trim(),
 			genre: formValues.genre.trim(), 
 			favourites: [],
 			user_sub: user.sub,
-			sold: false
-		})	 
+			sold: false,
+			image: imageUrl
+		})
 		setSucceed(true)
         setProcessing(false)
         navigate('/profile')
