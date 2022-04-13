@@ -34,7 +34,7 @@ const listItem = {
 export default function Books(){
     const {isAuthenticated, user, isLoading} = useAuth0()
     const [processing, setProcessing] = useState()
-	const [genre, setGenre] = useState("")
+	const [genre, setGenre] = useState("Genre")
 	const [priceMax, setPriceMax] = useState(1000000000000)
 	const [open, setOpen] = useState(false)
 	const [originalBooks, setOriginalBooks] = useState([])
@@ -75,11 +75,16 @@ export default function Books(){
 
     async function searchBooks(){
 		let newBooks = []
+		let genreObject = {genreQuery: genre}
+
+		if (genre === "Genre"){
+			genreObject.genreQuery = ""
+		}
 
 		for (let book of originalBooks){
 			if (book.name.toLowerCase().includes(document.querySelector("#name").value.toLowerCase()) 
 				&& book.author.toLowerCase().includes(document.querySelector("#author").value.toLowerCase())
-				&& book.genre.includes(genre)
+				&& book.genre.includes(genreObject.genreQuery)
 				&& Number(book.price) >= Number(document.querySelector("#priceMin").value)
 				&& Number(book.price) <= priceMax){
 				newBooks.push(book)
@@ -132,7 +137,7 @@ export default function Books(){
 								<ListItem sx={listItem}>
 									<FormControl style={{minWidth:"12em"}}>	
 										<Select Label="Genre" id="genre" onChange={handleGenreChange} onOpen={handleGenreOpen} onClose={handleGenreClose} open={open} value={genre}>
-											<MenuItem value="" disabled placeholder>Genre</MenuItem>
+											<MenuItem value="Genre" disabled placeholder>Genre</MenuItem>
 											<MenuItem value="Action">Action</MenuItem>
 										</Select>
 									</FormControl>

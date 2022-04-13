@@ -9,6 +9,7 @@ import BookBuy from './Pages/BookBuy';
 import EditBook from './Pages/EditBook';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {ProtectedRoute } from "./auth/ProtectedRoute";
+import NotFound from "./Pages/NotFound";
 
 const theme = createTheme({
 	palette: {
@@ -33,6 +34,7 @@ function App() {
 				<Route path="/profile/:page" element={<ProtectedRoute component={Profile} />} />
 				<Route path="/addbook" element={<ProtectedRoute component={AddBook}/>} />
 				<Route path="/profile" element={<Navigate to="/profile/sale"/>}/>
+				<Route path="*" element={<NotFound />} />
 			  </Routes>
 		</ThemeProvider>
 	);
