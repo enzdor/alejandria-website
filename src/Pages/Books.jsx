@@ -19,7 +19,7 @@ import Divider from "@mui/material/Divider";
 import Hidden from "@mui/material/Hidden";
 import { collection, getDocs, query, where} from "firebase/firestore";
 import {db} from "../firebase";
-
+import SkeletonBooks from "../Components/SkeletonBooks";
 
 
 const listItem = {
@@ -59,7 +59,7 @@ export default function Books(){
 		setGenre(event.target.value)
 	}
 
-    const [books, setBooks] = useState([])
+    const [books, setBooks] = useState(null)
     useEffect(() => {
 		async function getBooksGoogle(){
 			const booksCollectionRef = collection(db, "books")
@@ -156,9 +156,11 @@ export default function Books(){
 					</Box>
 				</Grid>
 				<Grid item xs={12} sm={8} md={9} sx={{my: "1em", ml: "auto"}}>
-				{isLoading 
-					? <p>Loading</p>
-					: <BooksContainer books={books}/>
+				{!books
+					? <SkeletonBooks />
+					: books.length === 0
+						? <Typography variant="h5" color="primary">Your queries do not match any books</Typography>
+						: <BooksContainer books={books}/>
 				}
 				</Grid>
 			</Grid>

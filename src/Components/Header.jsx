@@ -16,6 +16,8 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
+import SignupButton from "./SignupButton";
+
 
 const logo = {
     fontSize: "2em",
@@ -47,7 +49,10 @@ export default function Header(){
 								<Typography component={ Link } to="/profile" variant="h6" color="black" sx={menuLink}>Profile</Typography>
 								<LogoutButton sx={{...menuLink,}} variant="contained"/>
 							</> 
-							: <LoginButton sx={{...menuLink,}} variant="contained"/>
+							: <>
+								<LoginButton sx={{...menuLink,}} variant="outlined"/>
+								<SignupButton sx={{...menuLink,}} variant="contained"/>
+							</>
 						}
 					</Stack>
 			</Hidden>

@@ -15,6 +15,7 @@ import Tab from "@mui/material/Tab";
 import { useParams, useNavigate } from "react-router-dom";
 import {collection, query, where, getDocs} from "firebase/firestore";
 import {db} from "../firebase";
+import SkeletonBooks from "../Components/SkeletonBooks";
 
 
 export default function Profile(){
@@ -23,7 +24,7 @@ export default function Profile(){
 
 	const booksCollectionRef = collection(db, "books")
 
-    const [booksCreated, setBooksCreated] = useState([])
+    const [booksCreated, setBooksCreated] = useState(null)
     useEffect(() => { 
 
 		async function getBooksCreatedGoogle(){
@@ -39,7 +40,7 @@ export default function Profile(){
         }
     }, [isLoading])
 
-    const [booksFavourite, setBooksFavourite] = useState([])
+    const [booksFavourite, setBooksFavourite] = useState(null)
     useEffect(() => {
 
 		async function getBooksFavouriteGoogle(){
@@ -54,7 +55,7 @@ export default function Profile(){
         }
     }, [isLoading])
 
-    const [booksSold, setBooksSold] = useState([])
+    const [booksSold, setBooksSold] = useState(null)
     useEffect(() => {
 
 		async function getBooksSoldGoogle(){
@@ -112,17 +113,17 @@ export default function Profile(){
 						</ListItem>
 						<ListItem>
 							<Typography variant="h6">
-								Books for sale: {booksCreated.length}
+								Books for sale: {booksCreated && booksCreated.length}
 							</Typography>
 						</ListItem>
 						<ListItem>
 							<Typography variant="h6">
-								Favourite books: {booksFavourite.length}
+								Favourite books: {booksFavourite && booksFavourite.length}
 							</Typography>
 						</ListItem>
 						<ListItem>
 							<Typography variant="h6">
-								Sold books: {booksSold.length}
+								Sold books: {booksSold && booksSold.length}
 							</Typography>
 						</ListItem>
 						<ListItem>
@@ -140,7 +141,12 @@ export default function Profile(){
 							<Tab label="Favourites"/>
 							<Tab label="Sold"/>
 						</Tabs>
-						<BooksContainer books={booksCreated} />
+						{!booksCreated
+							? <SkeletonBooks /> 
+							: booksCreated.length === 0
+								? <Typography variant="h5" color="primary">You have no books for sale</Typography>
+								: <BooksContainer books={booksCreated} />
+						}
 					</Grid>
 				}
 				{selectedTab === 1 && 
@@ -150,7 +156,12 @@ export default function Profile(){
 							<Tab label="Favourites"/>
 							<Tab label="Sold"/>
 						</Tabs>
-						<BooksContainer books={booksFavourite} />
+						{!booksFavourite
+							? <SkeletonBooks /> 
+							: booksFavourite.length === 0
+								? <Typography variant="h5" color="primary">You have no favourite books</Typography>
+								: <BooksContainer books={booksFavourite} />
+						}
 					</Grid>
 				}
 				{selectedTab === 2 &&
@@ -160,7 +171,12 @@ export default function Profile(){
 							<Tab label="Favourites"/>
 							<Tab label="Sold"/>
 						</Tabs>
-						<BooksContainer books={booksSold} />
+						{!booksSold
+							? <SkeletonBooks /> 
+							: booksSold.length === 0
+								? <Typography variant="h5" color="primary">You have no books sold</Typography>
+								: <BooksContainer books={booksSold} />
+						}					
 					</Grid>
 				}
             </Grid>

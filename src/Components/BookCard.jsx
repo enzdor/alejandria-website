@@ -21,6 +21,10 @@ const contentStyles = {
 }
 const title = {
 	textDecoration: "none",
+	overflow: "hidden",
+	whiteSpace: "nowrap",
+	textOverflow: "ellipsis",
+	display: "block"
 }
 
 export default function BookCard(props){
@@ -64,7 +68,16 @@ export default function BookCard(props){
     
     return (
 		<Card>
-			<CardMedia component="img" height="300" image={props.data.image} alt="cover of the book"/>
+			<CardMedia component="img" sx={{
+				height: {
+					xs: 500,
+					sm: 500,
+					md: 300,
+					lg: 300, 
+					xl: 300
+				} 				
+				
+			}} image={props.data.image} alt="cover of the book"/>
 			<CardContent sx={contentStyles}>
 				<Typography to={`/books/${props.data.id}`} component={Link} variant="h6" color="black" sx={title}>{props.data.name}</Typography>
 				<Typography variant="h6" color="primary">${props.data.price}</Typography>
