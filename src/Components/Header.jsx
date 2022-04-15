@@ -50,7 +50,7 @@ export default function Header(){
 								<LogoutButton sx={{...menuLink,}} variant="contained"/>
 							</> 
 							: <>
-								<LoginButton sx={{...menuLink,}} variant="outlined"/>
+								<LoginButton type="link" sx={{...menuLink,}} variant="text"/>
 								<SignupButton sx={{...menuLink,}} variant="contained"/>
 							</>
 						}
@@ -70,16 +70,19 @@ export default function Header(){
 				<Divider />
 				<List>
 				<ListItem>
-						<Button component={ Link } to="/books" variant="text">Books</Button>
+						<Button component={ Link } to="/books" variant="text"  sx={menuLink}>Books</Button>
 				</ListItem>
 					{isLoading 
 								? <p>Loading</p> 
 								: isAuthenticated ? <>
-					   <ListItem><Button component={ Link } to="/profile" variant="text" color="primary">Profile</Button></ListItem>
+						<ListItem><Button component={ Link } to="/profile" variant="text" color="primary">Profile</Button></ListItem>
 						<ListItem><LogoutButton variant="text"/></ListItem>
 						</> 
-					: <ListItem><LoginButton variant="text"/></ListItem>
-							}
+						: <>
+							<ListItem><LoginButton type="button" /></ListItem>
+							<ListItem><SignupButton variant="text" /></ListItem>
+						</>
+					}
 				</List>
 				</SwipeableDrawer>
             </Toolbar>

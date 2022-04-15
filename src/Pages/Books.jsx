@@ -135,7 +135,7 @@ export default function Books(){
 									<TextField variant="outlined" label="Author" id="author"/>
 								</ListItem>
 								<ListItem sx={listItem}>
-									<FormControl style={{minWidth:"12em"}}>	
+									<FormControl style={{minWidth:"12rem"}}>	
 										<Select Label="Genre" id="genre" onChange={handleGenreChange} onOpen={handleGenreOpen} onClose={handleGenreClose} open={open} value={genre}>
 											<MenuItem value="Genre" disabled placeholder>Genre</MenuItem>
 											<MenuItem value="Action">Action</MenuItem>
