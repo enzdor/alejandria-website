@@ -128,8 +128,6 @@ export default function EditBookForm(props){
 				lg: "40%",
 				xl: "40%"
 			}, mx:"auto", justifyContent:"center", my: "2em"}}>
-				<p>{JSON.stringify(formValues, '', 2)}</p>
-				<p>{originalImage}</p>
 				<Typography variant="h5">Edit Book</Typography>
 				<TextField error={formErrors.name} helperText={formErrors.name ? formErrors.name : ""} label="Name" variant="outlined" name="name" id="name" value={formValues.name} onChange={handleChange} />
 				<TextField error={formErrors.author} helperText={formErrors.author ? formErrors.author : ""} label="Author" variant="outlined" type="text" name="author" id="author" value={formValues.author} onChange={handleChange}/>
