@@ -139,6 +139,16 @@ export default function Books(){
 										<Select Label="Genre" id="genre" onChange={handleGenreChange} onOpen={handleGenreOpen} onClose={handleGenreClose} open={open} value={genre}>
 											<MenuItem value="Genre" disabled placeholder>Genre</MenuItem>
 											<MenuItem value="Action">Action</MenuItem>
+											<MenuItem value="Action">Action</MenuItem>
+											<MenuItem value="Comedy">Comedy</MenuItem>
+											<MenuItem value="Crime">Crime</MenuItem>
+											<MenuItem value="Fantasy">Fantasy</MenuItem>
+											<MenuItem value="Horror">Horror</MenuItem>
+											<MenuItem value="Science Fiction">Science Fiction</MenuItem>
+											<MenuItem value="Romance">Romance</MenuItem>
+											<MenuItem value="Academic">Academic</MenuItem>
+											<MenuItem value="Biography">Biography</MenuItem>
+											<MenuItem value="Self-help">Self-help</MenuItem>
 										</Select>
 									</FormControl>
 								</ListItem>

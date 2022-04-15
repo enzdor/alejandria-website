@@ -132,6 +132,15 @@ export default function AddBook(){
 						<Select error={formErrors.genre} helperText={formErrors.genre ? formErrors.genre : ""}  id="genre" name="genre" onChange={handleChange} onOpen={handleGenreOpen} onClose={handleGenreClose} open={open} value={formValues.genre}>
 							<MenuItem value="Genre" disabled placeHolder>Genre</MenuItem>
 							<MenuItem value="Action">Action</MenuItem>
+							<MenuItem value="Comedy">Comedy</MenuItem>
+							<MenuItem value="Crime">Crime</MenuItem>
+							<MenuItem value="Fantasy">Fantasy</MenuItem>
+							<MenuItem value="Horror">Horror</MenuItem>
+							<MenuItem value="Science Fiction">Science Fiction</MenuItem>
+							<MenuItem value="Romance">Romance</MenuItem>
+							<MenuItem value="Academic">Academic</MenuItem>
+							<MenuItem value="Biography">Biography</MenuItem>
+							<MenuItem value="Self-help">Self-help</MenuItem>
 						</Select>
 					</FormControl>
 					<Button type="submit" variant="contained" sx={{width: "50%", alignSelf: "center"}} disabled={isLoading || !isAuthenticated || processing || succeed}>

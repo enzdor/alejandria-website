@@ -32,12 +32,14 @@ export default function EditBookForm(props){
     const [formValues, setFormValues] = useState(initialValues)
     const [formErrors, setFormErrors] = useState({})
     const [processing, setProcessing] = useState(false)
-    const [succeed, setSucceed] = useState(false)
+	const [succeed, setSucceed] = useState(false)
+	const [originalImage, setOriginalImage] = useState('')
 
     useEffect(() => {
 		if (props.data){
 			setData(props.data)
 			setFormValues(props.data)
+			setOriginalImage(props.data.image)
 		}
 		}, [props])
 
@@ -80,21 +82,32 @@ export default function EditBookForm(props){
 	
 	async function putBookGoogle(){
 		const time = Date.now().toString()
-		const storageRef = ref(storage, time)
-		await uploadBytes(storageRef, formValues.image)
-		const imageUrl = await getDownloadURL(storageRef)
 		const bookDoc = doc(db, "books", props.data.id)	
-		await updateDoc(bookDoc, {
-			name: formValues.name.trim(), 
-			author: formValues.author.trim(), 
-			description: formValues.description.trim(), 
-			price: formValues.price.trim(), 
-			genre: formValues.genre.trim(), 
-			image: imageUrl
-		})
+		if (formValues.image !== originalImage){
+			const storageRef = ref(storage, time)
+			await uploadBytes(storageRef, formValues.image)
+			const imageUrl = await getDownloadURL(storageRef)
+			await updateDoc(bookDoc, {
+				name: formValues.name.trim(), 
+				author: formValues.author.trim(), 
+				description: formValues.description.trim(), 
+				price: formValues.price.trim(), 
+				genre: formValues.genre.trim(), 
+				image: imageUrl
+			})
+		} else {
+			await updateDoc(bookDoc, {
+				name: formValues.name.trim(), 
+				author: formValues.author.trim(), 
+				description: formValues.description.trim(), 
+				price: formValues.price.trim(), 
+				genre: formValues.genre.trim(), 
+			})
+		}
+		
         setSucceed(true)
         setProcessing(false)
-        navigate('/profile')
+		navigate('/profile')
 	}
     
 
@@ -115,6 +128,8 @@ export default function EditBookForm(props){
 				lg: "40%",
 				xl: "40%"
 			}, mx:"auto", justifyContent:"center", my: "2em"}}>
+				<p>{JSON.stringify(formValues, '', 2)}</p>
+				<p>{originalImage}</p>
 				<Typography variant="h5">Edit Book</Typography>
 				<TextField error={formErrors.name} helperText={formErrors.name ? formErrors.name : ""} label="Name" variant="outlined" name="name" id="name" value={formValues.name} onChange={handleChange} />
 				<TextField error={formErrors.author} helperText={formErrors.author ? formErrors.author : ""} label="Author" variant="outlined" type="text" name="author" id="author" value={formValues.author} onChange={handleChange}/>
@@ -130,6 +145,16 @@ export default function EditBookForm(props){
 					<Select error={formErrors.genre} helperText={formErrors.genre ? formErrors.genre : ""} name="genre" id="genre" onClose={handleGenreClose} onOpen={handleGenreOpen} open={open} value={formValues.genre} onChange={handleChange}>
 						<MenuItem value="Genre" disabled placeholder>Genre</MenuItem>
 						<MenuItem value="Action">Action</MenuItem>
+						<MenuItem value="Action">Action</MenuItem>
+						<MenuItem value="Comedy">Comedy</MenuItem>
+						<MenuItem value="Crime">Crime</MenuItem>
+						<MenuItem value="Fantasy">Fantasy</MenuItem>
+						<MenuItem value="Horror">Horror</MenuItem>
+						<MenuItem value="Science Fiction">Science Fiction</MenuItem>
+						<MenuItem value="Romance">Romance</MenuItem>
+						<MenuItem value="Academic">Academic</MenuItem>
+						<MenuItem value="Biography">Biography</MenuItem>
+						<MenuItem value="Self-help">Self-help</MenuItem>
 					</Select>
 				</FormControl>
 				<Button type="submit" name="Submit" variant="contained" sx={{widht:"50%", alignSelf: "center"}}disabled={processing || succeed || isLoading || !isAuthenticated}>

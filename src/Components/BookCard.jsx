@@ -62,8 +62,10 @@ export default function BookCard(props){
 	async function deleteBookGoogle(event){
 		event.preventDefault()
 
+
 		const bookDoc = doc(db, "books", props.data.id)
 		await deleteDoc(bookDoc)
+		navigate("/profile")
 	}
     
     return (
