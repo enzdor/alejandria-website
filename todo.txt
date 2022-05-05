@@ -1,7 +1,2 @@
-
-see to how to store images
-
-make it possible to other users profiles
-
-make get books via google firestore and favourite/unfavourite
-via firestore too
+make skeleton for images and make text for missing books in
+user neater

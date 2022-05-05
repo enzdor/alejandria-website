@@ -58,7 +58,7 @@ export default function BookDetailInformation(props){
 				<Grid item xs={12} sm={6} sx={{display: "flex", my: "2rem"}}>
 					<Box component="img" width="90%" src={props.data.image} sx={{mx: "auto"}} alt="bookcover"/>
 				</Grid>
-				<Grid item xs={12} sm={6} sx={{mt: "2rem"}}>
+				<Grid item xs={12} sm={6} sx={{mb: "2rem", mt: {sx: '0rem', sm: '2rem'}}}>
 					<Stack direction="row" spacing={5}>
 						<Typography variant="h3" sx={{px: "0.5rem"}}>{props.data.name}</Typography>
 						{isAuthenticated

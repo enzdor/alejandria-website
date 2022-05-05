@@ -20,7 +20,7 @@ import Hidden from "@mui/material/Hidden";
 import { collection, getDocs, query, where} from "firebase/firestore";
 import {db} from "../firebase";
 import SkeletonBooks from "../Components/SkeletonBooks";
-
+import {useSpring, animated} from "react-spring";
 
 const listItem = {
 	display: "flex",
@@ -38,6 +38,7 @@ export default function Books(){
 	const [priceMax, setPriceMax] = useState(1000000000000)
 	const [open, setOpen] = useState(false)
 	const [originalBooks, setOriginalBooks] = useState([])
+	const [showSearch, setShowSearch] = useState(false)
 
 	function handleMaxPriceChange(){
 		if (Number(document.querySelector("#priceMax").value) === 0){
@@ -104,7 +105,12 @@ export default function Books(){
         if(processing === true) {
             searchBooks()
         }
-    }, [processing])
+	}, [processing])
+
+
+	const listSearch = useSpring({
+		display: showSearch ? 'block' : 'none'
+	})
 
 
 
@@ -112,19 +118,69 @@ export default function Books(){
         <>
             <Header />
 			<Hidden smDown>
-			<Container sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-				<Box sx={{width: "40%"}}component="img" src="https://cdn.dribbble.com/users/2460712/screenshots/8140285/media/86ee2d6154dadfe955ff5ce16a2f2f71.png"/>
-				<Typography variant="h4" sx={{my: "1rem"}}>
-					Discover books that you will love
-				</Typography>
-				<Divider orientation="horizontal" sx={{my: "1rem"}} flexItem />
-			</Container>
+				<Container sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+					<Box sx={{width: "40%"}}component="img" src="https://cdn.dribbble.com/users/2460712/screenshots/8140285/media/86ee2d6154dadfe955ff5ce16a2f2f71.png"/>
+					<Typography variant="h4" sx={{my: "1rem"}}>
+						Discover books that you will love
+					</Typography>
+					<Divider orientation="horizontal" sx={{my: "1rem"}} flexItem />
+				</Container>
 			</Hidden>
 			<Grid container spacing={3}>
-				<Grid item className="search" xs={12} sm={4} md={3} sx={{display: "flex", flexDirection:"column", alignItems: "center"}}>
+			<Hidden smUp>
+				<Grid item className="search" xs={12} sm={4} md={3} sx={{ display: 'flex', flexDirection:"column", alignItems: "center"}}>
 					<Box sx={{position: {sm: "sticky", md: "sticky", lg: "sticky", xl: "sticky"}, top: "10vh"}}> 
 						<List>
-							<form onSubmit={handleSubmit}>
+							<ListItem sx={listItem} >
+								<Typography variant="h4" sx={{mt: '2rem'}}>Discover Books</Typography>
+							</ListItem>
+							<ListItem sx={listItem} >
+								<Button onClick={() => {setShowSearch(!showSearch)}}>Filter</Button>
+							</ListItem>
+							<animated.form onSubmit={handleSubmit} style={listSearch}>
+								<ListItem sx={listItem}>
+									<TextField variant="outlined" label="Name" id="name"/>
+								</ListItem>
+								<ListItem sx={listItem}>
+									<TextField variant="outlined" label="Author" id="author"/>
+								</ListItem>
+								<ListItem sx={listItem}>
+									<FormControl style={{minWidth:"12rem"}}>	
+										<Select Label="Genre" id="genre" onChange={handleGenreChange} onOpen={handleGenreOpen} onClose={handleGenreClose} open={open} value={genre}>
+											<MenuItem value="Genre" disabled placeholder>Genre</MenuItem>
+											<MenuItem value="Action">Action</MenuItem>
+											<MenuItem value="Action">Action</MenuItem>
+											<MenuItem value="Comedy">Comedy</MenuItem>
+											<MenuItem value="Crime">Crime</MenuItem>
+											<MenuItem value="Fantasy">Fantasy</MenuItem>
+											<MenuItem value="Horror">Horror</MenuItem>
+											<MenuItem value="Science Fiction">Science Fiction</MenuItem>
+											<MenuItem value="Romance">Romance</MenuItem>
+											<MenuItem value="Academic">Academic</MenuItem>
+											<MenuItem value="Biography">Biography</MenuItem>
+											<MenuItem value="Self-help">Self-help</MenuItem>
+										</Select>
+									</FormControl>
+								</ListItem>
+								<ListItem sx={listItem}>
+									<TextField type="number" name="priceMin" id="priceMin" label="Minimum Price" min={0}/>
+								</ListItem>
+								<ListItem sx={listItem}>
+									<TextField type="number" name="priceMax" id="priceMax" label="Max Price" onChange={handleMaxPriceChange}/>
+								</ListItem>
+								<ListItem sx={listItem}>
+									<Button type="submit" id="Submit" variant="contained" color="primary" disabled={isLoading || processing}>Submit</Button>
+								</ListItem>
+							</animated.form>
+						</List>
+					</Box>
+				</Grid>
+			</Hidden>
+			<Hidden smDown>
+				<Grid item className="search" xs={12} sm={4} md={3} sx={{ display: 'flex', flexDirection:"column", alignItems: "center"}}>
+					<Box sx={{position: {sm: "sticky", md: "sticky", lg: "sticky", xl: "sticky"}, top: "10vh"}}> 
+						<List>
+							<form onSubmit={handleSubmit} style={listSearch}>
 								<ListItem sx={listItem} >
 									<Typography variant="h4">Search</Typography>
 								</ListItem>
@@ -165,6 +221,7 @@ export default function Books(){
 						</List>
 					</Box>
 				</Grid>
+			</Hidden>
 				<Grid item xs={12} sm={8} md={9} sx={{my: "1em", ml: "auto"}}>
 				{!books
 					? <SkeletonBooks />

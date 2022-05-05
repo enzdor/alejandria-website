@@ -77,9 +77,11 @@ export default function BookCard(props){
 					md: 300,
 					lg: 300, 
 					xl: 300
-				} 				
-				
-			}} image={props.data.image} alt="cover of the book"/>
+				}, cursor: 'pointer'}} 
+				image={props.data.image} 
+				alt="cover of the book"
+				onClick={() => {navigate(`/books/${props.data.id}`)}}
+			/>
 			<CardContent sx={contentStyles}>
 				<Typography to={`/books/${props.data.id}`} component={Link} variant="h6" color="black" sx={title}>{props.data.name}</Typography>
 				<Typography variant="h6" color="primary">${props.data.price}</Typography>
