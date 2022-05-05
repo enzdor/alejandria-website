@@ -10,7 +10,7 @@ function LoginButton(props){
 	return (
 		<>
 			{props.type === "button"
-				?<Button sx={{...props.sx}} variant="text" color="primary">Log In</Button>
+				?<Button sx={{...props.sx}} variant="text" color="primary" onClick={() => loginWithRedirect()}>Log In</Button>
 				:<Typography variant="h6"  onClick={() => loginWithRedirect()} sx={{...props.sx,color: "black", cursor: "pointer"}}>Log In</Typography>
 			}
 		</>

@@ -144,7 +144,7 @@ export default function Profile(){
 						{!booksCreated
 							? <SkeletonBooks /> 
 							: booksCreated.length === 0
-								? <Typography variant="h5" color="primary">You have no books for sale</Typography>
+								? <Typography variant="h5" color="primary" sx={{m: '1rem'}}>You have no books for sale</Typography>
 								: <BooksContainer books={booksCreated} />
 						}
 					</Grid>
@@ -159,7 +159,7 @@ export default function Profile(){
 						{!booksFavourite
 							? <SkeletonBooks /> 
 							: booksFavourite.length === 0
-								? <Typography variant="h5" color="primary">You have no favourite books</Typography>
+								? <Typography variant="h5" color="primary" sx={{m: '1rem'}}>You have no favourite books</Typography>
 								: <BooksContainer books={booksFavourite} />
 						}
 					</Grid>
@@ -174,7 +174,7 @@ export default function Profile(){
 						{!booksSold
 							? <SkeletonBooks /> 
 							: booksSold.length === 0
-								? <Typography variant="h5" color="primary">You have no books sold</Typography>
+								? <Typography variant="h5" color="primary" sx={{m: '1rem'}}>You have no books sold</Typography>
 								: <BooksContainer books={booksSold} />
 						}					
 					</Grid>

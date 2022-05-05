@@ -79,7 +79,6 @@ export default function BookCard(props){
 					xl: 300
 				}, cursor: 'pointer'}} 
 				image={props.data.image} 
-				alt="cover of the book"
 				onClick={() => {navigate(`/books/${props.data.id}`)}}
 			/>
 			<CardContent sx={contentStyles}>

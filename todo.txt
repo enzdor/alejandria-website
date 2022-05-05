@@ -1,2 +1,2 @@
-make skeleton for images and make text for missing books in
-user neater
+and fix genre box  in mobile to be the same size as other inputs
+

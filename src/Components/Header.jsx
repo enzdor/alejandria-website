@@ -17,8 +17,16 @@ import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import SignupButton from "./SignupButton";
+import CloseIcon from '@mui/icons-material/Close';
 
 
+
+const listItem = {
+	display: "flex",
+	flexDirection: "column",
+	alignItems: "center",
+	px: "0"
+}
 const logo = {
     fontSize: "2em",
     textDecoration: "none",
@@ -61,30 +69,33 @@ export default function Header(){
 				<MenuIcon />
 				</IconButton>
 			</Hidden>
-			<SwipeableDrawer open={open} anchor="right" onOpen={()=>setOpen(true)} onClose={()=>setOpen(false)}>
-				<div>
+			<SwipeableDrawer open={open} anchor="top" onOpen={()=>setOpen(true)} onClose={()=>setOpen(false)}>
+				<div style={{display: 'flex', justifyContent: 'flex-end'}}>
 					<IconButton onClick={()=>setOpen(false)}>
-					<ChevronRightIcon />
+						<CloseIcon />
 					</IconButton>
 				</div>
 				<Divider />
 				<List>
-				<ListItem>
-						<Button component={ Link } to="/books" variant="text"  sx={menuLink}>Books</Button>
-				</ListItem>
+					<ListItem sx={listItem}>
+							<Button component={ Link } to="/books" variant="text"  sx={menuLink}>Books</Button>
+					</ListItem>
 					{isLoading 
-								? <p>Loading</p> 
-								: isAuthenticated ? <>
-						<ListItem><Button component={ Link } to="/profile" variant="text" color="primary">Profile</Button></ListItem>
-						<ListItem><LogoutButton variant="text"/></ListItem>
+						? <p>Loading</p> 
+						: isAuthenticated ? 
+						<>
+							<ListItem sx={listItem}><Button component={ Link } to="/profile" variant="text" color="primary">Profile</Button></ListItem>
+							<ListItem sx={listItem}><LogoutButton variant="text"/></ListItem>
 						</> 
 						: <>
-							<ListItem><LoginButton type="button" /></ListItem>
-							<ListItem><SignupButton variant="text" /></ListItem>
+							<ListItem sx={listItem}>
+								<LoginButton type="button" sx={{...menuLink,}} variant="text"/>
+							</ListItem>
+							<ListItem sx={listItem}><SignupButton variant="text" /></ListItem>
 						</>
 					}
 				</List>
-				</SwipeableDrawer>
+			</SwipeableDrawer>
             </Toolbar>
 	   
         )
