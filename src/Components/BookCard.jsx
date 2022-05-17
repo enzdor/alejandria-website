@@ -41,6 +41,9 @@ export default function BookCard(props){
 			} 
 		}
 	}, [user, props])
+
+
+
         
 	async function createDeleteFavouriteGoogle(event){
 		event.preventDefault()
@@ -67,6 +70,7 @@ export default function BookCard(props){
 		await deleteDoc(bookDoc)
 		navigate("/profile")
 	}
+
     
     return (
 		<Card>
