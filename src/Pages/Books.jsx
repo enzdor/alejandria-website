@@ -21,6 +21,7 @@ import { collection, getDocs, query, where} from "firebase/firestore";
 import {db} from "../firebase";
 import SkeletonBooks from "../Components/SkeletonBooks";
 import {useSpring, animated} from "react-spring";
+import Stack from "@mui/material/Stack"
 
 const listItem = {
 	display: "flex",
@@ -130,15 +131,13 @@ export default function Books(){
 			<Hidden smUp>
 				<Grid item className="search" xs={12} sm={4} md={3} sx={{ display: 'flex', flexDirection:"column", alignItems: "center"}}>
 					<Box sx={{position: {sm: "sticky", md: "sticky", lg: "sticky", xl: "sticky"}, top: "10vh"}}> 
-						<List>
-							<ListItem sx={listItem} >
-								<Typography variant="h4" sx={{mt: '2rem'}}>Discover Books</Typography>
-							</ListItem>
-							<ListItem sx={listItem} >
-								<Button onClick={() => {setShowSearch(!showSearch)}}>Filter</Button>
-							</ListItem>
+						<Stack direction="horizontal" sx={{mt: '2.5rem'}}>
+							<Typography variant="h4" sx={{mr: '1rem'}}>{books ? books.length : 0} books found</Typography>
+							<Button variant="contained" size="large" onClick={() => {setShowSearch(!showSearch)}}>Filter</Button>
+						</Stack>
+						<List sx={{p: 0}}>
 							<animated.form onSubmit={handleSubmit} style={listSearch}>
-								<ListItem sx={listItem}>
+								<ListItem sx={{...listItem, mt: '1rem'}}>
 									<TextField variant="outlined" label="Name" id="name"/>
 								</ListItem>
 								<ListItem sx={listItem}>
