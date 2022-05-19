@@ -11,7 +11,6 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Divider from "@mui/material/Divider";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
@@ -39,6 +38,13 @@ const toolbar = {
 const menuLink = {
 	textDecoration: "none",
 }
+const drawerButton = {
+	border: 'none',
+	margin: '0',
+	padding: '0',
+	fontSize: '2rem',
+	color: 'black'
+}
 
 export default function Header(){
     const { isAuthenticated, isLoading } = useAuth0()
@@ -55,11 +61,11 @@ export default function Header(){
 							? <p>Loading</p> 
 							: isAuthenticated ? <>
 								<Typography component={ Link } to="/profile" variant="h6" color="black" sx={menuLink}>Profile</Typography>
-								<LogoutButton sx={{...menuLink,}} variant="contained"/>
+								<LogoutButton sx={{...menuLink,}} variant="button"/>
 							</> 
 							: <>
 								<LoginButton type="link" sx={{...menuLink,}} variant="text"/>
-								<SignupButton sx={{...menuLink,}} variant="contained"/>
+								<SignupButton sx={{...menuLink,}} variant="button"/>
 							</>
 						}
 					</Stack>
@@ -78,20 +84,20 @@ export default function Header(){
 				<Divider />
 				<List>
 					<ListItem sx={listItem}>
-							<Button component={ Link } to="/books" variant="text"  sx={menuLink}>Books</Button>
+							<Typography component={ Link } to="/books" variant="h4" color="primary" sx={menuLink}>Books</Typography>
 					</ListItem>
 					{isLoading 
-						? <p>Loading</p> 
+						? <p>Loading</p>
 						: isAuthenticated ? 
 						<>
-							<ListItem sx={listItem}><Button component={ Link } to="/profile" variant="text" color="primary">Profile</Button></ListItem>
-							<ListItem sx={listItem}><LogoutButton variant="text"/></ListItem>
+							<ListItem sx={listItem}><Typography component={ Link } color="primary" to="/profile" variant="h4" sx={{...menuLink, my: '2rem'}}>Profile</Typography></ListItem>
+							<ListItem sx={listItem}><LogoutButton variant="drawer"/></ListItem>
 						</> 
 						: <>
 							<ListItem sx={listItem}>
-								<LoginButton type="button" sx={{...menuLink,}} variant="text"/>
+								<LoginButton sx={{my: '2rem'}} variant="drawer"/>
 							</ListItem>
-							<ListItem sx={listItem}><SignupButton variant="text" /></ListItem>
+							<ListItem sx={listItem}><SignupButton variant="drawer" /></ListItem>
 						</>
 					}
 				</List>

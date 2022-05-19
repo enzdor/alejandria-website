@@ -37,7 +37,7 @@ export default function AddBook(){
 
 	function handleChange(event) {
 		if (event.target.name == "image"){
-			setFormValues({...formValues, image:event.target.files[0]})
+			setFormValues({...formValues, image: event.target.files[0]})
 		} else {
 			const { name, value } = event.target
 			setFormValues({...formValues, [name]: value})
